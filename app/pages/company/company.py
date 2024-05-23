@@ -30,7 +30,7 @@ df_count_company = algo.number_of_tracked_reports_over_time_company(df_selected_
 
 # Calculate sector, upe_code and number of reports for selected company
 company_sector = list(df_selected_company["sector"].unique())[0]
-company_upe_code = df_selected_company["upe_code"].unique()[0]
+company_upe_name = df_selected_company["upe_name"].unique()[0]
 number_of_tracked_reports_company = algo.number_of_tracked_reports_company(df_selected_company)
 
 
@@ -115,7 +115,7 @@ viz1 = {
 }
 
 viz2 = {
-    "data": company_upe_code,
+    "data": company_upe_name,
     "title": "Headquarter",
     "sub_title": "",
     "on_action": download_viz2
@@ -240,7 +240,6 @@ viz_19 = {
 data_viz_21_dict = algo.compute_tax_havens_use_evolution(
     df=data, company=selected_company)
 data_viz_21 = pd.DataFrame.from_dict(data_viz_21_dict)
-print(data_viz_21)
 viz_21 = {
     "data": data_viz_21,
     "title": "Percentage of profits, percentage of employees and profit per employees over time ",
@@ -255,7 +254,7 @@ def update_viz1(state):
 
 
 def update_viz2(state):
-    state.viz2["data"] = state.company_upe_code
+    state.viz2["data"] = state.company_upe_name
 
 
 def update_viz3(state):
@@ -302,7 +301,7 @@ def on_change_company(state):
     state.df_count_company = algo.number_of_tracked_reports_over_time_company(state.df_selected_company)
 
     state.company_sector = list(state.df_selected_company["sector"].unique())[0]
-    state.company_upe_code = state.df_selected_company["upe_code"].unique()[0]
+    state.company_upe_name = state.df_selected_company["upe_name"].unique()[0]
     state.number_of_tracked_reports_company = (
         algo.number_of_tracked_reports_company(state.df_selected_company))
 
@@ -334,7 +333,7 @@ def on_change_company(state):
 
     update_viz1(state)
     # state.viz1["data"'"] = state.company_sector
-    state.viz2["data"] = state.company_upe_code
+    state.viz2["data"] = state.company_upe_name
     state.viz3["data"] = state.number_of_tracked_reports_company
     state.viz4["data"] = state.number_of_tracked_reports_company
     state.viz5["data"] = state.number_of_tracked_reports_company

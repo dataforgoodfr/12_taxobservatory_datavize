@@ -78,7 +78,7 @@ Reach with this [contact form](/Contact) if you found it.
 |company>
 
 [//]: # (3. Financial reporting section)
-<|financial|part|class_name=ml6 mr6 pl2 pr2|
+<financial|part|class_name=ml6 mr6 pl2 pr2|
 
 [//]: # (Financial section : title and selector)
 <title|part|class_name=title_selector_container mb2|
