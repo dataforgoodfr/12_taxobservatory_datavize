@@ -66,6 +66,10 @@ def download_viz5(state):
     download_el(state, viz5)
 
 
+def download_viz6(state):
+    download_el(state, viz6)
+
+
 def download_viz_26(state):
     download_el(state, viz_26)
 
@@ -136,6 +140,13 @@ viz5 = {
     'title': "CbC Transparency  Grade",
     'sub_title': "selected fiscal year",
     'on_action': download_viz5
+}
+
+viz6 = {
+    "data": df_selected_company,
+    "title": "More on transparency (tbd)",
+    "sub_title": "",
+    "on_action": download_viz6
 }
 
 # viz26
