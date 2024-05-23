@@ -1,4 +1,4 @@
-from taipy.gui import Gui
+from taipy.gui import Gui, navigate
 
 from pages.root import root
 from pages.home.home import home_md
@@ -16,6 +16,28 @@ pages = {
     "Methodology": methodology_md,
     "Contact": contact_md
 }
+
+
+# Functions used to navigate between pages
+def goto_home(state):
+    navigate(state, "Home")
+
+
+def goto_keystories(state):
+    navigate(state, "KeyStories")
+
+
+def goto_company(state):
+    navigate(state, "Company")
+
+
+def goto_contact(state):
+    navigate(state, "Contact")
+
+
+def goto_methodology(state):
+    navigate(state, "Methodology")
+
 
 # Initialise Gui with pages and style sheet
 gui_multi_pages = Gui(
