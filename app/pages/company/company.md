@@ -1,488 +1,203 @@
-<|part|class_name=pagecontent|
+[//]: # (Main content)
+<main_content|part|class_name=container_bg pt3 pb3|
 
-<header||layout|columns=1  1|class_name=p4 fr header|
-<headerleft|part|
-<|part|class_name=h1 fr align-columns-center|
-Pick a company to dive into their report
-|>
-<|{selected_company}|selector|lov={selector_company}|on_change=on_change_company|dropdown|label=Company|>
+[//]: # (1. Select company section)
+<selection|part|class_name=mb2 ml6 mr6 pl2 pr2|
+<|layout|columns=1fr 1fr|gap=1.5rem|class_name=align-columns-top|
 <|part|
-Can’t find a company ?   
-We might have missed out in its report,  
-Reach with this contact form if you found it  
+Pick a company to dive into the report
+{: .big_title_blue .pr4 .mb2}
+
+<|{selected_company}|selector|lov={selector_company}|on_change=on_change_company|dropdown|class_name=fullwidth mb2|width=65%|>
+
+<|part|class_name=align-items-bottom|
+Can't find a company ?<br/>
+We might have missed out in its report.<br/>
+Reach with this [contact form](/Contact) if you found it.
+{: .text_blue .contact_text .pt2 }
 |>
-|headerleft>
-<headerright|part|
-<|{header_right_image_path}|image|>
-|headerright>
-|header>
+|>
 
-<generalinfo|part|
+<|{header_right_image_path}|image|width=100%|>
+|>
+|selection>
 
-# <|{selected_company}|> # {: .title_blue }
+<hr class="header_hr" />
 
-<firstrow|layout|columns=1 1 1 1|class_name=p4 align-columns-center align-columns-stretch|
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz1.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz1.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz1.sub_title}|>
-|sub_title>
-<data_viz|part|
+[//]: # (2. Company general information section)
+<|company|part|class_name=pt3 mb3 ml6 mr6 pl2 pr2|
+<|{selected_company}|text|class_name=big_title_blue|>
+
+<|layout|columns=1fr 1fr 1fr 1fr|gap=1.5rem|class_name=align-items-center mt1|
+<|card|
+<|part|
+<|{viz1.title}|text|class_name=viz_title|>
+<br/>
+<|{viz1.sub_title}|text|class_name=viz_sub_title|>
+<br/>
+|>
+<|part|class_name=viz_text_blue|
 <|{viz1.data}|>
-|data_viz>
-|viz_card>
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz2.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz2.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz2.sub_title}|>
-|sub_title>
-<data_viz|part|
+|>
+|>
+
+<|card|
+<|part|
+<|{viz2.title}|text|class_name=viz_title|>
+<br/>
+<|{viz2.sub_title}|text|class_name=viz_sub_title|>
+<br/>
+|>
+<|part|class_name=viz_text_blue|
 <|{viz2.data}|>
-|data_viz>
-|viz_card>
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz3.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz3.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz3.sub_title}|>
-|sub_title>
-<data_viz|part|class_name=round|
+|>
+|>
+
+<|card|
+<|part|class_name=pb1|
+<|{viz3.title}|text|class_name=viz_title|>
+<br/>
+<|{viz3.sub_title}|text|class_name=viz_sub_title|>
+|>
+<|part|class_name=round mb1|
 <|{viz3.data}|>
-|data_viz>
-|viz_card>
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz4.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz4.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz4.sub_title}|>
-|sub_title>
-<data_viz|part|class_name=round|
+|>
+|>
+
+<|card|
+<|part|class_name=pb1|
+<|{viz4.title}|text|class_name=viz_title|>
+<br/>
+<|{viz4.sub_title}|text|class_name=viz_sub_title|>
+|>
+<|part|class_name=round mb1|
 <|{viz4.data}|>
-|data_viz>
-|viz_card>
-|firstrow>
+|>
+|>
+|>
+|company>
 
-|generalinfo>
+[//]: # (3. Financial reporting section)
+<|financial|part|class_name=ml6 mr6 pl2 pr2|
 
-<cntent1|part|
-
-[//]: # (###########################################")
-[//]: # (Financial Reporting Overview)
-[//]: # (###########################################")
-<header|layout|columns=1fr 1|clas_name=p4 align-columns-center|
-
+[//]: # (Financial section : title and selector)
+<title|part|class_name=title_selector_container mb2|
 Financial Reporting Overview
-{: .title_blue }
+{: .big_title_blue }
 
+<|{selected_year}|selector|lov={selector_year}|on_change=on_change_year|dropdown|class_name=fullwidth|width=200%|>
+|title>
 
-<|{selected_year}|selector|lov={selector_year}|on_change=on_change_year|dropdown|label=Fiscal Year|>
-|header>
-
-[//]: # (###########################################")
-[//]: # (Tax transparency)
-
+[//]: # (3.1. Financial section : tax transparency)
+<tax_transparency|part|
 Tax transparency
-{: .sectiontitle }
+{: .title_blue .mb2}
 
-<datarow|layout|columns=1 1fr|clas_name=p4 align-columns-center|
-
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz5.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz5.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz5.sub_title}|>
-|sub_title>
-<data_viz|part|class_name=round|
+<|layout|columns=1fr 3fr|gap=1.5rem|
+<|card|
+<|part|class_name=pb1|
+<|{viz5.title}|text|class_name=viz_title|>
+<br/>
+<|{viz5.sub_title}|text|class_name=viz_sub_title|>
+<br/>
+|>
+<|part|class_name=round mb1|
 <|{viz5.data}|>
-|data_viz>
-|viz_card>
+|>
+|>
 
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_26.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_26.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_26.sub_title}|>
-|sub_title>
-<data_viz|part|
-<|{viz_26.data}|table|>
-|data_viz>
-|viz_card>
+<|card|
+<|part|class_name=pb1|
+<|{viz6.title}|text|class_name=viz_title|>
+<br/>
+<|{viz6.sub_title}|text|class_name=viz_sub_title|>
+<br/>
+|>
+<|part|class_name=round mb1|
+<|{viz6.data}|>
+|>
+|>
+|>
 
-|datarow>
+<|part|class_name=text_justified mt2|
+* We evaluate the reports transparency considering two features: the geographical disaggregation and the presence of 
+the different recommended variables. The more detailed the geographical disaggregation and the higher the number of 
+variables published the higher the transparency score. Find more on our [methodology page](/Company).
+<br/><br/>
+* It is important to note that the availability of different variables will be essential to calculate the indicators 
+below. When the variables are not available it will not be possible to calculate all indicators.
+|>
+|tax_transparency>
 
-<blabla|part|
-- Transparency vary from one multinational to another in terms 
-of the financial variables disclosed and the extent of 
-geographical disaggregation.  
-
-- We evaluate the reports transparency considering two 
-features: the geographical disaggregation and the presence 
-of of the different recommended variables. The more 
-detailed the geographical disaggregation and the higher 
-the number of variables published the higher the 
-transparency score.  
-
-- It is important to note that the availability of different 
-variables will be essential to calculate the indicators 
-below. When the variables are not available it will not be 
-possible to calculate all of the indicators.
-|blabla>
-
-[//]: # (###########################################")
-[//]: # (Financial profile)
-
+[//]: # (3.2 Financial section : financial profile)
+<financial_profile|part|class_name=mt2 mb4|
 Financial profile
-{: .sectiontitle }
+{: .title_blue .mb2}
 
-<datarow|layout|columns=1 1|class_name=p4 align-columns-center align-columns-stretch|
+<|layout|columns=1fr 1fr|gap=1.5rem|
+<|card|
+<|part|class_name=pb1|
+<|{viz_13_key_metric.title}|text|class_name=viz_title|>
+<br/>
+<|{viz_13_key_metric.sub_title}|text|class_name=viz_sub_title|>
+<br/>
+|>
+<|part|
+<|{viz_13_key_metric.data}|table|show_all|>
+|>
+|>
 
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_13_key_metric.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_13_key_metric.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_13_key_metric.sub_title}|>
-|sub_title>
-<data_viz|part||
-<|{viz_13_key_metric.data}|table|>
-|data_viz>
-|viz_card>
-
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_14.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_14.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_14.sub_title}|>
-|sub_title>
-<data_viz|part|
+<|card|
+<|part|class_name=pb1|
+<|{viz_14.title}|text|class_name=viz_title|>
+<br/>
+<|{viz_14.sub_title}|text|class_name=viz_sub_title|>
+<br/>
+|>
+<|part|
 <|chart|figure={viz_14.fig}|>
-[//]: # (<|{viz_14.data}|chart|orientation=h|type=bar|x=total_revenues_%|y=jur_name|>)
+|>
+|>
+|>
+|financial_profile>
 
-|data_viz>
-|viz_card>
+[//]: # (3.3. Financial section : distribution of profits vs employees)
+<profits_employees|part|class_name=mt2 mb4|
+Distribution of profits vs employees
+{: .title_blue .mb2}
 
-|datarow>
-
-[//]: # (###########################################")
-[//]: # (Distribution of profits vs. employees)
-
-Distribution of profits vs. employees
-{: .sectiontitle }
-
-<datarow|layout|columns=1 1|class_name=p4 align-columns-center|
-
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_15.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_15.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_15.sub_title}|>
-|sub_title>
-<data_viz|part|
-[//]: # (<|{viz_15.data}|chart|orientation=h|type=bar|x[1]=employees_%|x[2]=profit_before_tax_%|y=jur_name|>)
-[//]: # (<|{viz_15.data}|chart|type=bar|properties={properties}|>)
+<|layout|columns=1fr 1fr|gap=1.5rem|
+<|card|
+<|part|class_name=pb1|
+<|{viz_15.title}|text|class_name=viz_title|>
+<br/>
+<|{viz_15.sub_title}|text|class_name=viz_sub_title|>
+<br/>
+|>
+<|part|height=400px|class_name=scrollable-container|
 <|chart|figure={viz_15.fig}|>
-|data_viz>
-|viz_card>
+|>
+|>
 
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_16.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_16.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_16.sub_title}|>
-|sub_title>
-<data_viz|part|class_name=round|
+<|card|
+<|part|class_name=pb1|
+<|{viz_16.title}|text|class_name=viz_title|>
+<br/>
+<|{viz_16.sub_title}|text|class_name=viz_sub_title|>
+<br/>
+|>
+<|part|
 <|{viz_16.data}|>
-|data_viz>
-|viz_card>
-|datarow>
-
-<blabla|part|
-This chart plots the percentage of total positive profits 
-and the percentage of total employees reported in each 
-jurisdiction where the multinational is active. Comparing 
-the amount of physical production factors like employees 
-with the amount of profit can give an indication of profit 
-shifting activities where strong misalignment are observed. 
-|blabla>
-
-|cntent1>
-
-
-
-[//]: # (###########################################")
-[//]: # (Use of tax havens)
-[//]: # (###########################################")
-<cntent2|layout|columns=1=|gap=4rem|clas_name=p4 align-columns-center|
-
-<header|layout|columns=1fr 1|clas_name=p4 align-columns-center|
-
-Use of tax havens
-{: .title_blue }
-
-<|{selected_year}|selector|lov={selector_year}|on_change=on_change_year|dropdown|label=Fiscal Year|>
-|header>
-
-<blabla|part|
-(change text) Tax havens are countries where low effective 
-tax rates are observed, in this section, we rely on official 
-lists of tax havens (see methodology)
-|blabla>
-
-<datarow|layout|columns=1 1|gap=5rem|clas_name=p4 align-columns-center|
-
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_17.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_17.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_17.sub_title}|>
-|sub_title>
-<data_viz|part|
-<|{viz_17.data}|table|>
-|data_viz>
-<blabla|part|
-This charts shows the percentage of profits booked in each 
-jurisdiction (horizontal axis and bubble size) and contrast 
-it with the amount of profit per employee reported in the 
-jurisdiction. Tax havens are XXX color while other countries 
-are in XXX color.
-|blabla>
-|viz_card>
-
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_18.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_18.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_18.sub_title}|>
-|sub_title>
-<data_viz|part|
-
-[//]: # (<|{viz_18.data}|chart|type=bar|x=index|y[1]=unrelated_revenues_percentage|y[2]=related_revenues_percentage|layout={layout}|>)
-<|chart|figure={viz_18.fig}|>
-|data_viz>
-<blabla|part|
-Related party revenues arise when the company trades 
-internally. These revenues, in contrast with unrelated party 
-revenues that arise from trade with external partners, 
-present a risk of profit shifting as could entail transfer 
-pricing manipulations.
-|blabla>
-|viz_card>
-
-|datarow>
-
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_19.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_19.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_19.sub_title}|>
-|sub_title>
-<data_viz|part|
-<|{viz_19.data}|table|page_size=8|>
-|data_viz>
-|viz_card>
-
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_21.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_21.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_21.sub_title}|>
-|sub_title>
-<data_viz|part|
-<|{viz_21.data}|chart|mode=lines|x=year|y[1]=tax_havens_profit_%|y[2]=tax_havens_employees_%|line[1]=dash|>
-|data_viz>
-|viz_card>
-
-|cntent2>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<nav_footer|part|class_name=blue_section align-item-center|
-
-<|layout|columns=2 1 2|
-<|part|
 |>
-<button|part|
-<|button|active|label=Download data|>
-|button>
-<|part|
 |>
 |>
 
-
-<|layout|columns=1 auto 1|
-<|part|
+<|part|class_name=text_justified mt2|
+This chart plots the percentage of total positive profits and the percentage of total employees reported in each 
+jurisdiction where the multinational is active. Comparing the amount of physical production factors like employees with 
+the amount of profit can give an indication of profit shifting activities where strong misalignment are observed
 |>
-<blabla|part|class_name=h1 align-columns-center|
-Would you like to learn more?
-|blabla>
-<|part|
-|>
-|>
+|profits_employees>
+|financial>
 
-
-
-<layoutcard|layout|columns=1 1 1|class_name=p4|gap=5rem|
-  <|card|
-  
-Publication trends
-{: .cardtitle}
-
-  Visualize how tax reporting practices from the world's 
-  largest corporations are evolving across industries, 
-  regions and over time through interactive charts and 
-  analysis.
-{: .cardtext .pb1}
-
-
-  <|button|active|label=Publication trends ->|class_name=buttonsection|>
-  |>    
-
-  <|card|
-  
-Methodology
-{: .cardtitle}
-
-  text
-{: .cardtext .pb1}
-
-  <|button|active|label=Our methodology ->|class_name=buttonsection|>
-  |>   
-  <|card|
-
-Key stories
-{: .cardtitle}
-
-  Access our ongoing research examining multinational tax 
-  behavior based on this country-by-country data, including 
-  case studies, risk scoring and more.
-{: .cardtext .pb1 }
-
-  <|button|active|label=Key stories ->|class_name=buttonsection|>
-
-  |>
-|layoutcard>
-[//]: <> (end layout card)
-
-|nav_footer>
-
-
-|>
+|main_content>
