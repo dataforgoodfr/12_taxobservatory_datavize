@@ -97,9 +97,9 @@ Data for Good is a community of 4 000 tech experts volunteering for general inte
 {: .footer_text_justified }
 
 <|layout|columns=2fr 1fr|class_name=pt1|
-<|button|label=Discover our methodology|on_action=go_methodology|>
+<|button|label=Discover our methodology|>
 <|part|class_name=text-right|
-<|button|label=Contact||on_action=go_contact|>
+<|button|label=Contact|>
 |>
 |>
 |>
