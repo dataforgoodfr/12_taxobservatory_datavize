@@ -1,4 +1,251 @@
+@charset "UTF-8";
 @import url("viz.css");
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+/* Common **********/
+
+.container_bg {
+    background-color: #F2F2F2;
+    width: 1440px;
+    margin: 0 auto;
+}
+
+.text_justified {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    text-align: justify;
+}
+
+.big_title_blue {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    color: #021978;
+}
+
+.title_blue {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 48px;
+    color: #021978;
+}
+
+.text_blue {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 23px;
+    color: #021978;
+}
+
+.title_button_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title_selector_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Home page **********/
+
+.world_map_container {
+    position: relative;
+    display: inline-block;
+}
+
+.world_map_content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.world_map_title {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    color: white;
+}
+
+.world_map_text {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 23px;
+    color: white;
+    text-align: justify;
+}
+
+.home_viz_grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    height:380px;
+    gap: 1.5rem;
+    grid-template-areas:
+    "a c d"
+    "b c d";
+}
+
+.home_viz_grid_item {
+    border-radius: 10px;
+    background-color: white;
+}
+
+.home_viz_1 {grid-area: a;}
+.home_viz_2 {grid-area: c;}
+.home_viz_3 {grid-area: b;}
+.home_viz_24 {grid-area: d;}
+
+.scrollable-container {
+    overflow: auto;
+}
+
+/* Company page *********/
+
+
+/* Cards **********/
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: none;
+    /*cursor: pointer;*/
+}
+
+.white_card_title {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 48px;
+    color: #021978;
+}
+
+.white_card_text {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+}
+
+.white_card_arrow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #021978;
+    font-size: 2rem;
+}
+
+#white_card {
+    background-color: #ffffff;
+}
+
+#white_card:hover {
+    background-color: #02198D;
+    -webkit-text-fill-color: white;
+}
+
+.blue_card_title {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 48px;
+    color: white;
+}
+
+.blue_card_text {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    text-align: justify;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.blue_card_link {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+
+#blue_card {
+    background-color: #02198D;
+}
+
+/*#blue_card:hover {
+    background-color: white;
+    -webkit-text-fill-color: #02198D;
+}*/
+
+/* Buttons **********/
+
+.taipy-button {
+    background-color: #021978;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-transform: none;
+    font-family: "Roboto";
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.taipy-selector {
+    color: #28323F;
+    font-family: "Manrope";
+    font-weight: 400;
+    font-size: 17px;
+}
+
+
+/* Header *********/
+
+.header {
+    background-color:#E8E9EC;
+    -webkit-text-fill-color:#02198D;
+}
+
+.header_bg {
+    background-color: white;
+    width: 1440px;
+    margin: 0 auto;
+}
 
 .logo {
     width: 45.26px;
@@ -7,6 +254,7 @@
     left: 1.74px;
     gap: 0px;
     opacity: 0px;
+    margin-left: 10px
 }
 
 .logotitle {
@@ -15,16 +263,80 @@
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
-    line-height: 55px;
-
+    /*line-height: 55px;*/
     color: #000000;
 }
+
+/* Header bottom line */
+hr.header_hr {
+    border: none;
+    border-top: 2px solid #021978;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Footer *********/
+
+.footer {
+    background-color: #B8BEDB;
+    -webkit-text-fill-color:#02198D;
+    padding-left:10%;
+    padding-top:0%;
+    padding-right:10%;
+    padding-bottom:5%;
+
+}
+
+.footer_bg {
+    background-color: #B8BEDB;
+    width: 1440px;
+    margin: 0 auto;
+}
+
+.footer_vl {
+    border: 1.5px solid #021978;
+    height: 320px;
+    margin-top: 30px;
+    box-shadow: none;
+}
+
+.footer_text {
+    font-family: "Roboto";
+    font-size: 14px;
+    line-height: 1.5rem
+}
+
+.footer_text_justified {
+    font-family: "Roboto";
+    font-size: 14px;
+    text-align: justify;
+    line-height: 1.2rem
+}
+
+.footer_privacy_text {
+    font-family: "Roboto";
+    font-size: 14px;
+    line-height: 1.5rem;
+    color: #021978;
+    position: absolute;
+}
+
+.footer_title {
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: 700;
+    color: #021978;
+}
+
+/* Other **********/
 
 .pagecontent {
     padding-left:10%;
     padding-top:5%;
     padding-right:10%;
     padding-bottom:5%;
+    text-align: justify;
 }
 
 .blue_section {
@@ -34,41 +346,24 @@
     padding:30px;
 }
 
-.card {
-    background-color:#ffffff;
-    border-radius: 20px;
-    -webkit-text-fill-color:#02198D;
-    font-size: 24px;
-}
-
-.card:hover {
-    background-color:#02198D;
-    border-radius: 20px;
-    -webkit-text-fill-color:#ffffff;
-    font-size: 24px;
-}
-
-
-.header {
-    background-color:#E8E9EC;
-    -webkit-text-fill-color:#02198D;
+.world {
+    background-image: url("../../images/world_map.png");
+    background-size: cover;
 }
 
 .world_map {
     background-image: url("../../images/world_map.png");
+    background-size: cover;
     -webkit-text-fill-color:#FFFFFF;
     padding-left:10%;
     padding-top:5%;
     padding-right:10%;
     padding-bottom:5%;
+    max-width: 100 %;
+    height: auto;
 }
 
 .title {
-    /* Title */
-
-    /*width: 1037px;
-    height: 55px;*/
-
     /* Grand titre */
     font-family: 'Manrope';
     font-style: normal;
@@ -78,26 +373,15 @@
     /* identical to box height */
     display: flex;
     align-items: center;
-
     /* f9fbfe */
     color: #F9FBFE;
-
-
     /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
 }
 
-
-
-
-.title_blue {
-    /* Title */
-
-    /*width: 1037px;
-    height: 55px;*/
-
+.title_white {
     /* Grand titre */
     font-family: 'Manrope';
     font-style: normal;
@@ -107,73 +391,27 @@
     /* identical to box height */
     display: flex;
     align-items: center;
-
+    margin-bottom: 10px;
     /* f9fbfe */
-    color: #021978;
-
-
+    color: #F9FBFE;
     /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
 }
 
-
-
-.cardtitle {
-    /* Title */
-
-    /*width: 354px;
-    height: 38px;*/
-
+.text_white {
     font-family: 'Manrope';
     font-style: normal;
-    font-weight: 500;
-    font-size: 35px;
-    line-height: 48px;
-    display: flex;
-    align-items: center;
-
-    /* 021978 */
-    color: #021978;
-
-
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.cardtext{
-    /* Title */
-
-    /*width: 301.64px;
-    height: 106px;*/
-
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 17px;
-    line-height: 23px;
-    display: flex;
-    align-items: center;
-
-    /* 000000 */
-    color: #000000;
-
-
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    color: #F9FBFE;
+    text-align: justify;
 }
+
+
 
 .sectiontitle {
-    /* Title */
-
-    /*width: 473.51px;
-    height: 57.28px;*/
-
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
@@ -181,36 +419,31 @@
     line-height: 48px;
     display: flex;
     align-items: center;
-
+    margin-bottom: 10px;
     /* 021978 */
     color: #021978;
-
-
     /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
-
 }
 
-
+.blue {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 17px;
+    color: #021978;
+}
 
 .subheader {
-    /* Subtitle */
-
-    /*width: 1170px;
-    height: 163px;*/
-
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;
     font-size: 17px;
     line-height: 23px;
-
     /* f9fbfe */
     color: #F9FBFE;
-
-
     /* Inside auto layout */
     flex: none;
     order: 1;
@@ -219,30 +452,14 @@
     padding-bottom:2%;
 }
 
-.footer {
-    background-color: #B8BEDB;
-    -webkit-text-fill-color:#02198D;
-    padding-left:10%;
-    padding-top:0%;
-    padding-right:10%;
-    padding-bottom:5%;
-    
-}
-
 .buttonsection {
-    /* Button */
-    /*width: 264px;
-    height: 50px;*/
     /* Inside auto layout */
     flex: none;
     order: 1;
     flex-grow: 0;
-
     -webkit-text-fill-color:#FFFFFF;
-
     background: #021978;
     border-radius: 5px;
-
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 800;
