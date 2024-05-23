@@ -1,3 +1,5 @@
+[//]: # (Layout of company page)
+
 [//]: # (Main content)
 <main_content|part|class_name=container_bg pt3 pb3|
 

@@ -78,7 +78,7 @@ studies, risk scoring and more.
 Our database is growing
 {: .title_blue}
 
-<|button|label=More on reporting trends &#8594;|>
+[//]: # (<|button|label=More on reporting trends &#8594;|>)
 |>
 
 <|part|class_name=home_viz_grid|

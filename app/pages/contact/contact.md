@@ -1,8 +1,11 @@
-<|part|class_name=pagecontent container_bg|
+[//]: # (Layout of contact page)
 
+[//]: # (Main content)
+<|part|class_name=pagecontent container_bg|
+<|part|class_name=ml6 mr6 pl2 pr2 pb4|
 <|layout|columns=1fr 1fr|class_name=align-columns-center|
 
-<|part|class_name=align-item-center mr6 pr2|
+<|part|class_name=align-item-center mt6 mb6 mr6 pr2|
 Contact
 {: .big_title_blue }
 
@@ -14,5 +17,6 @@ version and contributions of updated data points or report of errors. We will do
 # CONTACT FORMS
 |>
 
+|>
 |>
 |>

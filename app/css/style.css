@@ -332,10 +332,10 @@ hr.header_hr {
 /* Other **********/
 
 .pagecontent {
-    padding-left:10%;
+    /*padding-left:10%;
     padding-top:5%;
     padding-right:10%;
-    padding-bottom:5%;
+    padding-bottom:5%;*/
     text-align: justify;
 }
 

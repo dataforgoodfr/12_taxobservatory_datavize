@@ -1,5 +1,8 @@
-<|part|class_name=pagecontent container_bg|
+[//]: # (Layout of methodology page)
 
+[//]: # (Main content)
+<|part|class_name=pagecontent container_bg|
+<|part|class_name=pt6 pl6 mr6 pl2 pr2 pb4|
 Methodology
 {: .big_title_blue }
 
@@ -112,4 +115,5 @@ Yet, some companies do not disclose all variables. We wanted to reflect this in 
 <br/><br/>
 
 **Calculation behind Component II** : We calculate the score based on the weighted share of variables available in the report (i.e., for which the company provides at least 1 datapoint). The weight is 2 for Pre-tax profits and Taxes paid, and 1 for other variables (reflecting the importance of the first two for tax behavior analysis).
+|>
 |>
