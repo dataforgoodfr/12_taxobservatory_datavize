@@ -1,7 +1,7 @@
 <|part|class_name=pagecontent container_bg|
 
 Methodology
-{: .title_blue }
+{: .big_title_blue }
 
 Taxplorer was created to collect, aggregate and analyze data from country-by-country reports published by multinationals.  
 Our approach is based on three pillars :
