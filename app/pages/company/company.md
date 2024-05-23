@@ -25,7 +25,7 @@ Reach with this [contact form](/Contact) if you found it.
 <hr class="header_hr" />
 
 [//]: # (2. Company general information section)
-<|company|part|class_name=pt3 mb3 ml6 mr6 pl2 pr2|
+<company|part|class_name=pt3 mb3 ml6 mr6 pl2 pr2|
 <|{selected_company}|text|class_name=big_title_blue|>
 
 <|layout|columns=1fr 1fr 1fr 1fr|gap=1.5rem|class_name=align-items-center mt1|
@@ -197,7 +197,7 @@ This chart plots the percentage of total positive profits and the percentage of 
 jurisdiction where the multinational is active. Comparing the amount of physical production factors like employees with 
 the amount of profit can give an indication of profit shifting activities where strong misalignment are observed
 |>
+
 |profits_employees>
 |financial>
-
 |main_content>
