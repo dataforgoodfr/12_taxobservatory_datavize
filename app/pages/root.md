@@ -1,109 +1,107 @@
+[//]: # (The root file handles sections in common for all pages like header and footer. Tt also
+contains the <|content|> variable which will display the content of selected page)
 
-<|layout|columns=1 1 1fr auto 1 1fr|class_name=container align-columns-top align_item_stretch|
-<|{taxplorer_logo_path}|image|class_name=logo|>
-<|part|class_name=pt_half pb_half|
-<|part|class_name=logotitle|
-Taxplorer
+[//]: # (Header)
+<header|part|class_name=header_bg|
+<|layout|columns=auto 1fr auto 1fr|class_name=align-columns-center|
+<|part|class_name=align-item-center|
+<|{taxplorer_logo_path}|image|width="48px"|>
 |>
+
+<|part|class_name=align-item-center|
+<|Taxplorer|text|class_name=logotitle|>
 |>
-<|part|
-|>
-<|part|class_name=align_item_stretch|
+
+<|part|class_name=align-item-stretch|
 <|navbar|class_name=fullheight|>
 |>
 
-<|part|
-|>
-
-
-<|part|class_name=text_right|
-<|button|label=download|class_nanme=align-center|>
-
-[//]: # (<|toggle|theme|class_name=relative nolabel|>)
+<|part|class_name=text-right align-item-center|
+<|button|label=Download data|>
 |>
 |>
 
+<hr class="header_hr"/>
+|header>
 
-
+[//]: # (Add active page content)
 <|content|>
 
+[//]: # (Footer)
+<footer|part|height=380px|class_name=footer_bg|
+<|layout|columns=1fr auto 1fr|class_name=align-columns-center|
 
+[//]: # (Left section of footer)
+<|layout|columns=1fr 1fr|class_name=align-columns-center|
+<|part|class_name=text-center align-item-center|
+<|{data4good_logo_path}|image|height=6rem|class_name=d-block m-auto mb1|>
+DATA FOR GOOD<br/>
+{: .footer_title }
 
-<footer|layout|columns=1 1|gap=3rem|class_name=align-columns-center footer|
+<|layout|columns=1fr 1fr|class_name=align-columns-center mt1 ml6 mr6|
+<|part|class_name=text-left align-item-center ml1|
+Website<br/>
+Twitter<br/>
+LinkedIn<br/>
+{: .footer_text }
+|>
 
-<left|layout|columns=1 1|class_name=align-columns-center|
-
-<|layout|columns=1|class_name=align-columns-center|
-<|{data4good_logo_path}|image|>
-## Data For Good
-
-<|layout|columns=1 1|
-<|
-Website
+<|part|class_name=text-center align-item-center|
+<|{website_logo_path}|image|width=1rem|class_name=d-block m-auto|>
+<|{twitter_logo_path}|image|width=1rem|class_name=d-block m-auto|>
+<|{linkedin_logo_path}|image|width=1rem|class_name=d-block m-auto|>
 |>
-<|{website_logo_path}|image|>
-|>
-<|layout|columns=1 1|
-<|
-Twitter
-|>
-<|{twitter_logo_path}|image|>
-|>
-<|layout|columns=1 1|
-<|
-Linkedin
-|>
-<|{linkedin_logo_path}|image|>
 |>
 |>
 
-<|layout|columns=1|class_name=align-columns-center|
-<|{eutax_logo_path}|image|>
-## EU Tax Observatory  
-<|layout|columns=1 1|
-<|
-Website
-|>
-<|{website_logo_path}|image|>
-|>
-<|layout|columns=1 1|
-<|
-Twitter
-|>
-<|{twitter_logo_path}|image|>
-|>
-<|layout|columns=1 1|
-<|
-Linkedin
-|>
-<|{linkedin_logo_path}|image|>
+<|part|class_name=text-center align-item-center|
+<|{eutax_logo_path}|image|height=6rem|class_name=d-block m-auto mb1|>
+EU TAX OBSERVATORY<br/>
+{: .footer_title }
+
+<|layout|columns=1fr 1fr|class_name=align-columns-center mt1 ml6 mr6|
+<|part|class_name=text-left align-item-center ml1|
+Website<br/>
+Twitter<br/>
+LinkedIn<br/>
+{: .footer_text }
 |>
 
+<|part|class_name=text-center align-item-center|
+<|{website_logo_path}|image|width=1rem|class_name=d-block m-auto|>
+<|{twitter_logo_path}|image|width=1rem|class_name=d-block m-auto|>
+<|{linkedin_logo_path}|image|width=1rem|class_name=d-block m-auto|>
+|>
+|>
 |>
 
-|left>
-
-<right|part m3|
-
-# A project led by the EU tax observatory and Data for Good
-
-The EU Tax Observatory conducts innovative research on taxation, 
-contributes to a democratic and inclusive debate on the future of 
-taxation, and fosters a dialogue between the scientific community, 
-civil society, and policymakers in the European Union and worldwide.
-Data for Good is a community of 4 000 tech experts volunteering 
-for general interest projects.  
-
-<|layout|columns=3fr 1|class_name=pt3
-
-<|button|label=Discover our methodology|>
-
-<|button|label=Contact|>
-
+<|part|class_name=lign-item-center ml3 mt2|
+&#169; 2024 Privacy &#8210; Terms
+{: .footer_privacy_text }
+|>
 |>
 
-|right>
+[//]: # (Add vertical line)
+<div class="footer_vl"></div>
 
-© 2024 Privacy — Terms
+[//]: # (Right section of footer)
+<|part|class_name=ml6 mr6 pr4 mt3|
+A project led by the EU tax observatory and Data for Good
+{: .footer_title }
 
+<br/>
+The EU Tax Observatory conducts innovative research on taxation, contributes to a democratic and inclusive debate on the 
+future of taxation, and fosters a dialogue between the scientific community, civil society, and policymakers in the 
+European Union and worldwide.  
+Data for Good is a community of 4 000 tech experts volunteering for general interest projects.
+{: .footer_text_justified }
+
+<|layout|columns=2fr 1fr|class_name=pt1|
+<|button|label=Discover our methodology|on_action=go_methodology|>
+<|part|class_name=text-right|
+<|button|label=Contact||on_action=go_contact|>
+|>
+|>
+|>
+|>
 |footer>
