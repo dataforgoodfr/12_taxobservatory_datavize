@@ -1,214 +1,183 @@
-<home|layout|columns=1|class_name=align-columns-center|
+[//]: # (Layout of the home page)
 
-<world_map|part|class_name=world_map|
+[//]: # (Main content section)
+<main_content|part|class_name=container_bg|
 
-[//]: <> (header)
-<header|part|class_name=title|
-Multinationals under the spotlight  
+[//]: # (World map section)
+<world_map|part|class_name=world_map_container|
 
-|header>
-[//]: <> (end header)
+[//]: # (World map : background image)
+<|{world_map_path}|image|width=100%|>
 
-<subheader|part|class_name=subheader|
-This platform provides unprecedented insights into 
-how large corporations approach taxes across borders. 
-Explore country-by-country financial reports published 
-by multinationals to see where they declare profits 
-and revenues, identify potential uses of tax havens 
-or loopholes and analyze tax payments versus actual 
-operations.  
-While some multinationals now publish detailed 
-country data, the reports remain scattered and 
-difficult to analyze collectively. Our tool compiles 
-this information into an accessible, user-friendly 
-format. Start exploring the tax footprints of major 
-multinationals today and unlock key insights into an 
-often opaque aspect of global business operations.  
+[//]: # (World map : text and cards)
+<|part|class_name=world_map_content ml6 mr6 pl2 pr2|
 
-|subheader>
+[//]: # (World map : text)
+Multinationals under the spotlight
+{: .world_map_title .mt4 .mb3 }
 
+This platform provides unprecedented insights into  how large corporations approach taxes across borders. Explore 
+country-by-country financial reports published by multinationals to see where they declare profits and revenues, 
+identify potential uses of tax havens or loopholes and analyze tax payments versus actual operations.<br/><br/>
+While some multinationals now publish detailed country data, the reports remain scattered and difficult to analyze 
+collectively. Our tool compiles this information into an accessible, user-friendly format. Start exploring the tax 
+footprints of major multinationals today and unlock key insights into an often opaque aspect of global business.
+{: .world_map_text .mb3 }
 
-[//]: <> (layout card)
-<layoutcard|layout|columns=1 1 1|gap=2rem|
-  <|card|
-  <|part|class_name=cardtitle
-  Explore companies
-  |>
-  <|part|class_name=cardtext|
-  Search and filter to find reports   
-  for specific multinationals. Review their declared 
-  profits, taxes paid, employee counts and more for 
-  each country over multiple years.
-  |>
-  |>    
-  <|card|
-  <|part|class_name=cardtitle
-  Spot reporting trends
-  |>
-  <|part|class_name=cardtext|
-  Visualize how tax reporting practices from the 
-  world's largest corporations are evolving across
-  industries, regions and over time through 
-  interactive charts and analysis.
-  |>
-  |>   
-  <|card|
-  <|part|class_name=cardtitle
-  Gain Expert Insights
-  |>
-  <|part|class_name=cardtext|
-  Access our ongoing research examining 
-  multinational tax behavior based on this 
-  country-by-country data, including case 
-  studies, risk scoring and more.
-  |>
-  |>
-|layoutcard>
-[//]: <> (end layout card)
+[//]: # (World map : cards)
+<|layout|columns=1fr 1fr 1fr|gap=1rem|class_name=align-columns-center|
+<|card|id=white_card|
+Explore companies
+{: .white_card_title .mr2 }
 
+<|part|class_name=d-flex|
+Search and filter to find reports for specific multinationals. Review their declared profits, taxes paid, employee 
+counts and more for each country over multiple years.
+{: .white_card_text }
+
+&#8599;
+{: .white_card_arrow .ml2}
+|>
+|>
+
+<|card|id=white_card|
+Spot reporting trends
+{: .white_card_title .mr2 }
+
+<|part|class_name=d-flex|
+Visualize how tax reporting practices from the world's largest corporations are evolving across industries, regions 
+and over time through interactive charts and analysis.
+{: .white_card_text }
+
+&#8599;
+{: .white_card_arrow .ml2}
+|>
+|>
+
+<|card|id=white_card|
+Gain Expert Insights
+{: .white_card_title .mr2 }
+
+<|part|class_name=d-flex|
+Access our ongoing research examining multinational tax behavior based on this country-by-country data, including case 
+studies, risk scoring and more.
+{: .white_card_text }
+
+&#8599;
+{: .white_card_arrow .ml2}
+|>
+|>
+|>
+|>
 |world_map>
-[//]: <> (end world map)
 
-<pagecontent|part|class_name=pagecontent|
+[//]: # (Main content : viz)
+<|part|class_name=pt3 pb3|
+<viz|part|class_name=mb3 ml6 mr6 pl2 pr2|
+<|part|class_name=title_button_container mb3|
+Our database is growing
+{: .title_blue}
 
-<|layout|columns=4 1|clas_name=align-columns-center|
-<|part|class_name=sectiontitle|
-Our database is growing 
+<|button|label=More on reporting trends &#8594;|>
 |>
-<|button|active|label=More on reporting trends ->|class_name=buttonsection|>
-|>
 
+<|part|class_name=home_viz_grid|
 
-[//]: <> (row viz)
-<|part pt2 pb2|
-<viz_row|layout|columns=1 1 1|gap=2rem|clas_name= align-columns-center|
-
-<first2viz|layout|columns=1|gap=2rem|clas_name=fr align-columns-center|
-[//]: <> (a viz 1)
-<viz_card|part viz|
-<headers|layout|columns=5 1|
+[//]: # (Viz 1)
+<|part|class_name=home_viz_1|
+<|card|
 <|part|
-<title|part|class_name=viz_title|
-<|{viz1.title}|>
-|title>
-<sub_title|class_name=viz_subtitle|
-<|{viz1.sub_title}|>
-|sub_title>
+<|{viz1.title}|text|class_name=viz_title|>
+<br/>
+<|{viz1.sub_title}|text|class_name=viz_sub_title|>
 |>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz1.on_action}|>
-|download_button>
-|headers>
-<data_viz|part|class_name=round|
+<|part|class_name=round|
 <|{viz1.data}|>
-|data_viz>
-|viz_card>
+|>
+|>
+|>
 
-[//]: <> (a viz 3)
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz3.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz3.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz3.sub_title}|>
-|sub_title>
-<data_viz|part|class_name=round|
+[//]: # (Viz 3)
+<|part|class_name=home_viz_3|
+<|card|
+<|part|
+<|{viz3.title}|text|class_name=viz_title|>
+<br/>
+<|{viz3.sub_title}|text|class_name=viz_sub_title|>
+|>
+<|part|class_name=round|
 <|{viz3.data}|>
-|data_viz>
-|viz_card>
-[//]: <> (end of a viz 3)
+|>
+|>
+|>
 
-|first2viz>
-
-
-[//]: <> (a viz 2)
-<|part|class_name=viz|
-<|layout|columns=2fr 1|
+[//]: # (Viz 2)
+<|part|class_name=home_viz_2|
+<|card|
 <|part|
-<|{viz_2.title}|>
-|>                     
-  
+<|{viz_2.title}|text|class_name=viz_title|>
+<br/>
+<|{viz_2.sub_title}|text|class_name=viz_sub_title|>
+|>
 <|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_2.on_action}|>
+<|{viz_2.data}|chart|type=bar|x=year|y[1]=mnc|line[1]=dash|height=300px|>
 |>
 |>
-<|{viz_2.sub_title}|>  
-<|{viz_2.data}|chart|type=bar|x=year|y[1]=mnc|line[1]=dash|>
-|>
-[//]: <> (end of a viz 2)
-
-<viz_card|part|class_name=viz|
-<headers|layout|columns=2fr 1|
-<title|part|
-<|{viz_24.title}|>
-|title>
-<download_button|part|
-<|{download_icon_path}|image|class_name=download_button|on_action={viz_24.on_action}|>
-|download_button>
-|headers>
-<sub_title|
-<|{viz_24.sub_title}|>
-|sub_title>
-<data_viz|part|
-<|chart|figure={data_viz_24_fig}|>
-|data_viz>
-|viz_card>
-
-|viz_row>
 |>
 
+[//]: # (Viz 24)
+<|part|class_name=home_viz_24|
+<|card|
+<|part|
+<|{viz_24.title}|text|class_name=viz_title|>
+<br/>
+<|{viz_24.sub_title}|text|class_name=viz_sub_title|>
+|>
+<|part|
+<|chart|figure={data_viz_24_fig}|height=300px|>
+|>
+|>
+|>
+|>
+|viz>
 
-<rowheader|layout|columns=5  1|class_name=pb2 align-columns-stretch|
-<|part|class_name=sectiontitle|
+[//]: # (Main content : stories)
+<stories|part|class_name=main_content ml6 mr6 pl2 pr2|
+<|part|class_name=title_button_container mb3|
 And there are a lot of stories to tell
+{: .title_blue}
+
+<|button|label=More key stories &#8594;|>
 |>
-<|button|label=More key stories|class_name=buttonsection|>
-|rowheader>
 
-
-<bluesection|layout|columns=1  1|gap=5rem|clas_name=p4 align-columns-center|
-<firstblue|part|class_name=blue_section|
-
+<|layout|columns=1 1|gap=6rem|class_name=align-columns-center|
+<|card|id=blue_card|
 European banks love tax havens
-{: .cardtitle}
+{: .blue_card_title .mb1 .pr2}
 
-Analysing 7 years of country-by-country data published by European 
-banks, we show that EU banks have been consistently present in tax 
-havens with around 14% of their profits booked in tax havens annually.  
-Implementing a 15% minimum tax rate could generate EUR 3-5 billion 
-annually for European countries.  
-{: .cardtext}
+Analysing 7 years of country-by-country data published by European banks, we show that EU banks have been consistently 
+present in tax havens with around 14% of their profits booked in tax havens annually. Implementing a 15% minimum tax 
+rate could generate EUR 3-5 billion annually for European countries.
+{: .blue_card_text .mb2 }
 
-Read more ->
-{: .pt4}
-|firstblue>
+Read more &#8594;
+{: .blue_card_link }
+|>
 
-
-<secondblue|part|class_name=blue_section|
+<|card|id=blue_card|
 Tracking CbCR's Fragmented Uptake
-{: .cardtitle}
+{: .blue_card_title .mb1 .pr2}
 
-Overall CbCR publishing rates are low (97 reports for 2020), but 
-increasing rapidly.  
-CbCR publishing is concentrated in European countries and in the 
-extractive sector. Last, there remains significant room for progress 
-on the completion of the information provided and the accessibility 
-of these reports: 55% of the reports do not include all the 
-recommended variables and reports are published in a wide variety 
-of documents.  
-{: .cardtext}
+Overall CbCR publishing rates are low (97 reports for 2020), but increasing rapidly. CbCR publishing is concentrated in 
+European countries and in the extractive sector. Last, there remains significant room for progress on the completion of 
+the information provided and the accessibility of these reports: 55% of the reports do not include all the recommended 
+variables and reports are published in a wide variety of documents.
+{: .blue_card_text .mb2 }
 
-Read more ->
-{: .pt4}
-|secondblue>
-
-|bluesection>
-
-|pagecontent>
-
-|home>
+Read more &#8594;
+{: .blue_card_link }
+|>
+|>
+|stories>
+|>
+|main_content>
