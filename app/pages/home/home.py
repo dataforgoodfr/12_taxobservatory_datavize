@@ -48,7 +48,7 @@ viz1 = {
     "on_action": download_viz1
 }
 
-df_viz3 = algo.number_of_tracked_reports_company(data)
+df_viz3 = algo.number_of_tracked_mnc(data)
 viz3 = {
     "data": df_viz3,
     "title": "Multinationals ",

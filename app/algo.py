@@ -22,6 +22,10 @@ def number_of_tracked_reports_company(df_selected_company):
     return number_of_tracked_reports_company
 
 
+def number_of_tracked_mnc(df: pd.DataFrame) -> int:
+    return df["mnc"].nunique()
+
+
 # TODO add viz comment
 def number_of_tracked_reports_sector(df_selected_sector):
     number_of_tracked_reports_sector = len(
@@ -961,7 +965,6 @@ def display_tax_havens_use_evolution(df: pd.DataFrame, company: str):
 
 
 # Viz 24
-
 
 
 def viz_24_compute_data(df):
