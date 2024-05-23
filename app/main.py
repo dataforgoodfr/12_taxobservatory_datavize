@@ -28,7 +28,7 @@ stylekit = {
     "color_primary": "#021978",
     "color_secondary": "#C0FFE",
     "color_paper_light": "#FFFFFF",
-    "color_background_light": "#F2F2F2",
+    "color_background_light": "#FFFFFF",
     "font_family": "Manrope"
 }
 
