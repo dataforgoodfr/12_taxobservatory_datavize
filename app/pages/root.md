@@ -1,5 +1,5 @@
-[//]: # (The root file handles sections in common for all pages like header and footer. Tt also
-contains the <|content|> variable which will display the content of selected page)
+[//]: # (The root file handles sections in common for all pages like header and footer)
+[//]: # (It also contains the <|content|> variable which will display the content of selected page)
 
 [//]: # (Header)
 <header|part|class_name=header_bg|
