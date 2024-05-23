@@ -3,12 +3,16 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import humanize
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+
 
 # TODO add viz comment
 # Viz 1 -
 def number_of_tracked_reports(df):
     number_of_tracked_reports = len(df.groupby(["year", "mnc"])["mnc"])
     return number_of_tracked_reports
+
 
 # TODO add viz comment
 def number_of_tracked_reports_company(df_selected_company):
@@ -17,19 +21,22 @@ def number_of_tracked_reports_company(df_selected_company):
     )
     return number_of_tracked_reports_company
 
+
 # TODO add viz comment
 def number_of_tracked_reports_sector(df_selected_sector):
     number_of_tracked_reports_sector = len(
-            df_selected_sector.groupby(["year", "mnc"])["year"]
-        )
+        df_selected_sector.groupby(["year", "mnc"])["year"]
+    )
     return number_of_tracked_reports_sector
 
+
 # TODO add viz comment
-def number_of_tracked_reports_country(df_selected_country):    
+def number_of_tracked_reports_country(df_selected_country):
     number_of_tracked_reports_country = len(
         df_selected_country.groupby(["year", "mnc"])["year"]
     )
     return number_of_tracked_reports_country
+
 
 # TODO add viz comment
 # Viz 2 - Number of tracked reports over time
@@ -37,11 +44,12 @@ def number_of_tracked_reports_over_time(df):
     df_count = df.groupby(["year"])["mnc"].nunique().reset_index()
     return df_count
 
+
 # TODO add viz comment
 def number_of_tracked_reports_over_time_company(df_selected_company):
     df_count_company = (
         df_selected_company.groupby(["year"])["mnc"].nunique().reset_index()
-    )    
+    )
     # df_count_all_company = df.groupby(["year"])["mnc"].nunique().reset_index()
 
     # row[3].line_chart(df_count_all_company, x="year", y="mnc")
@@ -51,6 +59,7 @@ def number_of_tracked_reports_over_time_company(df_selected_company):
     #     "df_selected_sector.groupby(['year'])['mnc'].nunique().reset_index()"
     # )
     return df_count_company
+
 
 # TODO add viz comment
 def number_of_tracked_reports_over_time_sector(df_selected_sector):
@@ -70,6 +79,7 @@ def number_of_tracked_reports_over_time_sector(df_selected_sector):
     # )
     return df_count_sector
 
+
 # TODO add viz comment
 def number_of_tracked_reports_over_time_country(df_selected_country):
     df_count_country = (
@@ -82,6 +92,7 @@ def number_of_tracked_reports_over_time_country(df_selected_country):
     # row[5].line_chart(df_count_all_country, x="year", y="mnc", color="jur_name")
     return df_count_country
 
+
 # Viz 16
 
 # company’s % pre-tax profit and profit per employee
@@ -89,10 +100,11 @@ def number_of_tracked_reports_over_time_country(df_selected_country):
 # size of the bubble based on % profit and a color code for
 # tax havens vs others
 def company_pourcentage_pretax_profit_and_profit_per_employee(df_selected_company):
-    pretax_profit_col_name = 'profit_before_tax'
+    # pretax_profit_col_name = 'profit_before_tax'
     profit_col_name = ''
     employee_col_name = 'employees'
     df_selected_company[profit_col_name] / df_selected_company[employee_col_name]
+
 
 # Viz 19
 # what are the tax havens being used by the company
@@ -111,9 +123,7 @@ def tax_haven_used_by_company(df_selected_company):
     df_selected_company_th = df_selected_company[df_selected_company['jur_tax_haven'] != 'not.TH']
     df_selected_company_nth = df_selected_company[df_selected_company['jur_tax_haven'] == 'not.TH']
 
-
     for col in pc_list:
-
         df_selected_company.insert(
             len(df_selected_company.columns),
             col + '_domestic_sum',
@@ -137,10 +147,8 @@ def tax_haven_used_by_company(df_selected_company):
         df_selected_company.insert(
             len(df_selected_company.columns),
             col + '_pc',
-            100 * df_selected_company[col] / df_selected_company[col+'_sum'])
+            100 * df_selected_company[col] / df_selected_company[col + '_sum'])
         # df_selected_company[col + '_pc'] = 100 * df_selected_company[col] / df_selected_company[col+'_sum']
-
-
 
     df_selected_company_th = df_selected_company[df_selected_company['jur_tax_haven'] != 'not.TH']
     df_selected_company_th_agg = df_selected_company_th.groupby(['mnc', 'jur_name']).agg(
@@ -151,16 +159,18 @@ def tax_haven_used_by_company(df_selected_company):
         related_revenues_pc=('related_revenues_pc', 'sum')
     )
     df_selected_company_th_agg = df_selected_company_th_agg.reset_index()
-    df_selected_company_th_agg['profit per employee'] =\
-        df_selected_company_th_agg['profit_before_tax']/df_selected_company_th_agg['employees']
-    df_selected_company_th_agg['profit per employee'] = df_selected_company_th_agg['profit per employee'].replace([np.inf, -np.inf], None)
+    df_selected_company_th_agg['profit per employee'] = \
+        df_selected_company_th_agg['profit_before_tax'] / df_selected_company_th_agg['employees']
+    df_selected_company_th_agg['profit per employee'] = df_selected_company_th_agg['profit per employee'].replace(
+        [np.inf, -np.inf], None)
 
     return df_selected_company, df_selected_company_th_agg
+
 
 # TODO add viz comment
 # complete table table showing for all jurisdictions revenues, profits, employees, taxes with % of total for each (color code for tax havens)
 def company_table(df_selected_company):
-    company_upe_code = df_selected_company['upe_code'].unique()[0]
+    # company_upe_code = df_selected_company['upe_code'].unique()[0]
     pc_list = ['employees', 'profit_before_tax', 'unrelated_revenues', 'related_revenues', 'total_revenues', 'tax_paid']
 
     for col in pc_list:
@@ -190,12 +200,11 @@ def company_table(df_selected_company):
     return df_selected_company_by_jur.reset_index()
 
 
-
 # Viz 4 - Breakdown of reports by sector (pie chart)
 def breakdown_of_reports_by_sector(df):
-
     #Dataframe called df
-    df_reports_per_sector_year = df.groupby(['sector', 'year'])['mnc'].nunique().reset_index(name='unique_company_count')
+    df_reports_per_sector_year = df.groupby(['sector', 'year'])['mnc'].nunique().reset_index(
+        name='unique_company_count')
 
     # Aggregate the counts of unique companies across all years for each sector
     df_reports_per_sector = df_reports_per_sector_year.groupby('sector')['unique_company_count'].sum().reset_index()
@@ -204,27 +213,30 @@ def breakdown_of_reports_by_sector(df):
     total_companies = df_reports_per_sector['unique_company_count'].sum()
 
     # Calculate the percentage of each sector's count relative to the total count and round to 2 decimals
-    df_reports_per_sector['percent'] = ((df_reports_per_sector['unique_company_count'] / total_companies) * 100).round(2)
+    df_reports_per_sector['percent'] = ((df_reports_per_sector['unique_company_count'] / total_companies) * 100).round(
+        2)
 
     # Sort the DataFrame by the count of unique companies in ascending order
     df_reports_per_sector = df_reports_per_sector.sort_values(by='unique_company_count', ascending=True)
 
     return df_reports_per_sector
 
+
 def breakdown_of_reports_by_sector_viz(df_reports_per_sector):
     # Plotting the horizontal bar chart with Plotly Express
     fig = px.bar(df_reports_per_sector, y='sector', x='percent',
-                orientation='h',  # Horizontal orientation
-                title='Breakdown of Reports by Sector (All Years)',
-                labels={'percent': 'Percentage of Companies (%)', 'sector': 'Sector'},
-                text='percent',  # Show the percentage as text label
-                hover_data={'unique_company_count': True, 'percent': ':.2f%'},  # Add tooltip for count and rounded percentage
-                )
+                 orientation='h',  # Horizontal orientation
+                 title='Breakdown of Reports by Sector (All Years)',
+                 labels={'percent': 'Percentage of Companies (%)', 'sector': 'Sector'},
+                 text='percent',  # Show the percentage as text label
+                 hover_data={'unique_company_count': True, 'percent': ':.2f%'},
+                 # Add tooltip for count and rounded percentage
+                 )
 
     # Update layout to display the title above the chart
     fig.update_layout(title='Breakdown of Reports by Sector',
-                    title_x=0.5, title_y=0.9,  # Adjust position
-                    title_font_size=20)  # Adjust font size
+                      title_x=0.5, title_y=0.9,  # Adjust position
+                      title_font_size=20)  # Adjust font size
 
     # Show the horizontal bar chart
     return go.Figure(fig)
@@ -244,12 +256,13 @@ def breakdown_of_reports_by_hq_country(df):
 
     # Calculate the percentage of each HQ country's count relative to the total count and round to 2 decimals
     df_reports_per_country['percent'] = (
-                (df_reports_per_country['unique_company_count'] / total_companies) * 100).round(2)
+            (df_reports_per_country['unique_company_count'] / total_companies) * 100).round(2)
 
     # Sort the DataFrame by the count of unique companies in ascending order
     df_reports_per_country = df_reports_per_country.sort_values(by='unique_company_count', ascending=True)
 
     return df_reports_per_country
+
 
 def breakdown_of_reports_by_hq_country_viz(df_reports_per_country):
     # Plotting the horizontal bar chart with Plotly Express
@@ -271,11 +284,12 @@ def breakdown_of_reports_by_hq_country_viz(df_reports_per_country):
     # fig.show()
     return go.Figure(fig)
 
+
 ## Viz 6 - Breakdown of reports by sector over time (bar chart)
 
 
 def breakdown_of_reports_by_sector_over_time(df):
-    df_reports_per_sector_over_time = df
+    # df_reports_per_sector_over_time = df
     # return df_reports_per_sector_over_time
 
     # Step 1: Determine the top 10 sectors that released reports
@@ -285,14 +299,16 @@ def breakdown_of_reports_by_sector_over_time(df):
     df['Sectors'] = df['sector'].apply(lambda x: x if x in top_10_sectors else 'Others')
 
     # Step 3: Group the DataFrame by 'year', 'Sectors', and count the number of unique companies for each year and sector
-    df_reports_per_year_sector = df.groupby(['year', 'Sectors'])['mnc'].nunique().reset_index(name='unique_company_count')
+    df_reports_per_year_sector = df.groupby(['year', 'Sectors'])['mnc'].nunique().reset_index(
+        name='unique_company_count')
 
     # Sort sectors alphabetically
     df_reports_per_year_sector = df_reports_per_year_sector.sort_values(by='Sectors', ascending=False)
 
     return df_reports_per_year_sector, top_10_sectors
-def breakdown_of_reports_by_sector_over_time_viz(df_reports_per_year_sector, top_10_sectors):
 
+
+def breakdown_of_reports_by_sector_over_time_viz(df_reports_per_year_sector, top_10_sectors):
     # Define the order of sectors for the stacked bar chart and legend, reversed
     chart_order = ['Others'] + top_10_sectors[::-1]
     legend_order = ['Others'] + top_10_sectors[::-1]
@@ -317,10 +333,6 @@ def breakdown_of_reports_by_sector_over_time_viz(df_reports_per_year_sector, top
     # Show the plot
     # fig.show()
     return go.Figure(fig)
-
-
-
-
 
 
 ## Viz 7 - Breakdown of reports by HQ country over time (bar chart)
@@ -371,6 +383,7 @@ def compute_company_available_reports(df: pd.DataFrame, company: str) -> dict:
     }
 
     return data
+
 
 def display_company_available_reports(
         df: pd.DataFrame, company: str, hide_company: bool = True) -> pd.DataFrame:
@@ -449,6 +462,8 @@ def compute_company_key_financials_kpis(
     data = df.to_dict(orient='index')
 
     return data
+
+
 def display_company_key_financials_kpis(
         df: pd.DataFrame, company: str, year: int = None) -> pd.DataFrame:
     """Display key financial KPIs for a company.
@@ -469,6 +484,7 @@ def display_company_key_financials_kpis(
     df = pd.DataFrame.from_dict(data)
 
     return df
+
 
 # Viz 14
 def compute_top_jurisdictions_revenue(
@@ -728,8 +744,6 @@ def display_pretax_profit_and_employees_rank(
     return go.Figure(fig)
 
 
-
-
 # Viz 18
 
 def compute_related_and_unrelated_revenues_breakdown(
@@ -852,7 +866,8 @@ def display_related_and_unrelated_revenues_breakdown(df: pd.DataFrame, company: 
 
     # fig.show()
     return go.Figure(fig)
-    
+
+
 # Viz 21 - evolution of tax havens use over time : % profit vs % employees in TH over time
 def compute_tax_havens_use_evolution(df: pd.DataFrame, company: str) -> dict:
     """Compute the evolution of tax havens use by company over time.
@@ -946,8 +961,8 @@ def display_tax_havens_use_evolution(df: pd.DataFrame, company: str):
 
 
 # Viz 24
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
+
+
 
 def viz_24_compute_data(df):
     # Drop duplicates to ensure each MNC appears only once per year
@@ -961,6 +976,7 @@ def viz_24_compute_data(df):
 
     return mnc_report_count
 
+
 def viz_24_viz(mnc_report_count):
     # Generate the word cloud using the report counts as weights
     wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(mnc_report_count)
@@ -970,18 +986,6 @@ def viz_24_viz(mnc_report_count):
     fig = px.imshow(wordcloud)
     # plt.imshow(wordcloud, interpolation='bilinear')
     return fig
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Viz 25
@@ -1090,9 +1094,6 @@ def compute_completness_score(df: pd.DataFrame, company: str, year: int) -> floa
     return completness_score
 
 
-
-
-
 def compute_transparency_score(df: pd.DataFrame, company: str) -> dict:
     """Compute the transparency score which is the average of component I
     (geographic score) and component II (completness score).
@@ -1129,7 +1130,6 @@ def compute_transparency_score(df: pd.DataFrame, company: str) -> dict:
         }
 
     return data
-
 
 
 def transparency_scores_to_csv(
@@ -1219,9 +1219,6 @@ def display_transparency_score(df: pd.DataFrame, company: str, year: int = None)
 
     # Show figure
     fig.show()
-
-
-
 
 
 # Viz 26
@@ -1322,6 +1319,3 @@ def display_transparency_score_over_time_details(
     })
 
     return df
-
-
-

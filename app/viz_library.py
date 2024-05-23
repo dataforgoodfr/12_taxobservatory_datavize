@@ -75,7 +75,7 @@ class VizLibrary(ElementLibrary):
         # Get the property values
         title = props.get("title")
         subtitle = props.get("subtitle")
-        data = props.get("data")
+        # data = props.get("data")
 
         return f'''
         <div class="viz">
