@@ -33,10 +33,10 @@ number_of_tracked_reports_company = algo.number_of_tracked_reports_company(df_se
 
 
 
-def download_viz_1(state): download_el(state,viz1)
+def download_viz_1(state): download_el(state,viz_1)
 def update_viz_1(state):
-    state.viz1['data'] = state.company_sector
-viz1 = {
+    state.viz_1['data'] = state.company_sector
+viz_1 = {
     'data': company_sector,
     'title': "Sector",
     'sub_title': "",
@@ -44,45 +44,45 @@ viz1 = {
 }
 
 
-def download_viz_2(state): download_el(state,viz2)
-viz2 = {
+def download_viz_2(state): download_el(state,viz_2)
+viz_2 = {
     'data': company_upe_code,
     'title': "Headquarter",
     'sub_title': "",
     'on_action': download_viz_2
 }
 def update_viz_2(state):
-    state.viz2['data'] = state.company_upe_code
+    state.viz_2['data'] = state.company_upe_code
 
-def download_viz_3(state): download_el(state,viz3)
-viz3 = {
+def download_viz_3(state): download_el(state,viz_3)
+viz_3 = {
     'data': number_of_tracked_reports_company,
     'title': "Reports",
     'sub_title': "CbC reports tracked",
     'on_action': download_viz_3
 }
 def update_viz_3(state):
-    state.viz3['data'] = state.number_of_tracked_reports_company
+    state.viz_3['data'] = state.number_of_tracked_reports_company
 
-def download_viz_4(state): download_el(state,viz4)
-viz4 = {
+def download_viz_4(state): download_el(state,viz_4)
+viz_4 = {
     'data': number_of_tracked_reports_company,
     'title': "CbC Transparency Grade",
     'sub_title': "average over all reports",
     'on_action': download_viz_4
 }
 def update_viz_4(state):
-    state.viz4['data'] = state.number_of_tracked_reports_company
+    state.viz_4['data'] = state.number_of_tracked_reports_company
 
-def download_viz_5(state): download_el(state,viz5)
-viz5 = {
+def download_viz_5(state): download_el(state,viz_5)
+viz_5 = {
     'data': number_of_tracked_reports_company,
     'title': "CbC Transparency  Grade",
     'sub_title': "selected fiscal year",
     'on_action': download_viz_5
 }
 def update_viz_5(state):
-    state.viz5['data'] = state.number_of_tracked_reports_company
+    state.viz_5['data'] = state.number_of_tracked_reports_company
 
 # Viz 26
 data_viz_26 = algo.compute_transparency_score(data, selected_company)
@@ -325,10 +325,6 @@ def on_change_company(state):
 
     state.viz4['data'] = state.number_of_tracked_reports_company
     state.viz5['data'] = state.number_of_tracked_reports_company
-
-
-
-
 
 def on_change_year(state):
     print("Chosen year: ", state.selected_year)
