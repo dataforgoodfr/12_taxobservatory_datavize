@@ -188,7 +188,7 @@ viz_14 = {
     "fig": fig_viz_14,
     "data": data_viz_14,
     "title": "Distribution of revenues across partner jurisdictions",
-    "sub_title": f"Selected fiscal year : {selected_year}",
+    "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_14
 }
 
@@ -290,8 +290,7 @@ def update_viz_13(state):
         state.data, state.selected_company, int(state.selected_year))
     data_viz_13 = pd.DataFrame.from_dict(data_key_metric)
     state.viz_13_key_metric["data"] = data_viz_13
-    state.viz_13_key_metric["sub_title"] = \
-        f"Selected fiscal year ({int(state.selected_year)})"
+    state.viz_13_key_metric["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
 def update_viz_14(state):
@@ -301,7 +300,7 @@ def update_viz_14(state):
         state.data, state.selected_company, int(state.selected_year))
     state.viz_14["fig"] = fig_viz_14
     state.viz_14["data"] = data_viz_14
-    state.viz_14["sub_title"] = f"Selected fiscal year {selected_year}"
+    state.viz_14["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
 # Update data and figures when the selected company changes
