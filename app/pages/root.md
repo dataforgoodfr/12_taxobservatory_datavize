@@ -47,9 +47,22 @@ LinkedIn<br/>
 |>
 
 <|part|class_name=text-center align-item-center|
-<|{website_logo_path}|image|width=1rem|class_name=d-block m-auto|>
-<|{twitter_logo_path}|image|width=1rem|class_name=d-block m-auto|>
-<|{linkedin_logo_path}|image|width=1rem|class_name=d-block m-auto|>
+<|part|
+<a href="https://dataforgood.fr/">
+    <img src="./images/website-logo.svg"/>
+</a>
+|>
+<|part|
+<a href="https://twitter.com/dataforgood_fr">
+    <img src="./images/twitter-logo.svg"/>
+</a>
+|>
+<|part|
+<a href="https://www.linkedin.com/company/dataforgood">
+    <img src="./images/linkedin-logo.svg"/>
+</a>
+|>
+
 |>
 |>
 |>
@@ -68,9 +81,21 @@ LinkedIn<br/>
 |>
 
 <|part|class_name=text-center align-item-center|
-<|{website_logo_path}|image|width=1rem|class_name=d-block m-auto|>
-<|{twitter_logo_path}|image|width=1rem|class_name=d-block m-auto|>
-<|{linkedin_logo_path}|image|width=1rem|class_name=d-block m-auto|>
+<|part|
+<a href="https://www.taxobservatory.eu/">
+    <img src="./images/website-logo.svg"/>
+</a>
+|>
+<|part|
+<a href="https://twitter.com/taxobservatory">
+    <img src="./images/twitter-logo.svg"/>
+</a>
+|>
+<|part|
+<a href="https://www.linkedin.com/company/70917369/">
+    <img src="./images/linkedin-logo.svg"/>
+</a>
+|>
 |>
 |>
 |>
