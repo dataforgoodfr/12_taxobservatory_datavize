@@ -8,6 +8,7 @@ def to_text(val):
 # Path to images
 data4good_logo_path = "./images/data4good-logo.svg"
 eutax_logo_path = "./images/eutax-logo.svg"
+taxplorer_logo_path = "./images/taxplorer-logo.svg"
 
 
 def goto_d4g_website(state):
