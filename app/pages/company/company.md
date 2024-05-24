@@ -1,10 +1,10 @@
 [//]: # (Layout of company page)
 
 [//]: # (Main content)
-<main_content|part|class_name=container_bg pt3 pb3|
+<main_content|part|class_name=main-page-style|
 
 [//]: # (1. Select company section)
-<selection|part|class_name=mb2 ml6 mr6 pl2 pr2|
+<selection|part|class_name=main-content|
 <|layout|columns=1fr 1fr|gap=1.5rem|class_name=align-columns-top|
 <|part|
 Pick a company to dive into the report
@@ -27,7 +27,7 @@ Reach with this [contact form](/Contact) if you found it.
 <hr class="header_hr" />
 
 [//]: # (2. Company general information section)
-<company|part|class_name=pt3 mb3 ml6 mr6 pl2 pr2|
+<company|part|class_name=main-content|
 <|{selected_company}|text|class_name=big_title_blue|>
 
 <|layout|columns=1fr 1fr 1fr 1fr|gap=1.5rem|class_name=align-items-center mt1|
@@ -80,7 +80,7 @@ Reach with this [contact form](/Contact) if you found it.
 |company>
 
 [//]: # (3. Financial reporting section)
-<financial|part|class_name=ml6 mr6 pl2 pr2|
+<financial|part|class_name=main-content|
 
 [//]: # (Financial section : title and selector)
 <title|part|class_name=title_selector_container mb2|

@@ -1,8 +1,8 @@
 [//]: # (Layout of contact page)
 
 [//]: # (Main content)
-<|part|class_name=pagecontent container_bg|
-<|part|class_name=ml6 mr6 pl2 pr2 pb4|
+<|part|class_name=main-page-style|
+<|part|class_name=main-content|
 <|layout|columns=1fr 1fr|class_name=align-columns-center|
 
 <|part|class_name=align-item-center mt6 mb6 mr6 pr2|

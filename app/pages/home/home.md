@@ -1,7 +1,7 @@
 [//]: # (Layout of the home page)
 
-[//]: # (Main content section)
-<main_content|part|class_name=container_bg|
+[//]: # (Main section)
+<main_content|part|class_name=main-page-style|
 
 [//]: # (World map section)
 <world_map|part|class_name=world_map_container|
@@ -72,8 +72,8 @@ studies, risk scoring and more.
 |world_map>
 
 [//]: # (Main content : viz)
-<|part|class_name=pt3 pb3|
-<viz|part|class_name=mb3 ml6 mr6 pl2 pr2|
+<|part|class_name=main-content|
+<viz|part|class_name=mb4|
 <|part|class_name=title_button_container mb3|
 Our database is growing
 {: .title_blue}
@@ -142,7 +142,7 @@ Our database is growing
 |viz>
 
 [//]: # (Main content : stories)
-<stories|part|class_name=main_content ml6 mr6 pl2 pr2|
+<stories|part|
 <|part|class_name=title_button_container mb3|
 And there are a lot of stories to tell
 {: .title_blue}

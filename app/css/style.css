@@ -4,10 +4,20 @@
 
 /* Common **********/
 
-.container_bg {
+.main-page-style {
     background-color: #F2F2F2;
-    width: 1440px;
+    width: 90rem;
     margin: 0 auto;
+    padding: 0;
+}
+
+.main-content {
+    padding-left: 8rem;
+    padding-right: 8rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    margin: 0;
+    text-align: justify;
 }
 
 .text_justified {
@@ -25,6 +35,7 @@
     font-size: 40px;
     line-height: 55px;
     color: #021978;
+    text-align: left;
 }
 
 .title_blue {
@@ -34,6 +45,7 @@
     font-size: 35px;
     line-height: 48px;
     color: #021978;
+    text-align: left;
 }
 
 .text_blue {
@@ -330,14 +342,6 @@ hr.header_hr {
 }
 
 /* Other **********/
-
-.pagecontent {
-    /*padding-left:10%;
-    padding-top:5%;
-    padding-right:10%;
-    padding-bottom:5%;*/
-    text-align: justify;
-}
 
 .blue_section {
     background-color:#02198D;
