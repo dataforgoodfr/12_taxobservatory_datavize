@@ -147,7 +147,7 @@ Our database is growing
 And there are a lot of stories to tell
 {: .title_blue}
 
-<|button|label=More key stories &#8594;|>
+<|button|label=More key stories &#8594;|on_action=goto_keystories|>
 |>
 
 <|layout|columns=1 1|gap=6rem|class_name=align-columns-center|
