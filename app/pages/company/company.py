@@ -33,6 +33,8 @@ company_sector = list(df_selected_company["sector"].unique())[0]
 company_upe_name = df_selected_company["upe_name"].unique()[0]
 number_of_tracked_reports_company = algo.number_of_tracked_reports_company(df_selected_company)
 
+# Calculate company's average transparency score
+company_average_transparency_score = algo.display_transparency_score(data, selected_company)
 
 # Generate the digits, save them in a CSV file content, and trigger a download action
 # so the user can retrieve them
@@ -123,14 +125,14 @@ viz2 = {
 
 viz3 = {
     "data": number_of_tracked_reports_company,
-    "title": "Reports",
-    "sub_title": "CbC reports tracked",
+    "title": "Number of tracked reports",
+    "sub_title": "",
     "on_action": download_viz3
 }
 
 viz4 = {
-    'data': number_of_tracked_reports_company,
-    'title': "CbC Transparency Grade",
+    'data': company_average_transparency_score,
+    'title': "Transparency Grade",
     'sub_title': "average over all reports",
     'on_action': download_viz4
 }
@@ -262,7 +264,7 @@ def update_viz3(state):
 
 
 def update_viz4(state):
-    state.viz4["data"] = state.number_of_tracked_reports_company
+    state.viz4["data"] = algo.display_transparency_score(state.data, state.selected_company)
 
 
 def update_viz5(state):
@@ -305,6 +307,10 @@ def on_change_company(state):
     state.number_of_tracked_reports_company = (
         algo.number_of_tracked_reports_company(state.df_selected_company))
 
+    # Update viz4 (transparency score) on change :
+    state.company_average_transparency_score = algo.display_transparency_score(state.data, state.selected_company)
+    update_viz4(state)
+
     update_viz_13(state)
     update_viz_14(state)
 
@@ -335,7 +341,6 @@ def on_change_company(state):
     # state.viz1["data"'"] = state.company_sector
     state.viz2["data"] = state.company_upe_name
     state.viz3["data"] = state.number_of_tracked_reports_company
-    state.viz4["data"] = state.number_of_tracked_reports_company
     state.viz5["data"] = state.number_of_tracked_reports_company
 
     state.viz_15["fig"] = fig_viz_15

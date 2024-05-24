@@ -73,7 +73,7 @@ Reach with this [contact form](/Contact) if you found it.
 <|{viz4.sub_title}|text|class_name=viz_sub_title|>
 |>
 <|part|class_name=round mb1|
-<|{viz4.data}|>
+<|{viz4.data}|><|/100|text|>
 |>
 |>
 |>
@@ -202,4 +202,4 @@ the amount of profit can give an indication of profit shifting activities where 
 
 |profits_employees>
 |financial>
-|main_content>
+|main_cont

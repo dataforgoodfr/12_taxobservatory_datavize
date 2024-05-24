@@ -1190,9 +1190,10 @@ def display_transparency_score(df: pd.DataFrame, company: str, year: int = None)
     df = df.reset_index().rename(columns={'index': 'year'})
 
     # When data are not filtered by year, the score is the average of all years
-    score = (
+    score = round(
         df.loc[df['year'] == year, 'transparency_score'].iloc[0] if year
-        else df['transparency_score'].mean()
+        else df['transparency_score'].mean(),
+        0
     )
 
     # Create figure
@@ -1221,8 +1222,9 @@ def display_transparency_score(df: pd.DataFrame, company: str, year: int = None)
         height=360)
 
     # Show figure
-    fig.show()
+    # fig.show()
 
+    return score
 
 # Viz 26
 

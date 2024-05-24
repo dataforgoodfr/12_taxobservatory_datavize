@@ -30,8 +30,8 @@
     background: #B8BEDB;
     gap: 10px;
     -webkit-text-fill-color:#021978;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     display: flex; /* or inline-flex */
     align-items: center;
@@ -61,15 +61,16 @@
     font-weight: 400;
     font-size: 17px;
     line-height: 23px;
+    text-align: left;
 
 }
 
-.viz_subtitle {
+.viz_sub_title {
     /* Title */
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 300;
     font-size: 15px;
     line-height: 20px;
-
+    text-align: left;
 }
