@@ -344,6 +344,11 @@ hr.header_hr {
 
 /* Other **********/
 
+.contact-enveloppe {
+    font-size: 8rem;
+    text-decoration: none !important;
+}
+
 .blue_section {
     background-color:#02198D;
     -webkit-text-fill-color:ghostwhite;
@@ -413,8 +418,6 @@ hr.header_hr {
     color: #F9FBFE;
     text-align: justify;
 }
-
-
 
 .sectiontitle {
     font-family: 'Manrope';

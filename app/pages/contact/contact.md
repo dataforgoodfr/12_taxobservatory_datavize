@@ -14,9 +14,9 @@ version and contributions of updated data points or report of errors. We will do
 |>
 
 <|part|class_name=text-center align-item-center|
-# CONTACT FORMS
-|>
 
+[&#9993;](mailto:Public_cbcr_database@taxobservatory.eu)
+{: .contact-enveloppe}
 |>
 |>
 |>
