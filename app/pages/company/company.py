@@ -10,9 +10,8 @@ from app.data.data import data
 # Path to image
 header_right_image_path = "images/pexels-ingo-joseph-1880351.png"
 
-# Initialize selected company and year
+# Initialize selected company
 selected_company = "SHELL"
-selected_year = 2020
 
 # Create a filtered DataFrame with selected company
 df_selected_company = data[data["mnc"] == selected_company]
@@ -21,9 +20,10 @@ df_selected_company = data[data["mnc"] == selected_company]
 colname_company = "mnc"
 selector_company = list(np.sort(data[colname_company].astype(str).unique()))
 
-# List years to populate selector
-colname_year = "year"
-selector_year = list(np.sort(data[colname_year].astype(str).unique()))
+# List years to populate selector and initialise selected year
+# colname_year = "year"
+selector_year = data.loc[data["mnc"] == selected_company, "year"].unique().astype(str).tolist()
+selected_year = max(data.loc[data["mnc"] == selected_company, "year"].unique().tolist())
 
 # Calculate number of reports for all companies
 df_count_company = algo.number_of_tracked_reports_over_time_company(df_selected_company)
@@ -35,6 +35,14 @@ number_of_tracked_reports_company = algo.number_of_tracked_reports_company(df_se
 
 # Calculate company's average transparency score
 company_average_transparency_score = algo.display_transparency_score(data, selected_company)
+
+# Calculate company's transparency score for a specific year
+company_year_transparency_score = algo.display_transparency_score(
+    data, selected_company, selected_year)
+
+# Calculate company's transparency detailed scores over time
+company_detailed_transparency_scores = algo.display_transparency_score_over_time_details(data, selected_company)
+
 
 # Generate the digits, save them in a CSV file content, and trigger a download action
 # so the user can retrieve them
@@ -138,23 +146,22 @@ viz4 = {
 }
 
 viz5 = {
-    'data': number_of_tracked_reports_company,
-    'title': "CbC Transparency  Grade",
-    'sub_title': "selected fiscal year",
+    'data': company_year_transparency_score,
+    'title': "Transparency  Grade",
+    'sub_title': f"selected fiscal year : {selected_year}",
     'on_action': download_viz5
 }
 
 viz6 = {
     "data": df_selected_company,
-    "title": "More on transparency (tbd)",
+    "title": "More on transparency",
     "sub_title": "",
     "on_action": download_viz6
 }
 
 # viz26
-data_viz_26 = algo.compute_transparency_score(data, selected_company)
 viz_26 = {
-    "data": data_viz_26,
+    "data": company_detailed_transparency_scores,
     "title": "Transparency score over time ",
     "sub_title": "",
     "on_action": download_viz_26
@@ -167,7 +174,7 @@ data_viz_13 = pd.DataFrame.from_dict(data_key_metric).reset_index()
 viz_13_key_metric = {
     "data": data_viz_13,
     "title": "Key metrics",
-    "sub_title": f"Selected fiscal year ({selected_year})",
+    "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_13_key_metric
 }
 
@@ -181,7 +188,7 @@ viz_14 = {
     "fig": fig_viz_14,
     "data": data_viz_14,
     "title": "Distribution of revenues across partner jurisdictions",
-    "sub_title": f"Selected fiscal year{selected_year}",
+    "sub_title": f"Selected fiscal year : {selected_year}",
     "on_action": download_viz_14
 }
 
@@ -264,16 +271,18 @@ def update_viz3(state):
 
 
 def update_viz4(state):
-    state.viz4["data"] = algo.display_transparency_score(state.data, state.selected_company)
+    state.viz4["data"] = algo.display_transparency_score(
+        state.data, state.selected_company)
 
 
 def update_viz5(state):
-    state.viz5["data"] = state.number_of_tracked_reports_company
+    state.viz5["data"] = algo.display_transparency_score(
+        state.data, state.selected_company, int(state.selected_year))
+    state.viz5["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
 def update_viz26(state):
-    data_viz_26 = algo.compute_transparency_score(state.data, state.selected_company)
-    state.viz_26["data"] = data_viz_26
+    state.viz_26["data"] = algo.display_transparency_score_over_time_details(data, state.selected_company)
 
 
 def update_viz_13(state):
@@ -299,6 +308,11 @@ def update_viz_14(state):
 def on_change_company(state):
     print("Chosen company: ", state.selected_company)
 
+    # Update selected year and available years
+    state.selector_year = data.loc[data["mnc"] == state.selected_company, "year"].unique().astype(str).tolist()
+    state.selected_year = max(data.loc[data["mnc"] == state.selected_company, "year"].unique().tolist())
+    print("Available years :", state.selector_year)
+
     state.df_selected_company = data[data["mnc"] == state.selected_company]
     state.df_count_company = algo.number_of_tracked_reports_over_time_company(state.df_selected_company)
 
@@ -307,9 +321,16 @@ def on_change_company(state):
     state.number_of_tracked_reports_company = (
         algo.number_of_tracked_reports_company(state.df_selected_company))
 
-    # Update viz4 (transparency score) on change :
+    # Update viz4 (average transparency score) on change :
     state.company_average_transparency_score = algo.display_transparency_score(state.data, state.selected_company)
     update_viz4(state)
+
+    # Update viz5 (average transparency score) on change :
+    state.company_year_transparency_score = algo.display_transparency_score(state.data, state.selected_company, int(state.selected_year))
+    update_viz5(state)
+
+    # Update viz_26 (detailed transparency scores over time)
+    update_viz26(state)
 
     update_viz_13(state)
     update_viz_14(state)
@@ -334,15 +355,13 @@ def on_change_company(state):
         df=state.data, company=state.selected_company)
     data_viz_21 = pd.DataFrame.from_dict(data_viz_21_dict)
 
-    data_viz_26 = algo.compute_transparency_score(state.data, state.selected_company)
-    state.viz_26["data"] = data_viz_26
+    # data_viz_26 = algo.compute_transparency_score(state.data, state.selected_company)
+    # state.viz_26["data"] = data_viz_26
 
     update_viz1(state)
     # state.viz1["data"'"] = state.company_sector
     state.viz2["data"] = state.company_upe_name
     state.viz3["data"] = state.number_of_tracked_reports_company
-    state.viz5["data"] = state.number_of_tracked_reports_company
-
     state.viz_15["fig"] = fig_viz_15
     state.viz_15["data"] = data_viz_15
     state.viz_18["fig"] = fig_viz_18
@@ -354,6 +373,11 @@ def on_change_company(state):
 # Update data and figures when the selected year changes
 def on_change_year(state):
     print("Chosen year: ", state.selected_year)
+    # Update viz5 (average transparency score) on change :
+    state.company_year_transparency_score = algo.display_transparency_score(state.data, state.selected_company,
+                                                                            int(state.selected_year))
+    update_viz5(state)
+
     update_viz_13(state)
     update_viz_14(state)
     data_viz_15 = algo.compute_pretax_profit_and_employees_rank(

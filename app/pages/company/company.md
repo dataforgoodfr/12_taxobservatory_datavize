@@ -87,7 +87,7 @@ Reach with this [contact form](/Contact) if you found it.
 Financial Reporting Overview
 {: .big_title_blue }
 
-<|{selected_year}|selector|lov={selector_year}|on_change=on_change_year|dropdown|class_name=fullwidth|width=200%|>
+<|{selected_year}|selector|lov={selector_year}|on_change=on_change_year|dropdown|class_name=fullwidth|>
 |title>
 
 [//]: # (3.1. Financial section : tax transparency)
@@ -104,19 +104,19 @@ Tax transparency
 <br/>
 |>
 <|part|class_name=round mb1|
-<|{viz5.data}|>
+<|{viz5.data}|><|/100|text|>
 |>
 |>
 
 <|card|
 <|part|class_name=pb1|
-<|{viz6.title}|text|class_name=viz_title|>
+<|{viz_26.title}|text|class_name=viz_title|>
 <br/>
-<|{viz6.sub_title}|text|class_name=viz_sub_title|>
+<|{viz_26.sub_title}|text|class_name=viz_sub_title|>
 <br/>
 |>
-<|part|class_name=round mb1|
-<|{viz6.data}|>
+<|part|
+<|{viz_26.data}|table|show_all|>
 |>
 |>
 |>
