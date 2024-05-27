@@ -127,7 +127,10 @@
 .home_viz_24 {grid-area: d;}
 
 .scrollable-container {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    max-width=100%,
 }
 
 /* Company page *********/

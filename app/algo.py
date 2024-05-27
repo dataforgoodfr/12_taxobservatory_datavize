@@ -701,7 +701,7 @@ def display_pretax_profit_and_employees_rank(
 
     # Update layout settings
     fig.update_layout(
-        title='Profitables jurisdictions pre-tax profit & employees',
+        title=None,
         xaxis=dict(
             title=None,
             tickformat='.0%',
@@ -709,12 +709,14 @@ def display_pretax_profit_and_employees_rank(
         ),
         yaxis_title=None,
         legend=dict(
+            x=-0.5,
+            y=1.05,
             title=dict(text=''),
             orientation='h'
         ),
         plot_bgcolor='white',
-        width=800,
-        height=fig_height
+        width=600,
+        height=fig_height,
     )
 
     # Add annotations for NaN values where there should have been a bar

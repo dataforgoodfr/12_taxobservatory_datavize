@@ -345,7 +345,7 @@ def on_change_company(state):
 
     update_viz_1(state)
     # state.viz1["data"'"] = state.company_sector
-    state.viz2["data"] = state.company_upe_name
+    state.viz_2["data"] = state.company_upe_name
     state.viz_18["fig"] = fig_viz_18
     state.viz_18["data"] = data_viz_18
     state.viz_19["data"] = data_viz_19
