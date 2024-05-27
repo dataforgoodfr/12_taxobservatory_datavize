@@ -189,7 +189,7 @@ fig_viz_14 = algo.display_jurisdictions_top_revenue(
 viz_14 = {
     "fig": fig_viz_14,
     "data": data_viz_14,
-    "title": "Distribution of revenues across partner jurisdictions",
+    "title": "Distribution of revenues across countries",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_14
 }
@@ -202,14 +202,14 @@ fig_viz_15 = algo.display_pretax_profit_and_employees_rank(
 viz_15 = {
     "fig": fig_viz_15,
     "data": data_viz_15,
-    "title": "% profit and employees by partner jurisdiction",
+    "title": "% profit and employees by countries",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_15
 }
 
 viz_16 = {
     "fig": algo.display_pretax_profit_and_profit_per_employee(data, selected_company, selected_year),
-    "title": "% profit and profit / employee by partner jurisdiction",
+    "title": "% profit and profit / employee by countries",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_16
 }

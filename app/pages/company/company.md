@@ -196,7 +196,7 @@ Distribution of profits vs employees
 
 <|part|class_name=text_justified mt2|
 This chart plots the percentage of total positive profits and the percentage of total employees reported in each 
-jurisdiction where the multinational is active. Comparing the amount of physical production factors like employees with 
+country where the multinational is active. Comparing the amount of physical production factors like employees with 
 the amount of profit can give an indication of profit shifting activities where strong misalignment are observed
 |>
 
