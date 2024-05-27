@@ -189,7 +189,7 @@ Distribution of profits vs employees
 <br/>
 |>
 <|part|
-<|{viz_16.data}|>
+<|chart|figure={viz_16.fig}|>
 |>
 |>
 |>

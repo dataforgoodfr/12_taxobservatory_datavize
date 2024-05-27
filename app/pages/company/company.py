@@ -208,9 +208,9 @@ viz_15 = {
 }
 
 viz_16 = {
-    "data": None,
+    "fig": algo.display_pretax_profit_and_profit_per_employee(data, selected_company, selected_year),
     "title": "% profit and profit / employee by partner jurisdiction",
-    "sub_title": "CbC reports tracked",
+    "sub_title":  f"selected fiscal year : {selected_year}",
     "on_action": download_viz_16
 }
 
@@ -303,6 +303,10 @@ def update_viz_14(state):
     state.viz_14["data"] = data_viz_14
     state.viz_14["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
+def update_viz_16(state):
+    state.viz_16["fig"] = algo.display_pretax_profit_and_profit_per_employee(
+        state.data, state.selected_company, int(state.selected_year))
+    state.viz_16["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 # Update data and figures when the selected company changes
 def on_change_company(state):
@@ -339,6 +343,9 @@ def on_change_company(state):
     update_viz_13(state)
 
     update_viz_14(state)
+
+    # Update viz_16
+    update_viz_16(state)
 
     data_viz_15 = algo.compute_pretax_profit_and_employees_rank(
         state.data, state.selected_company, int(state.selected_year))
@@ -393,6 +400,9 @@ def on_change_year(state):
         state.data, state.selected_company, int(state.selected_year))
     state.viz_15["fig"] = fig_viz_15
     state.viz_15["data"] = data_viz_15
+
+    # Update viz_16
+    update_viz_16(state)
 
     data_viz_18_dict = algo.compute_related_and_unrelated_revenues_breakdown(
         state.data, state.selected_company, int(state.selected_year))
