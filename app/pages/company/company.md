@@ -139,13 +139,13 @@ Financial profile
 <|layout|columns=1fr 1fr|gap=1.5rem|
 <|card|
 <|part|class_name=pb1|
-<|{viz_13_key_metric.title}|text|class_name=viz_title|>
+<|{viz_13.title}|text|class_name=viz_title|>
 <br/>
-<|{viz_13_key_metric.sub_title}|text|class_name=viz_sub_title|>
+<|{viz_13.sub_title}|text|class_name=viz_sub_title|>
 <br/>
 |>
 <|part|
-<|{viz_13_key_metric.data}|table|show_all|>
+<|{viz_13.data}|table|show_all|dynamic=True|>
 |>
 |>
 

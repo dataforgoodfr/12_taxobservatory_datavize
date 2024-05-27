@@ -43,6 +43,11 @@ company_year_transparency_score = algo.display_transparency_score(
 # Calculate company's transparency detailed scores over time
 company_detailed_transparency_scores = algo.display_transparency_score_over_time_details(data, selected_company)
 
+# Calculate company's key financials kpis for a specific year
+company_key_financial_kpis = algo.display_company_key_financials_kpis(data, selected_company, selected_year)
+
+
+# Fonction pour mettre à jour le DataFrame et rafraîchir la table
 
 # Generate the digits, save them in a CSV file content, and trigger a download action
 # so the user can retrieve them
@@ -84,8 +89,8 @@ def download_viz_26(state):
     download_el(state, viz_26)
 
 
-def download_viz_13_key_metric(state):
-    download_el(state, viz_13_key_metric)
+def download_viz_13(state):
+    download_el(state, viz_13)
 
 
 def download_viz_14(state):
@@ -168,14 +173,11 @@ viz_26 = {
 }
 
 # viz13
-data_key_metric = algo.compute_company_key_financials_kpis(
-    data, selected_company, int(selected_year))
-data_viz_13 = pd.DataFrame.from_dict(data_key_metric).reset_index()
-viz_13_key_metric = {
-    "data": data_viz_13,
+viz_13 = {
+    "data": company_key_financial_kpis,
     "title": "Key metrics",
     "sub_title": f"selected fiscal year : {selected_year}",
-    "on_action": download_viz_13_key_metric
+    "on_action": download_viz_13
 }
 
 # viz14
@@ -282,15 +284,14 @@ def update_viz5(state):
 
 
 def update_viz26(state):
-    state.viz_26["data"] = algo.display_transparency_score_over_time_details(data, state.selected_company)
+    state.viz_26["data"] = algo.display_transparency_score_over_time_details(
+        data, state.selected_company)
 
 
 def update_viz_13(state):
-    data_key_metric = algo.compute_company_key_financials_kpis(
+    state.viz_13["data"] = algo.display_company_key_financials_kpis(
         state.data, state.selected_company, int(state.selected_year))
-    data_viz_13 = pd.DataFrame.from_dict(data_key_metric)
-    state.viz_13_key_metric["data"] = data_viz_13
-    state.viz_13_key_metric["sub_title"] = f"selected fiscal year : {state.selected_year}"
+    state.viz_13["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
 def update_viz_14(state):
@@ -325,13 +326,18 @@ def on_change_company(state):
     update_viz4(state)
 
     # Update viz5 (average transparency score) on change :
-    state.company_year_transparency_score = algo.display_transparency_score(state.data, state.selected_company, int(state.selected_year))
+    state.company_year_transparency_score = algo.display_transparency_score(
+        state.data, state.selected_company, int(state.selected_year))
     update_viz5(state)
 
     # Update viz_26 (detailed transparency scores over time)
+    state.company_year_transparency_score = algo.display_transparency_score(
+        state.data, state.selected_company, int(state.selected_year))
     update_viz26(state)
 
+    # Update viz_13 (company's key financial kpis)
     update_viz_13(state)
+
     update_viz_14(state)
 
     data_viz_15 = algo.compute_pretax_profit_and_employees_rank(
@@ -377,7 +383,9 @@ def on_change_year(state):
                                                                             int(state.selected_year))
     update_viz5(state)
 
+    # Update viz_13 (company's key financial kpis)
     update_viz_13(state)
+
     update_viz_14(state)
     data_viz_15 = algo.compute_pretax_profit_and_employees_rank(
         state.data, state.selected_company, int(state.selected_year))

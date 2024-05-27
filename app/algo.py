@@ -447,7 +447,7 @@ def compute_company_key_financials_kpis(
               .groupby(['year', 'upe_name'], as_index=False)[kpis_list]
               .sum())
 
-    df = df.set_index('year')
+    # df = df.set_index('year')
 
     # Make financial numbers easily readable with 'humanize' package
     for column in df.columns:
@@ -469,7 +469,7 @@ def compute_company_key_financials_kpis(
 
 
 def display_company_key_financials_kpis(
-        df: pd.DataFrame, company: str, year: int = None, hide_columns=False) -> pd.DataFrame:
+        df: pd.DataFrame, company: str, year: int = None):
     """Display key financial KPIs for a company.
 
     Args:
@@ -487,10 +487,6 @@ def display_company_key_financials_kpis(
 
     # Create the table
     df = pd.DataFrame.from_dict(data)
-
-    # Hide column headers
-    if hide_columns:
-        df = df.style.hide(axis='columns')
 
     return df
 
@@ -1230,6 +1226,7 @@ def display_transparency_score(df: pd.DataFrame, company: str, year: int = None)
     # fig.show()
 
     return score
+
 
 # Viz 26
 
