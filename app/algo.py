@@ -462,7 +462,7 @@ def compute_company_key_financials_kpis(
     df = df.rename(columns={'upe_name': 'headquarter'})
     df.columns = df.columns.str.replace('_', ' ').str.capitalize()
 
-    # Create a dictionnary with the results
+    # Create a dictionary with the results
     data = df.to_dict(orient='index')
 
     return data
