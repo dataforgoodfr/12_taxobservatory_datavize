@@ -124,7 +124,7 @@ Tax transparency
 <|part|class_name=text_justified mt2|
 * We evaluate the reports transparency considering two features: the geographical disaggregation and the presence of 
 the different recommended variables. The more detailed the geographical disaggregation and the higher the number of 
-variables published the higher the transparency score. Find more on our [methodology page](/Company).
+variables published the higher the transparency score. Find more on our [methodology page](/Methodology).
 <br/><br/>
 * It is important to note that the availability of different variables will be essential to calculate the indicators 
 below. When the variables are not available it will not be possible to calculate all indicators.
