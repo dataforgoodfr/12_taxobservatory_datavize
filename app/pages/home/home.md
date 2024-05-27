@@ -150,32 +150,42 @@ And there are a lot of stories to tell
 <|button|label=More key stories &#8594;|on_action=goto_keystories|>
 |>
 
-<|layout|columns=1 1|gap=6rem|class_name=align-columns-center|
+<|layout|columns=1fr 1fr 1fr|gap=1rem|class_name=align-columns-center|
 <|card|id=blue_card|
-European banks love tax havens
+The Great Tax Escape
 {: .blue_card_title .mb1 .pr2}
 
-Analysing 7 years of country-by-country data published by European banks, we show that EU banks have been consistently 
-present in tax havens with around 14% of their profits booked in tax havens annually. Implementing a 15% minimum tax 
-rate could generate EUR 3-5 billion annually for European countries.
+Exploiting loopholes, multinationals funneled over $1 trillion in profits to tax havens in 2022 alone. This 
+industrial-scale tax avoidance costs countries 10% of their corporate tax base annually undermining their ability to 
+fund vital public services for citizens.
 {: .blue_card_text .mb2 }
 
-Read more &#8594;
+<a class="blue_card_link" href="https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/" target="_blank">Read more &#8594;</a>
 {: .blue_card_link }
 |>
 
 <|card|id=blue_card|
-Tracking CbCR's Fragmented Uptake
+The Spotlight on Corporate Taxes Intensifies
 {: .blue_card_title .mb1 .pr2}
 
-Overall CbCR publishing rates are low (97 reports for 2020), but increasing rapidly. CbCR publishing is concentrated in 
-European countries and in the extractive sector. Last, there remains significant room for progress on the completion of 
-the information provided and the accessibility of these reports: 55% of the reports do not include all the recommended 
-variables and reports are published in a wide variety of documents.
+Investors, activists and governments are demanding answers - are global corporations paying their fair share of taxes? 
+But too often, the data trail goes cold.<br/>
+Country-by-Country Reporting is crucial. It exposes the tax maneuvers of big businesses across borders.
+Shining a light on the opaque corporate tax maze, one multinational at a time.
 {: .blue_card_text .mb2 }
 
-Read more &#8594;
-{: .blue_card_link }
+|>
+
+<|card|id=blue_card|
+Tracking the Tax Trail
+{: .blue_card_title .mb1 .pr2}
+
+While more companies voluntarily publish their country-by-country tax reports, an incoming EU directive will force 
+thousands of multinationals to disclose their global tax footprints.<br/>
+The catch? No central database is mandated, making monitoring difficult. This site aims to be that missing public 
+repository.
+{: .blue_card_text .mb2 }
+
 |>
 |>
 |stories>
