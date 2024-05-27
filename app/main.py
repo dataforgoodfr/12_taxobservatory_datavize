@@ -6,6 +6,7 @@ from pages.company.company import company_md
 from pages.keystories.keystories import keystories_md
 from pages.methodology.methodology import methodology_md
 from pages.contact.contact import contact_md
+from pages.download.download import download_md
 
 # Add pages
 pages = {
@@ -14,7 +15,8 @@ pages = {
     "KeyStories": keystories_md,
     "Company": company_md,
     "Methodology": methodology_md,
-    "Contact": contact_md
+    "Contact": contact_md,
+    "Download": download_md
 }
 
 
@@ -37,6 +39,10 @@ def goto_contact(state):
 
 def goto_methodology(state):
     navigate(state, "Methodology")
+
+
+def goto_download(state):
+    navigate(state, "Download")
 
 
 # Initialise Gui with pages and style sheet

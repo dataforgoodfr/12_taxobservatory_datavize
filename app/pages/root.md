@@ -13,11 +13,11 @@
 |>
 
 <|part|class_name=align-item-stretch|
-<|navbar|class_name=fullheight|>
+<|navbar|class_name=fullheight|lov={navbar_items}|>
 |>
 
 <|part|class_name=text-right align-item-center|
-<|button|label=Download data|>
+<|button|label=Download data|on_action=goto_download|>
 |>
 |>
 
