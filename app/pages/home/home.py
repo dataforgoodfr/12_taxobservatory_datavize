@@ -43,8 +43,8 @@ def download_viz_24(state):
 df_viz1 = algo.number_of_tracked_reports(data)
 viz1 = {
     "data": df_viz1,
-    "title": "Reports",
-    "sub_title": "CbC reports tracked",
+    "title": "Reports tracked",
+    "sub_title": "",
     "on_action": download_viz1
 }
 
@@ -60,7 +60,7 @@ df_viz_2 = algo.number_of_tracked_reports_over_time(data)
 viz_2 = {
     "data": df_viz_2,
     "title": "Evolution of reports over time",
-    "sub_title": "CbC reports tracked",
+    "sub_title": "",
     "on_action": download_viz_2
 }
 
