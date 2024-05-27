@@ -33,47 +33,47 @@ Reach with this [contact form](/Contact) if you found it.
 <|layout|columns=1fr 1fr 1fr 1fr|gap=1.5rem|class_name=align-items-center mt1|
 <|card|
 <|part|
-<|{viz1.title}|text|class_name=viz_title|>
+<|{viz_1.title}|text|class_name=viz_title|>
 <br/>
-<|{viz1.sub_title}|text|class_name=viz_sub_title|>
+<|{viz_1.sub_title}|text|class_name=viz_sub_title|>
 <br/>
 |>
 <|part|class_name=viz_text_blue|
-<|{viz1.data}|>
+<|{viz_1.data}|>
 |>
 |>
 
 <|card|
 <|part|
-<|{viz2.title}|text|class_name=viz_title|>
+<|{viz_2.title}|text|class_name=viz_title|>
 <br/>
-<|{viz2.sub_title}|text|class_name=viz_sub_title|>
+<|{viz_2.sub_title}|text|class_name=viz_sub_title|>
 <br/>
 |>
 <|part|class_name=viz_text_blue|
-<|{viz2.data}|>
+<|{viz_2.data}|>
 |>
 |>
 
 <|card|
 <|part|class_name=pb1|
-<|{viz3.title}|text|class_name=viz_title|>
+<|{viz_3.title}|text|class_name=viz_title|>
 <br/>
-<|{viz3.sub_title}|text|class_name=viz_sub_title|>
+<|{viz_3.sub_title}|text|class_name=viz_sub_title|>
 |>
 <|part|class_name=round mb1|
-<|{viz3.data}|>
+<|{viz_3.data}|>
 |>
 |>
 
 <|card|
 <|part|class_name=pb1|
-<|{viz4.title}|text|class_name=viz_title|>
+<|{viz_4.title}|text|class_name=viz_title|>
 <br/>
-<|{viz4.sub_title}|text|class_name=viz_sub_title|>
+<|{viz_4.sub_title}|text|class_name=viz_sub_title|>
 |>
 <|part|class_name=round mb1|
-<|{viz4.data}|><|/100|text|>
+<|{viz_4.data}|><|/100|text|>
 |>
 |>
 |>
@@ -98,13 +98,13 @@ Tax transparency
 <|layout|columns=1fr 3fr|gap=1.5rem|
 <|card|
 <|part|class_name=pb1|
-<|{viz5.title}|text|class_name=viz_title|>
+<|{viz_5.title}|text|class_name=viz_title|>
 <br/>
-<|{viz5.sub_title}|text|class_name=viz_sub_title|>
+<|{viz_5.sub_title}|text|class_name=viz_sub_title|>
 <br/>
 |>
 <|part|class_name=round mb1|
-<|{viz5.data}|><|/100|text|>
+<|{viz_5.data}|><|/100|text|>
 |>
 |>
 
