@@ -1382,8 +1382,8 @@ def display_transparency_score_over_time_details(
     # Drop 'mnc' column
     df = df.drop(columns='mnc')
 
-    # Round and convert percentage to string with % character
-    df = df.apply(lambda x: round(x).astype(int).astype('string') + ' %')
+    # Round and convert percentage to string with '/100' annotation
+    df = df.apply(lambda x: round(x).astype(int).astype('string') + '/100')
 
     # Reset index and rename 'year' column
     df = df.reset_index().rename(columns={'index': 'Fiscal year'})
