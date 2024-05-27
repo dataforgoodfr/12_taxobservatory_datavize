@@ -469,13 +469,14 @@ def compute_company_key_financials_kpis(
 
 
 def display_company_key_financials_kpis(
-        df: pd.DataFrame, company: str, year: int = None) -> pd.DataFrame:
+        df: pd.DataFrame, company: str, year: int = None, hide_columns=False) -> pd.DataFrame:
     """Display key financial KPIs for a company.
 
     Args:
         df (pd.DataFrame): CbCRs database.
         company (str): Company name
         year (int, optional): fiscal year to filter the results with. Defaults to None.
+        hide_columns (bool, optional): hide colum labels.
 
     Returns:
         pd.DataFrame: company key financial KPIs.
@@ -486,6 +487,10 @@ def display_company_key_financials_kpis(
 
     # Create the table
     df = pd.DataFrame.from_dict(data)
+
+    # Hide column headers
+    if hide_columns:
+        df = df.style.hide(axis='columns')
 
     return df
 
