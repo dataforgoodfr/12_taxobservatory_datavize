@@ -487,6 +487,7 @@ def display_company_key_financials_kpis(
 
     # Create the table
     df = pd.DataFrame.from_dict(data)
+    df = df.reset_index()
 
     return df
 
@@ -744,6 +745,78 @@ def display_pretax_profit_and_employees_rank(
         values = df[trace.name]
         text_position = ['outside' if not np.isnan(value) else 'none' for value in values]
         trace.textposition = text_position
+
+    # fig.show()
+    return go.Figure(fig)
+
+
+# Viz 16
+def compute_pretax_profit_and_profit_per_employee(
+        df: pd.DataFrame, company: str, year: int) -> dict:
+    # Filter rows with selected company/year and subset with necessary features
+    features = ['jur_name', 'profit_before_tax', 'employees', 'jur_tax_haven']
+    df = df.loc[(df['mnc'] == company) & (df['year'] == year), features]
+
+    # Keep only profitable jurisdictions
+    df = df.loc[df['profit_before_tax'] >= 0]
+
+    # Sort jurisdictions by profits
+    df = df.sort_values(by='profit_before_tax').reset_index(drop=True)
+
+    # Replace 0 employees by 1
+    df.loc[df['employees'] == 0, 'employees'] = 1
+
+    # Calculate percentages
+    df['profit_before_tax_%'] = df['profit_before_tax'] / df['profit_before_tax'].sum()
+    df['profit_per_employee'] = df['profit_before_tax'] / df['employees']
+    df = df.drop(columns=['profit_before_tax', 'employees'])
+
+    # data = df.to_dict()
+
+    return df
+
+
+def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str, year: int):
+    # Compute data
+    data = compute_pretax_profit_and_profit_per_employee(df=df, company=company, year=year)
+
+    # Create DataFrame
+    df = pd.DataFrame(data)
+
+    # Rename columns
+    df = df.rename(columns={
+        'profit_before_tax_%': 'Percentage of pre-tax profit',
+        'profit_per_employee': 'Pre-tax profit per employee',
+        'jur_tax_haven': 'Tax haven'
+    })
+
+    # Create figure
+    fig = px.scatter(
+        df,
+        x='Percentage of pre-tax profit',
+        y='Pre-tax profit per employee',
+        size='Percentage of pre-tax profit',
+        color='Tax haven',
+        hover_name='jur_name'
+    )
+
+    # Update layout settings
+    fig.update_layout(
+        title='Pre-tax profit & profit per employee',
+        xaxis=dict(
+            title=None,
+            tickformat='.0%',
+            # range=[0, max_x_value ]
+        ),
+        yaxis_title=None,
+        legend=dict(
+            title=dict(text=''),
+            orientation='h'
+        ),
+        plot_bgcolor='white',
+        width=800,
+        # height=fig_height
+    )
 
     # fig.show()
     return go.Figure(fig)
