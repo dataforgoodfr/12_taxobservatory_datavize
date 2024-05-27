@@ -797,7 +797,7 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         y='Pre-tax profit per employee',
         size='Percentage of pre-tax profit',
         color='Tax haven',
-        hover_name='jur_name'
+        hover_name='jur_name',
     )
 
     # Update layout settings
