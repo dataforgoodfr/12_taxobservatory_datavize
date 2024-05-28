@@ -250,6 +250,24 @@
     font-size: 17px;
 }
 
+.taipy-table:where(:not(.table-header-font)) thead th {
+    color: #021978;
+    font-family: "Manrope";
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.taipy-table:where(:not(.table-row-top-border)) tbody td {
+  border-top: 1px solid #B8BEDB;
+}
+
+.table-cell>td {
+    color: #1A1E3D;
+    font-family: "Manrope";
+    font-weight: 300;
+    font-size: 15px;
+}
+
 
 /* Header *********/
 

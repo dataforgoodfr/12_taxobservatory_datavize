@@ -116,7 +116,7 @@ Tax transparency
 <br/>
 |>
 <|part|
-<|{viz_26.data}|table|show_all|>
+<|{viz_26.data}|table|show_all|style=table-cell|class_name=rows-similar|>
 |>
 |>
 |>
@@ -145,7 +145,7 @@ Financial profile
 <br/>
 |>
 <|part|
-<|{viz_13.data}|table|show_all|dynamic=True|>
+<|{viz_13.data}|table|show_all|dynamic=True|style=table-cell|class_name=rows-similar|>
 |>
 |>
 
