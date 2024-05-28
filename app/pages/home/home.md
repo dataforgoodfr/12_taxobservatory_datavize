@@ -144,7 +144,7 @@ Our database is growing
 [//]: # (Main content : stories)
 <stories|part|
 <|part|class_name=title_button_container mb3|
-And there are a lot of stories to tell
+Why this project ?
 {: .title_blue}
 
 <|button|label=More key stories &#8594;|on_action=goto_keystories|>
