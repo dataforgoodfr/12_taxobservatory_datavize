@@ -457,8 +457,10 @@ def compute_company_key_financials_kpis(
         elif column == 'employees':
             df[column] = df[column].astype(int)
 
+    # Remove 'upe_name' and 'year''
+    df = df.drop(columns=['upe_name', 'year'])
+
     # Clean columns string
-    df = df.rename(columns={'upe_name': 'headquarter'})
     df.columns = df.columns.str.replace('_', ' ').str.capitalize()
 
     # Create a dictionary with the results
@@ -475,7 +477,6 @@ def display_company_key_financials_kpis(
         df (pd.DataFrame): CbCRs database.
         company (str): Company name
         year (int, optional): fiscal year to filter the results with. Defaults to None.
-        hide_columns (bool, optional): hide colum labels.
 
     Returns:
         pd.DataFrame: company key financial KPIs.
@@ -487,6 +488,12 @@ def display_company_key_financials_kpis(
     # Create the table
     df = pd.DataFrame.from_dict(data)
     df = df.reset_index()
+
+    # Rename columns
+    df = df.rename(columns={'index': 'Variable', 0: 'Value'})
+
+    # Replace 0 values with 'N/A'
+    df.loc[df['Value'] == '€ 0', 'Value'] = 'N/A'
 
     return df
 
