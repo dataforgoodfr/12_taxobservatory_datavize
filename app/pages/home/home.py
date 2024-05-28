@@ -42,8 +42,9 @@ def download_viz_2(state):
 
 
 viz_2 = {
+    "fig": algo.display_number_of_tracked_reports_over_time(data),
     "data": algo.number_of_tracked_reports_over_time(data),
-    "title": "Evolution of reports over time",
+    "title": "Number of reports over time",
     "sub_title": "",
     "on_action": download_viz_2
 }

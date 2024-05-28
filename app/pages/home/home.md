@@ -119,8 +119,9 @@ Our database is growing
 <br/>
 <|{viz_2.sub_title}|text|class_name=viz_sub_title|>
 |>
-<|part|
-<|{viz_2.data}|chart|type=bar|x=year|y[1]=mnc|line[1]=dash|height=300px|>
+
+<|layout|columns=1fr|
+<|chart|figure={viz_2.fig}|>
 |>
 |>
 |>

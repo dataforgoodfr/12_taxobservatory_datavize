@@ -48,6 +48,43 @@ def number_of_tracked_reports_over_time(df):
     return df_count
 
 
+def display_number_of_tracked_reports_over_time(df):
+    # Calculate number of companies per year
+    data = number_of_tracked_reports_over_time(df=df)
+
+    # Bar color sequence
+    bar_color = '#D9D9D9'
+
+    # Create figure
+    fig = px.bar(data, x='year', y='mnc', color_discrete_sequence=[bar_color], text_auto=True)
+
+    # Update layout settings
+    fig.update_layout(
+        font_family='Roboto',
+        title=None,
+        xaxis=dict(
+            title=None,
+            tickvals=data['year'].unique()
+        ),
+        yaxis=dict(
+            title=None,
+            tickvals=[],
+            title_standoff=0.5
+        ),
+        plot_bgcolor='white',
+        width=400,
+        height=200,
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
+
+    # Force position and color of bar values
+    fig.update_traces(
+        textposition='outside', textfont=dict(color='black')
+    )
+
+    return go.Figure(fig)
+
+
 # TODO add viz comment
 def number_of_tracked_reports_over_time_company(df_selected_company):
     df_count_company = (
@@ -1061,7 +1098,6 @@ def viz_24_compute_data(df):
 
 
 def viz_24_viz(df):
-
     mnc_report_count = viz_24_compute_data(df=df)
 
     color_func = get_single_color_func("#005F73")
