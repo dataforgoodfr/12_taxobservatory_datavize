@@ -3,8 +3,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import humanize
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
+from wordcloud import WordCloud, get_single_color_func
 
 
 # TODO add viz comment
@@ -1041,8 +1040,6 @@ def display_tax_havens_use_evolution(df: pd.DataFrame, company: str):
 
 
 # Viz 24
-
-
 def viz_24_compute_data(df):
     # Drop duplicates to ensure each MNC appears only once per year
     df_unique_mnc = df.drop_duplicates(subset=['year', 'mnc'])
@@ -1056,15 +1053,37 @@ def viz_24_compute_data(df):
     return mnc_report_count
 
 
-def viz_24_viz(mnc_report_count):
+def viz_24_viz(df):
+
+    mnc_report_count = viz_24_compute_data(df=df)
+
+    color_func = get_single_color_func("#005F73")
+
     # Generate the word cloud using the report counts as weights
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(mnc_report_count)
+    wordcloud = WordCloud(
+        width=1200,
+        height=600,
+        background_color='white',
+        color_func=color_func
+    ).generate_from_frequencies(mnc_report_count)
 
     # Display the word cloud
-    plt.figure(figsize=(10, 5))
     fig = px.imshow(wordcloud)
-    # plt.imshow(wordcloud, interpolation='bilinear')
-    return fig
+
+    # Remove hover on image
+    fig.update_traces(hoverinfo='skip', hovertemplate='')
+
+    # Remove colorbar
+    fig.update_layout(coloraxis_showscale=False)
+
+    # Remove axis
+    fig.update_xaxes(showticklabels=False)
+    fig.update_yaxes(showticklabels=False)
+
+    # Remove margins
+    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
+
+    return go.Figure(fig)
 
 
 # Viz 25

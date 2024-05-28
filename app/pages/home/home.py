@@ -23,52 +23,53 @@ def download_el(state, viz):
     download(state, content=bytes(buffer.getvalue(), "UTF-8"), name="data.csv")
 
 
-def download_viz1(state):
-    download_el(state, viz1)
+def download_viz_1(state):
+    download_el(state, viz_1)
 
 
+# Viz 1
+viz_1 = {
+    "data": algo.number_of_tracked_reports(data),
+    "title": "Reports tracked",
+    "sub_title": "",
+    "on_action": download_viz_1
+}
+
+
+# Viz 2
 def download_viz_2(state):
     download_el(state, viz_2)
 
 
-def download_viz3(state):
-    download_el(state, viz3)
-
-
-def download_viz_24(state):
-    download_el(state, viz_24)
-
-
-# Generate visualizations
-df_viz1 = algo.number_of_tracked_reports(data)
-viz1 = {
-    "data": df_viz1,
-    "title": "Reports tracked",
-    "sub_title": "",
-    "on_action": download_viz1
-}
-
-df_viz3 = algo.number_of_tracked_mnc(data)
-viz3 = {
-    "data": df_viz3,
-    "title": "Multinationals ",
-    "sub_title": "with 1+ report tracked",
-    "on_action": download_viz3
-}
-
-df_viz_2 = algo.number_of_tracked_reports_over_time(data)
 viz_2 = {
-    "data": df_viz_2,
+    "data": algo.number_of_tracked_reports_over_time(data),
     "title": "Evolution of reports over time",
     "sub_title": "",
     "on_action": download_viz_2
 }
 
-data_viz_24 = algo.viz_24_compute_data(data)
-data_viz_24_fig = algo.viz_24_viz(data_viz_24)
+
+def download_viz_3(state):
+    download_el(state, viz_3)
+
+
+# Viz 3
+viz_3 = {
+    "data": algo.number_of_tracked_mnc(data),
+    "title": "Multinationals ",
+    "sub_title": "with 1+ report tracked",
+    "on_action": download_viz_3
+}
+
+
+# Viz 24
+def download_viz_24(state):
+    download_el(state, viz_24)
+
+
 viz_24 = {
-    "fig": data_viz_24_fig,
-    "data": data_viz_24,
+    "fig": algo.viz_24_viz(data),
+    "data": algo.viz_24_compute_data(data),
     "title": "Multinationals available",
     "sub_title": "with 1+ report tracked",
     "on_action": download_viz_24
