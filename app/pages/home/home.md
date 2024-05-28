@@ -165,13 +165,12 @@ fund vital public services for citizens.
 |>
 
 <|card|id=blue_card|
-The Spotlight on Corporate Taxes Intensifies
+The Call for Tax Transparency
 {: .blue_card_title .mb1 .pr2}
 
-Investors, activists and governments are demanding answers - are global corporations paying their fair share of taxes? 
-But too often, the data trail goes cold.<br/>
-Country-by-Country Reporting is crucial. It exposes the tax maneuvers of big businesses across borders.
-Shining a light on the opaque corporate tax maze, one multinational at a time.
+Investors, activists, and governments demand transparency - are corporations paying their fair share? But too often, 
+the data trail goes cold. Country-by-Country Reporting makes corporate tax strategies more transparent, one company at 
+a time.
 {: .blue_card_text .mb2 }
 
 |>
