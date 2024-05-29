@@ -4,8 +4,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* Custom paddings in percentage */
-.cpl2 {
-    padding-left: 2%;
+.cpl1 {
+    padding-left: 1%;
+}
+
+.cpr1 {
+    padding-right: 1%;
+}
+
+.cpt1 {
+    padding-top: 1%;
+}
+
+.cpb1 {
+    padding-bottom: 1%;
+}
+
+.cpl1 {
+    padding-left: 1%;
 }
 
 .cpr2 {
