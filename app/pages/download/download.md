@@ -1,6 +1,6 @@
 <main|container main-bg|
 
-<|part|class_name=cpt10 cpb10 cpl8 cpr8|
+<|part|class_name=cpt4 cpb4 cpl8 cpr8|
 Download
 {: .h1 .text-blue .cpb2}
 
