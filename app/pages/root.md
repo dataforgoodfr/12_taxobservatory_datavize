@@ -2,26 +2,26 @@
 [//]: # (It also contains the <|content|> variable which will display the content of selected page)
 
 [//]: # (Header)
-<header|part|class_name=header_bg|
-<|layout|columns=auto 1fr auto 1fr|class_name=align-columns-center|
-<|part|class_name=align-item-center|
-<|{taxplorer_logo_path}|image|width="48px"|>
+<header|header sticky|
+
+<|layout|columns=1fr 1fr 1fr|class_name= pt-half pb-half|
+
+<|part|class_name=d-flex|
+<|{taxplorer_logo_path}|image|width=3rem|>
+Taxplorer
+{: .h1}
 |>
 
-<|part|class_name=align-item-center|
-<|Taxplorer|text|class_name=logotitle|>
-|>
+<|navbar|lov={navbar_items}|>
 
-<|part|class_name=align-item-stretch|
-<|navbar|class_name=fullheight|lov={navbar_items}|>
-|>
-
-<|part|class_name=text-right align-item-center|
+<|part|class_name=text-right|
 <|button|label=Download data|on_action=goto_download|>
 |>
+
 |>
 
-<hr class="header_hr"/>
+<hr class="header-hr"/>
+
 |header>
 
 [//]: # (Add active page content)

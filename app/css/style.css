@@ -117,17 +117,34 @@
     padding-bottom: 12%;
 }
 
+/* Font relative styles */
 
 .text-blue {
     color: #021978;
+}
+
+.text-white {
+    color: white !important;
 }
 
 .text-justify {
     text-align: justify;
 }
 
+/* General */
+
 .main-bg {
     background-color: #F2F2F2;
+}
+
+/* Taipy classes */
+
+.header {
+    max-width: 90rem;
+    margin: 0 auto;
+    background-color: white !important;
+    box-shadow: none;
+    -webkit-text-fill-color: initial !important
 }
 
 .container {
@@ -443,9 +460,9 @@
 }
 
 /* Header bottom line */
-hr.header_hr {
+hr.header-hr {
     border: none;
-    border-top: 2px solid #021978;
+    border-top: 3.5px solid #021978;
     box-shadow: none;
     margin: 0;
     padding: 0;
