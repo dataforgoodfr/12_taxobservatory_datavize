@@ -21,43 +21,33 @@ footprints of major multinationals today and unlock key insights into an often o
 Explore companies
 {: .h2 .text-blue .text-weight500 .cpb2 }
 
-<|layout|columns=85% 15%|
-
 Search and filter to find reports for specific multinationals. Review their declared profits, taxes paid, employee 
-counts and more for each country over multiple years.
-{ .text-line-height-165 }
+counts and more for each country over multiple years.<br/><br/>
+{ .text-line-height-165 .cpb2}
 
-&#8599;
-{: .h2 .text-blue .text-center }
-|>
+[Read more &#8594;](/Company)
 |>
 
 <|card|id=white-card|
 Download the data
 {: .h2 .text-blue .text-weight500 .cpb2 }
 
-<|layout|columns=85% 15%|
-
 Do you want to analyse the data ?<br/>You can download the full dataset and methodology here.
-{ .text-line-height-165 }
+{ .text-line-height-165 .cpb6}
 
-&#8599;
-{: .h2 .text-blue .text-center }
-|>
+[Read more &#8594;](/Download)
 |>
 
 <|card|id=white-card|
 Gain Expert Insights
 {: .h2 .text-blue .text-weight500 .cpb2 }
 
-<|layout|columns=85% 15%|
 Access our ongoing research examining multinational tax behavior based on this country-by-country data, including case 
 studies, risk scoring and more.
-{ .text-line-height-165 }
+{ .text-line-height-165 .cpb4 }
 
-&#8599;
-{: .h2 .text-blue .text-center }
-|>
+[Read more &#8594;](/Keystories)
+
 |>
 |>
 
@@ -141,10 +131,13 @@ The Great Tax Escape
 
 Exploiting loopholes, multinationals funneled over $1 trillion in profits to tax havens in 2022 alone. This 
 industrial-scale tax avoidance costs countries 10 % of their corporate tax base annually undermining their ability to 
-fund vital public services for citizens.<br/><br/>
+fund vital public services for citizens
+<a class="text-white" href="https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/" target="_blank">
+ (source).
+</a>
 {: .text-white }
 
-<a class="text-white text-weight600" href="https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/" target="_blank">Read more &#8594;</a>
+
 |>
 
 <|card|id=blue-card|
