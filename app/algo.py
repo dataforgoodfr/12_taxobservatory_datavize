@@ -60,6 +60,7 @@ def display_number_of_tracked_reports_over_time(df):
 
     # Update layout settings
     fig.update_layout(
+        autosize=True,
         font_family='Roboto',
         title=None,
         xaxis=dict(
@@ -72,8 +73,8 @@ def display_number_of_tracked_reports_over_time(df):
             title_standoff=0.5
         ),
         plot_bgcolor='white',
-        width=400,
-        height=200,
+        # width=800,
+        # height=600,
         margin=dict(l=0, r=0, t=0, b=0)
     )
 
@@ -1100,12 +1101,12 @@ def viz_24_compute_data(df):
 def viz_24_viz(df):
     mnc_report_count = viz_24_compute_data(df=df)
 
-    color_func = get_single_color_func("#005F73")
+    color_func = get_single_color_func("#B8BEDB")
 
     # Generate the word cloud using the report counts as weights
     wordcloud = WordCloud(
         width=1200,
-        height=600,
+        height=800,
         background_color='white',
         color_func=color_func
     ).generate_from_frequencies(mnc_report_count)
