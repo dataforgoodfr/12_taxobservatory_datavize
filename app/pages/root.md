@@ -20,7 +20,7 @@ Taxplorer
 
 |>
 
-<hr class="header-hr"/>
+<hr class="header-hr35"/>
 
 |header>
 
