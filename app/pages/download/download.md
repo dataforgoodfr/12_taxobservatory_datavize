@@ -2,10 +2,10 @@
 
 <|part|class_name=cpt4 cpb4 cpl8 cpr8|
 Download
-{: .h1 .text-blue .cpb2}
+{: .h1 .text-blue .cpb2 }
 
 Do you want more information on the data ?
-{: .h2 .cpb2}
+{: .h2 .cpb2 .text-weight500}
 
 <|part|class_name=text-justify|
 If you would like to explore the data on your own, you can download it below. We have developed a
