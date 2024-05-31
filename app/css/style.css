@@ -117,6 +117,22 @@
     padding-bottom: 12%;
 }
 
+.cpl14 {
+    padding-left: 14%;
+}
+
+.cpr14 {
+    padding-right: 14%;
+}
+
+.cpt14 {
+    padding-top: 14%;
+}
+
+.cpb14 {
+    padding-bottom: 14%;
+}
+
 /* Font relative styles */
 
 .text-blue {
@@ -125,6 +141,10 @@
 
 .text-white {
     color: white !important;
+}
+
+.text-transparent {
+color: rgba(0,0,0,0.0)
 }
 
 .text-justify {
@@ -276,12 +296,14 @@
    /* max-width: 100%;*/
 }
 
-.plot-overflow{
+.plot-overflow {
     overflow-x: auto;
     overflow-y: auto;
     width: 100%;
     max-width=100%,
 }
+
+
 
 /* Company page *********/
 
@@ -340,7 +362,6 @@
     color: #021978;
     font-family: "Manrope";
     font-weight: 500;
-    font-size: 17px;
 }
 
 .taipy-table:where(:not(.table-row-top-border)) tbody td {
@@ -351,7 +372,6 @@
     color: #1A1E3D;
     font-family: "Manrope";
     font-weight: 300;
-    font-size: 15px;
 }
 
 
@@ -388,8 +408,17 @@
     color: #000000;
 }
 
-/* Header bottom line */
-hr.header-hr {
+/* Horizontal lines */
+
+hr.header-hr20 {
+    border: none;
+    border-top: 2px solid #021978;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+hr.header-hr35 {
     border: none;
     border-top: 3.5px solid #021978;
     box-shadow: none;
