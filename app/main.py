@@ -65,5 +65,5 @@ if __name__ == "__main__":
     gui_multi_pages.run(
         dark_mode=False,
         stylekit=stylekit,
-        title="Taxplorer · EU Tax Observatory"
+        title="Taxplorer"
     )
