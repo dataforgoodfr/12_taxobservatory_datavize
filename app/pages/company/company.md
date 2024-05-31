@@ -74,7 +74,6 @@ We might have missed out in its report.<br/>
 |>
 |>
 
-
 |>
 
 |company>
@@ -115,6 +114,7 @@ Tax Transparency
 <|{viz_26.data}|table|show_all|sortable=False|style=table-cell|class_name=rows-similar|>
 |>
 |>
+
 |>
 
 <|part|class_name=text-justify text-small cpt2|
@@ -195,3 +195,5 @@ the amount of profit can give an indication of profit shifting activities where 
 |distribution>
 
 |financial>
+
+|main>
