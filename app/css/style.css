@@ -131,16 +131,21 @@
     text-align: justify;
 }
 
+
 /* General */
 
 .main-bg {
     background-color: #F2F2F2;
 }
 
+.world-bg {
+    background-image: url("../../images/world_map.png");
+
+}
+
 /* Taipy classes */
 
 .header {
-    max-width: 90rem;
     margin: 0 auto;
     background-color: white !important;
     box-shadow: none;
@@ -262,29 +267,17 @@
     text-align: justify;
 }
 
-.home_viz_grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr 2fr;
-    grid-template-rows: 1fr 1fr;
-    height:380px;
-    gap: 1.5rem;
-    grid-template-areas:
-    "a c d"
-    "b c d";
+/*.js-plotly-plot {
+    max-width: 100%;
+    box-sizing: inherit !important
+}*/
+
+.card .taipy-chart {
+   /* max-width: 100%;*/
 }
 
-.home_viz_grid_item {
-    border-radius: 10px;
-    background-color: white;
-}
-
-.home_viz_1 {grid-area: a;}
-.home_viz_2 {grid-area: c;}
-.home_viz_3 {grid-area: b;}
-.home_viz_24 {grid-area: d;}
-
-.scrollable-container {
-    overflow-x: hidden;
+.plot-overflow{
+    overflow-x: auto;
     overflow-y: auto;
     width: 100%;
     max-width=100%,
@@ -296,89 +289,25 @@
 /* Cards **********/
 
 .card {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
     border-radius: 15px;
-    padding: 1.5rem;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    padding-left: 8%;
+    padding-right: 8%;
     box-shadow: none;
-    /*cursor: pointer;*/
 }
 
-.white_card_title {
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 35px;
-    line-height: 48px;
-    color: #021978;
+#white-card {
+    transition: transform .2s;
 }
 
-.white_card_text {
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 17px;
-    line-height: 23px;
-    display: flex;
-    align-items: center;
-}
-
-.white_card_arrow {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    color: #021978;
-    font-size: 2rem;
-}
-
-#white_card {
-    background-color: #ffffff;
-}
-
-#white_card:hover {
+#white-card:hover {
     background-color: #02198D;
     -webkit-text-fill-color: white;
+    transform: scale(1.02);
 }
 
-.blue_card_title {
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 35px;
-    line-height: 48px;
-    color: white;
-    text-align: left;
-}
-
-.blue_card_text {
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 17px;
-    text-align: justify;
-    line-height: 23px;
-    display: flex;
-    align-items: center;
-    color: white;
-}
-
-.blue_card_link {
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 23px;
-    display: flex;
-    align-items: center;
-    color: white;
-}
-
-
-#blue_card {
+#blue-card {
     background-color: #02198D;
 }
 
@@ -536,21 +465,13 @@ hr.header-hr {
     padding:30px;
 }
 
+.text-line-height-165 {
+    line-height: 165%;
+}
+
 .world {
     background-image: url("../../images/world_map.png");
     background-size: cover;
-}
-
-.world_map {
-    background-image: url("../../images/world_map.png");
-    background-size: cover;
-    -webkit-text-fill-color:#FFFFFF;
-    padding-left:10%;
-    padding-top:5%;
-    padding-right:10%;
-    padding-bottom:5%;
-    max-width: 100 %;
-    height: auto;
 }
 
 .title {

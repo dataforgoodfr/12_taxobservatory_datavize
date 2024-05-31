@@ -57,7 +57,7 @@ def download_viz_3(state):
 # Viz 3
 viz_3 = {
     "data": algo.number_of_tracked_mnc(data),
-    "title": "Multinationals ",
+    "title": "Multinationals",
     "sub_title": "with 1+ report tracked",
     "on_action": download_viz_3
 }
