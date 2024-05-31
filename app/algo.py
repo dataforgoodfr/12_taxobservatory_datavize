@@ -56,7 +56,13 @@ def display_number_of_tracked_reports_over_time(df):
     bar_color = '#D9D9D9'
 
     # Create figure
-    fig = px.bar(data, x='year', y='mnc', color_discrete_sequence=[bar_color], text_auto=True)
+    fig = px.bar(
+        data,
+        x='year',
+        y='mnc',
+        color_discrete_sequence=[bar_color],
+        text_auto=True
+    )
 
     # Update layout settings
     fig.update_layout(
@@ -68,14 +74,9 @@ def display_number_of_tracked_reports_over_time(df):
             tickvals=data['year'].unique()
         ),
         yaxis=dict(
-            title=None,
-            tickvals=[],
-            title_standoff=0.5
+            title=None
         ),
-        plot_bgcolor='white',
-        # width=800,
-        # height=600,
-        margin=dict(l=0, r=0, t=0, b=0)
+        plot_bgcolor='white'
     )
 
     # Force position and color of bar values
@@ -602,7 +603,7 @@ def compute_top_jurisdictions_revenue(
     # Compute percentage of revenue
     top['total_revenues_%'] = top['total_revenues'] / top['total_revenues'].sum()
 
-    # Convert DataFrame to dictionnary
+    # Convert DataFrame to dictionary
     data = top.to_dict()
 
     # Create DataFrame
@@ -629,24 +630,29 @@ def display_jurisdictions_top_revenue(df: pd.DataFrame, company: str, year: int)
     df = pd.DataFrame.from_dict(data)
     df = df.sort_values(by='total_revenues_%')
 
+    # Bar color sequence
+    bar_color = '#D9D9D9'
+
     # Create figure
     fig = px.bar(df,
                  x='total_revenues_%',
                  y='jur_name',
                  orientation='h',
-                 title='Top jurisdictions for revenue',
+                 color_discrete_sequence=[bar_color],
                  text_auto='.1%')
 
     # Update layout settings
     fig.update_layout(
+        autosize=True,
+        font_family='Roboto',
+        title=None,
         xaxis=dict(
             title='Percentage of total revenue',
             tickformat='.0%'
         ),
         yaxis_title=None,
         plot_bgcolor='white',
-        # width=800,
-        # height=480
+        margin=dict(l=0, r=0, t=0, b=0)
     )
 
     # Define position of text values
@@ -661,7 +667,7 @@ def display_jurisdictions_top_revenue(df: pd.DataFrame, company: str, year: int)
 
     # Define style of hover on bars
     fig.update_traces(hovertemplate='%{y}: %{x: .3%}')
-    # fig.show()
+
     return go.Figure(fig)
 
 
@@ -720,31 +726,36 @@ def display_pretax_profit_and_employees_rank(
 
     # Rename columns
     df = df.rename(columns={
-        'profit_before_tax_%': 'Percentage of pre-tax profit',
-        'employees_%': 'Percentage of employees'
+        'profit_before_tax_%': '% profit',
+        'employees_%': '% employees'
     })
+
+    # Bar color sequence
+    bar_colors = ['#D9D9D9', '#1E2E5C']
 
     # Create figure
     fig = px.bar(
         df,
-        x=['Percentage of employees', 'Percentage of pre-tax profit'],
+        x=['% employees', '% profit'],
         y='jur_name',
         barmode='group',
         orientation='h',
-        text_auto='.1%'
+        text_auto='.1%',
+        color_discrete_sequence=bar_colors
     )
 
-    # Set figure height (min. 480) depending on the number of jurisdictions
+    # Set figure height (min. 640) depending on the number of jurisdictions
     fig_height = max(480, (48 * len(df['jur_name'])))
 
     # Set maximum value for x axis
-    if not df[['Percentage of pre-tax profit', 'Percentage of employees']].isna().all().all():
-        max_x_value = max(df[['Percentage of pre-tax profit', 'Percentage of employees']].max(axis='columns')) + 0.1
+    if not df[['% profit', '% employees']].isna().all().all():
+        max_x_value = max(df[['% profit', '% employees']].max(axis='columns')) + 0.1
     else:
         max_x_value = 1
 
     # Update layout settings
     fig.update_layout(
+        font_family='Roboto',
         title=None,
         xaxis=dict(
             title=None,
@@ -753,19 +764,21 @@ def display_pretax_profit_and_employees_rank(
         ),
         yaxis_title=None,
         legend=dict(
-            x=-0.5,
+            x=0.1,
             y=1.05,
+            xanchor='center',
+            yanchor='top',
             title=dict(text=''),
             orientation='h'
         ),
         plot_bgcolor='white',
-        width=600,
         height=fig_height,
+        margin=dict(l=0, r=0, t=10, b=0)
     )
 
     # Add annotations for NaN values where there should have been a bar
     for index, row in df.iterrows():
-        if pd.isna(row['Percentage of employees']):
+        if pd.isna(row['% employees']):
             fig.add_annotation(
                 xanchor='left',
                 x=0.001,
@@ -775,7 +788,7 @@ def display_pretax_profit_and_employees_rank(
                 showarrow=False,
                 font=dict(size=12)
             )
-        if pd.isna(row['Percentage of pre-tax profit']):
+        if pd.isna(row['% profit']):
             fig.add_annotation(
                 xanchor='left',
                 x=0.001,
@@ -829,42 +842,52 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
     # Create DataFrame
     df = pd.DataFrame(data)
 
+    # Replace bool values of Tax haven by string values
+    df.loc[df['jur_tax_haven'] == True, 'jur_tax_haven'] = 'Tax haven'
+    df.loc[df['jur_tax_haven'] == False, 'jur_tax_haven'] = 'Non tax haven'
+
     # Rename columns
     df = df.rename(columns={
-        'profit_before_tax_%': 'Percentage of pre-tax profit',
-        'profit_per_employee': 'Pre-tax profit per employee',
+        'profit_before_tax_%': '% profit',
+        'profit_per_employee': 'Profit/employee',
         'jur_tax_haven': 'Tax haven'
     })
+
+    # Bar color sequence
+    colors = ['#D9D9D9', '#1E2E5C']
 
     # Create figure
     fig = px.scatter(
         df,
-        x='Percentage of pre-tax profit',
-        y='Pre-tax profit per employee',
-        size='Percentage of pre-tax profit',
+        x='% profit',
+        y='Profit/employee',
+        size='% profit',
         color='Tax haven',
         hover_name='jur_name',
+        color_discrete_sequence=colors
     )
 
     # Update layout settings
     fig.update_layout(
-        title='Pre-tax profit & profit per employee',
+        title=None,
+        font_family='Roboto',
+        autosize=True,
         xaxis=dict(
-            title=None,
+            title='% profit',
             tickformat='.0%',
-            # range=[0, max_x_value ]
         ),
-        yaxis_title=None,
+        yaxis_title='Profit/employee',
         legend=dict(
+            x=0.1,
+            y=1.05,
+            xanchor='center',
+            yanchor='top',
             title=dict(text=''),
-            orientation='h'
-        ),
+            orientation='h'),
         plot_bgcolor='white',
-        width=800,
-        # height=fig_height
+        margin=dict(l=0, r=0, t=0, b=0)
     )
 
-    # fig.show()
     return go.Figure(fig)
 
 
