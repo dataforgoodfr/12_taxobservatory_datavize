@@ -20,7 +20,7 @@ and our database can be downloaded [here](/Download).
 
 <collection|part|class_name=cpb1|
 How is the data collected ?
-{: .h2 .text-blue .cpb2}
+{: .h2 .text-blue .cpb2 .text-weight500 }
 
 <|part|class_name=text-justify|
 Search Strategy
@@ -86,7 +86,7 @@ into existing workflows.
 
 <process|part|class_name=cpb1|
 How is data processed ?
-{: .h2 .text-blue .cpb2}
+{: .h2 .text-blue .cpb2 .text-weight500 }
 
 <|part|class_name=text-justify|
 The country-by-country tax report (CbCR) can be provided in a pretty long financial report of a hundred of pages or so. 
@@ -181,10 +181,10 @@ and the OpenAI GPT-4 LLM.
 
 <calculations|part|class_name=cpb1|
 Calculations ?
-{: .h2 .text-blue .cpb2}
+{: .h2 .text-blue .cpb2 .text-weight500 }
 
 Transparency score
-{: .h5 .text-blue .cpb2}
+{: .h5 .text-blue .cpb2 }
 
 We created the transparency score metric to assess how transparent multinationals are in their CbC report, given the 
 CBC report's format is not standardized yet.
