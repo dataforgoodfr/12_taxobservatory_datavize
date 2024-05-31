@@ -8,7 +8,7 @@ from app import algo
 from app.data.data import data
 
 # Path to image
-header_right_image_path = "images/pexels-ingo-joseph-1880351.png"
+company_image_path = "images/pexels-ingo-joseph-1880351.png"
 
 # Initialize selected company
 selected_company = "SHELL"
@@ -55,7 +55,8 @@ def download_viz_1(state):
 viz_1 = {
     "data": company_sector,
     "title": "Sector",
-    "sub_title": "",
+    # Used for responsive to preserve layout
+    "sub_title": "------------ --------- ---------",
     "on_action": download_viz_1
 }
 
@@ -72,7 +73,8 @@ def update_viz_2(state):
 viz_2 = {
     "data": company_upe_name,
     "title": "Headquarter",
-    "sub_title": "",
+    # Used for responsive to preserve layout
+    "sub_title": "------------ --------- ---------",
     "on_action": download_viz_2
 }
 
@@ -88,8 +90,9 @@ def update_viz_3(state):
 
 viz_3 = {
     "data": algo.number_of_tracked_reports_company(df_selected_company),
-    "title": "Number of tracked reports",
-    "sub_title": "",
+    "title": "Number of reports",
+    # Used for responsive to preserve layout
+    "sub_title": "------------ --------- ---------",
     "on_action": download_viz_3
 }
 
@@ -106,7 +109,7 @@ def update_viz_4(state):
 
 viz_4 = {
     'data': algo.display_transparency_score(data, selected_company),
-    'title': "Transparency Grade",
+    'title': "Transparency Score",
     'sub_title': "average over all reports",
     'on_action': download_viz_4
 }
@@ -125,7 +128,7 @@ def update_viz_5(state):
 
 viz_5 = {
     'data': algo.display_transparency_score(data, selected_company, selected_year),
-    'title': "Transparency  Grade",
+    'title': "Transparency  Score",
     'sub_title': f"selected fiscal year : {selected_year}",
     'on_action': download_viz_5
 }
