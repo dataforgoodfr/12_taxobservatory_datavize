@@ -2,7 +2,7 @@
 [//]: # (It also contains the <|content|> variable which will display the content of selected page)
 
 [//]: # (Header)
-<header|header sticky|
+<header|container header sticky|
 
 <|layout|columns=1fr 1fr 1fr|class_name= pt-half pb-half|
 
