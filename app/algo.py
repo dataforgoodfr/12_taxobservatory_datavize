@@ -805,7 +805,13 @@ def display_pretax_profit_and_employees_rank(
         text_position = ['outside' if not np.isnan(value) else 'none' for value in values]
         trace.textposition = text_position
 
-    # fig.show()
+    # Customize hover information for each trace
+    for trace in fig.data:
+        if trace.name == '% employees':
+            trace.hovertemplate = '<b>%{y}</b><br><br>Employees : %{x:.3%}<extra></extra>'
+        elif trace.name == '% profit':
+            trace.hovertemplate = '<b>%{y}</b><br><br>Profit : %{x:.3%}<extra></extra>'
+
     return go.Figure(fig)
 
 
@@ -843,8 +849,9 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
     df = pd.DataFrame(data)
 
     # Replace bool values of Tax haven by string values
-    df.loc[df['jur_tax_haven'] == True, 'jur_tax_haven'] = 'Tax haven'
-    df.loc[df['jur_tax_haven'] == False, 'jur_tax_haven'] = 'Non tax haven'
+    df['jur_tax_haven'] = df['jur_tax_haven'].astype(str)  # prevent Pandas future warning
+    df.loc[df['jur_tax_haven'] == 'True', 'jur_tax_haven'] = 'Tax haven'
+    df.loc[df['jur_tax_haven'] == 'False', 'jur_tax_haven'] = 'Non tax haven'
 
     # Rename columns
     df = df.rename(columns={
@@ -863,7 +870,6 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         y='Profit/employee',
         size='% profit',
         color='Tax haven',
-        hover_name='jur_name',
         color_discrete_sequence=colors
     )
 
@@ -888,6 +894,16 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         margin=dict(l=0, r=0, t=0, b=0)
     )
 
+    # Define style of hover on bubbles
+    fig.update_traces(
+        hovertemplate=(
+                "<b>%{hovertext}</b><br><br>" +
+                "% profit: %{x:.3%}<br>" +
+                "Profit/employee: %{y:.3s}€"
+        ),
+        hovertext=(df['jur_name'] + " - " + df['Tax haven'])
+    )
+
     return go.Figure(fig)
 
 
@@ -896,7 +912,7 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
 def compute_related_and_unrelated_revenues_breakdown(
         df: pd.DataFrame, company: str, year: int) -> dict:
     """Compute related and unrelated revenues in tax heaven, non tax heaven and
-    domestic jusrisdictions.
+    domestic jurisdictions.
 
     Args:
         df (pd.DataFrame): CbCRs database.
@@ -938,7 +954,7 @@ def compute_related_and_unrelated_revenues_breakdown(
         'related_revenues': 'related_revenues_percentage'
     })
 
-    # Convert DataFrame to dictionnary
+    # Convert DataFrame to dictionary
     data = data.to_dict()
 
     return data
@@ -946,7 +962,7 @@ def compute_related_and_unrelated_revenues_breakdown(
 
 def display_related_and_unrelated_revenues_breakdown(df: pd.DataFrame, company: str, year: int):
     """Display related and unrelated revenues in tax heaven, non tax heaven and
-    domestic jusrisdictions.
+    domestic jurisdictions.
 
     Args:
         df (pd.DataFrame): CbCRs database.
@@ -1214,8 +1230,9 @@ def compute_geographic_score(df: pd.DataFrame, company: str, year: int) -> float
     return geographic_score
 
 
-def compute_completness_score(df: pd.DataFrame, company: str, year: int) -> float:
-    """Compute component II of transparency score which is the completness score.
+def compute_completeness_score(df: pd.DataFrame, company: str, year: int) -> float:
+    """Compute component II of transparency score which is the completeness score.
+
 
     Args:
         df (pd.DataFrame): CbCRs database.
@@ -1238,7 +1255,7 @@ def compute_completness_score(df: pd.DataFrame, company: str, year: int) -> floa
     # List financial columns left after deleting columns with only missing values
     financial_columns_left = [col for col in df.columns if col in financial_columns]
 
-    # Completness score = 0 if no financial columns left
+    # Completeness score = 0 if no financial columns left
     if not financial_columns_left:
         return 0
 
@@ -1253,15 +1270,14 @@ def compute_completness_score(df: pd.DataFrame, company: str, year: int) -> floa
         if variable in df.columns:
             score += 1
 
-    # Calculate completness score
-    completness_score = score / 12 * 100
+    # Calculate completeness score
+    completeness_score = score / 12 * 100
 
-    return completness_score
+    return completeness_score
 
 
-def compute_transparency_score(df: pd.DataFrame, company: str) -> dict:
-    """Compute the transparency score which is the average of component I
-    (geographic score) and component II (completness score).
+def compute_transparency_score(df: pd.DataFrame, company: str, year: int) -> float:
+    """Compute transparency score.
 
     Args:
         df (pd.DataFrame): CbCRs database.
@@ -1272,25 +1288,67 @@ def compute_transparency_score(df: pd.DataFrame, company: str) -> dict:
         float: value of the score.
     """
 
-    # List all years where the company as reported
+    # Filter rows with selected company and subset with financial columns
+    df = df.loc[
+        (df['mnc'] == company) & (df['year'] == year),
+        ['mnc', 'year', 'upe_code', 'jur_code', 'jur_name', *financial_columns]
+    ]
+
+    # Remove columns where data are missing for all jurisdictions
+    df = df.dropna(axis='columns', how='all')
+
+    # List financial columns left after deleting columns with only missing values
+    financial_columns_left = [col for col in df.columns if col in financial_columns]
+
+    # Transparency score = 0 if no financial columns left
+    if not financial_columns_left:
+        return 0
+
+    # Get absolute values of financial data to have only "positive" values
+    df[financial_columns_left] = df[financial_columns_left].abs()
+
+    # Calculate percentage of each financial value where jurisdiction is not 'OTHER'
+    # Percentage = 1. Total of not 'OTHER' row(s) / 2. Total of all rows
+    not_other_percentage = (
+            df.loc[df['jur_code'] != 'OTHER', financial_columns_left].sum()  # 1
+            / df[financial_columns_left].sum()  # 2
+    )
+
+    # Calculate transparency score
+    transparency_score = not_other_percentage.sum() / 10 * 100
+
+    return transparency_score
+
+
+def compute_all_scores(df: pd.DataFrame, company: str) -> dict:
+    """Compute all scores (geographic, completeness, transparency).
+
+    Args:
+        df (pd.DataFrame): CbCRs database.
+        company (str): Company name.
+        year (int): fiscal year to filter the results with.
+
+    Returns:
+        dict: value of the scores.
+    """
+
+    # List all years when the company as reported
     years_list = sorted(df.loc[df['mnc'] == company, 'year'].unique())
 
-    # Initialize an empty dictionnary
+    # Initialize an empty dictionary
     data = dict()
 
-    # Calculate scores for each year and add them to the dictionnary
+    # Calculate scores for each year and add them to the dictionary
     for year in years_list:
-        # Calculate components I and II
+        # Calculate scores
         geographic_score = compute_geographic_score(df=df, company=company, year=year)
-        completness_score = compute_completness_score(df=df, company=company, year=year)
-
-        # Calculate final score which is the average of components I and II
-        transparency_score = (geographic_score + completness_score) / 2
+        completeness_score = compute_completeness_score(df=df, company=company, year=year)
+        transparency_score = compute_transparency_score(df=df, company=company, year=year)
 
         data[year] = {
             'mnc': company,
             'geographic_score': geographic_score,
-            'completness_score': completness_score,
+            'completeness_score': completeness_score,
             'transparency_score': transparency_score
         }
 
@@ -1298,9 +1356,9 @@ def compute_transparency_score(df: pd.DataFrame, company: str) -> dict:
 
 
 def transparency_scores_to_csv(
-        df: pd.DataFrame, csv_path: str = './') -> pd.DataFrame:
+        df: pd.DataFrame, csv_path: str = './') -> pd.DataFrame():
     """Compute transparency score for all companies and all years into a
-    DataFrame and export it to a csv file (optionnal).
+    DataFrame and export it to a csv file (optional).
 
     Args:
         df (pd.DataFrame): CbCRs database.
@@ -1316,10 +1374,10 @@ def transparency_scores_to_csv(
     # Initialize an empty DataFrame
     mnc_df = pd.DataFrame()
 
-    # Calculate tranparency scores for all companies and add them to the DataFrame
+    # Calculate transparency scores for all companies and add them to the DataFrame
     for mnc in mnc_list:
         temp_df = pd.DataFrame.from_dict(
-            compute_transparency_score(df=df, company=mnc), orient='index')
+            compute_all_scores(df=df, company=mnc), orient='index')
 
         mnc_df = pd.concat([mnc_df, temp_df])
 
@@ -1343,7 +1401,7 @@ def display_transparency_score(df: pd.DataFrame, company: str, year: int = None)
     """
 
     # Compute data
-    data = compute_transparency_score(df=df, company=company)
+    data = compute_all_scores(df=df, company=company)
 
     # Create DataFrame
     df = pd.DataFrame.from_dict(data, orient='index')
@@ -1383,17 +1441,12 @@ def display_transparency_score(df: pd.DataFrame, company: str, year: int = None)
         width=360,
         height=360)
 
-    # Show figure
-    # fig.show()
-
     return score
 
 
 # Viz 26
 
-# Functions below use the 'financial_columns' list, and same computation
-# functions (compute_geographic_score(), compute_completness_score()
-# and compute_transparency_score()) used for Viz 25.
+# Functions below use the same computation function (compute_all_scores) as used for Viz 25.
 
 def display_transparency_score_over_time(df: pd.DataFrame, company: str):
     """Display transparency scores over time for a specific company in a bar
@@ -1405,7 +1458,7 @@ def display_transparency_score_over_time(df: pd.DataFrame, company: str):
     """
 
     # Compute data
-    data = compute_transparency_score(df=df, company=company)
+    data = compute_all_scores(df=df, company=company)
 
     # Create DataFrame
     df = pd.DataFrame.from_dict(data, orient='index')
@@ -1462,7 +1515,7 @@ def display_transparency_score_over_time_details(
     """
 
     # Compute data
-    data = compute_transparency_score(df=df, company=company)
+    data = compute_all_scores(df=df, company=company)
 
     # Create DataFrame
     df = pd.DataFrame.from_dict(data, orient='index')
@@ -1482,7 +1535,7 @@ def display_transparency_score_over_time_details(
     # Rename columns
     df = df.rename(columns={
         'geographic_score': 'Score on geographical disaggretion',
-        'completness_score': 'Score on variable exhaustiveness',
+        'completeness_score': 'Score on variable exhaustiveness',
         'transparency_score': 'Transparency score',
     })
 
