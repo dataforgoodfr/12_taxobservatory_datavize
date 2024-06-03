@@ -540,9 +540,7 @@ def display_company_key_financials_kpis(
 # Viz 14
 def compute_top_jurisdictions_revenue(
         df: pd.DataFrame, company: str, year: int) -> dict:
-    """Rank jurisdictions on their percentage of total revenues in a top 10.
-    When there are more than 10 jurisdictions, the tenth represent all
-    jurisdictions below 9.
+    """Rank jurisdictions on their percentage of total revenues.
 
     Args:
         df (pd.DataFrame): CbCRs database.
@@ -550,7 +548,7 @@ def compute_top_jurisdictions_revenue(
         year (int): fiscal year.
 
     Returns:
-        dict: Top 10 jurisdictions for percentage of total revenues.
+        dict: Rank of jurisdictions by percentage of total revenues.
     """
 
     df = df.loc[
@@ -573,48 +571,17 @@ def compute_top_jurisdictions_revenue(
     # Remove rows where 'total_revenues' is missing
     df = df.dropna(subset=['total_revenues'])
 
-    # Group same 'jur_name' (sometimes several 'Other')
-    # e.g. SWISS LIFE, 2021
-    df = df.groupby('jur_name', as_index=False).sum()
-
-    # Filter the top 10 'jur_name' for 'total_revenues'
-    if len(df) > 10:
-        # Check if 'Other' already in 'jur_name' and add the revenues
-        # of the 'jur_name' below top 10 to its value
-        if 'Other' in df['jur_name'].values:
-            top = df.nlargest(10, 'total_revenues')
-            below_top_revenues = df.loc[
-                ~df['jur_name'].isin(top['jur_name']), 'total_revenues'].sum()
-            top.loc[top['jur_name'] == 'Other', 'total_revenues'] += below_top_revenues
-            top = top.reset_index(drop=True)
-        else:
-            # Keep top 9 and group all revenues of the rest in 'Others'
-            top = df.nlargest(9, 'total_revenues')
-            below_top_revenues = df.loc[
-                ~df['jur_name'].isin(top['jur_name']), 'total_revenues'].sum()
-            top = top.reset_index(drop=True)
-            top.loc[9] = ['Others', below_top_revenues]
-    else:
-        top = df
-
-    # Rename 'Other' to 'Others'
-    top.loc[top['jur_name'] == 'Other', 'jur_name'] = 'Others'
-
     # Compute percentage of revenue
-    top['total_revenues_%'] = top['total_revenues'] / top['total_revenues'].sum()
+    df['total_revenues_%'] = df['total_revenues'] / df['total_revenues'].sum()
 
-    # Convert DataFrame to dictionary
-    data = top.to_dict()
+    # Convert DataFrame to dictionnary
+    data = df.to_dict()
 
-    # Create DataFrame
-    df = pd.DataFrame.from_dict(data)
-    df = df.sort_values(by='total_revenues_%')
-
-    return df
+    return data
 
 
 def display_jurisdictions_top_revenue(df: pd.DataFrame, company: str, year: int):
-    """Display top 10 jurisdictions for percentage of total revenues in an
+    """Display jurisdictions by percentage of total revenues in an
     horizontal bar chart.
 
     Args:
@@ -634,24 +601,28 @@ def display_jurisdictions_top_revenue(df: pd.DataFrame, company: str, year: int)
     bar_color = '#D9D9D9'
 
     # Create figure
-    fig = px.bar(df,
-                 x='total_revenues_%',
-                 y='jur_name',
-                 orientation='h',
-                 color_discrete_sequence=[bar_color],
-                 text_auto='.1%')
+    fig = px.bar(
+        df,
+        x='total_revenues_%',
+        y='jur_name',
+        orientation='h',
+        color_discrete_sequence=[bar_color],
+        text_auto='.1%'
+    )
+
+    # Set figure height (min. 480) depending on the number of jurisdictions
+    fig_height = max(480, (48 * len(df['jur_name'])))
 
     # Update layout settings
     fig.update_layout(
-        autosize=True,
         font_family='Roboto',
-        title=None,
         xaxis=dict(
             title='Percentage of total revenue',
             tickformat='.0%'
         ),
         yaxis_title=None,
         plot_bgcolor='white',
+        height=fig_height,
         margin=dict(l=0, r=0, t=0, b=0)
     )
 
@@ -666,7 +637,12 @@ def display_jurisdictions_top_revenue(df: pd.DataFrame, company: str, year: int)
     )
 
     # Define style of hover on bars
-    fig.update_traces(hovertemplate='%{y}: %{x: .3%}')
+    fig.update_traces(
+        hovertemplate=(
+            "<b>%{hovertext}</b><br><br>% revenue: %{x:.3%}<br>"
+        ),
+        hovertext=df['jur_name']
+    )
 
     return go.Figure(fig)
 
@@ -894,12 +870,10 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         margin=dict(l=0, r=0, t=0, b=0)
     )
 
-    # Define style of hover on bubbles
+    # Define style of hover
     fig.update_traces(
         hovertemplate=(
-                "<b>%{hovertext}</b><br><br>" +
-                "% profit: %{x:.3%}<br>" +
-                "Profit/employee: %{y:.3s}€"
+            "<b>%{hovertext}</b><br><br>% profit: %{x:.3%}<br>Profit/employee: %{y:.3s}€"
         ),
         hovertext=(df['jur_name'] + " - " + df['Tax haven'])
     )

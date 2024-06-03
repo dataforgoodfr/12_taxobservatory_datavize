@@ -151,7 +151,7 @@ Financial profile
 <|{viz_14.sub_title}|text|class_name=viz_sub_title|>
 <br/>
 |>
-<|chart|figure={viz_14.fig}|class_name=plot-overflow|>
+<|chart|figure={viz_14.fig}|height=400px|class_name=plot-overflow|>
 |>
 
 |>
