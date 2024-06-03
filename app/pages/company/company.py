@@ -198,7 +198,7 @@ def update_viz_15(state):
 
 viz_15 = {
     "fig": algo.display_pretax_profit_and_employees_rank(data, selected_company, selected_year),
-    "title": "% profit and employees by countries",
+    "title": "% profit and employees by country",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_15
 }
@@ -211,7 +211,7 @@ def download_viz_16(state):
 
 viz_16 = {
     "fig": algo.display_pretax_profit_and_profit_per_employee(data, selected_company, selected_year),
-    "title": "% profit and profit / employee by countries",
+    "title": "% profit and profit / employee by country",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_16
 }
