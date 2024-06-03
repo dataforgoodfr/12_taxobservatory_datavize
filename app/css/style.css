@@ -20,8 +20,8 @@
     padding-bottom: 1%;
 }
 
-.cpl1 {
-    padding-left: 1%;
+.cpl2 {
+    padding-left: 2%;
 }
 
 .cpr2 {
@@ -34,6 +34,22 @@
 
 .cpb2 {
     padding-bottom: 2%;
+}
+
+.cpl3 {
+    padding-left: 3%;
+}
+
+.cpr3 {
+    padding-right: 3%;
+}
+
+.cpt3 {
+    padding-top: 3%;
+}
+
+.cpb3 {
+    padding-bottom: 3%;
 }
 
 .cpl4 {
@@ -133,6 +149,22 @@
     padding-bottom: 14%;
 }
 
+.cpl24 {
+    padding-left: 24%;
+}
+
+.cpr24 {
+    padding-right: 24%;
+}
+
+.cpt24 {
+    padding-top: 24%;
+}
+
+.cpb24 {
+    padding-bottom: 24%;
+}
+
 /* Font relative styles */
 
 .text-blue {
@@ -151,6 +183,10 @@ color: rgba(0,0,0,0.0)
     text-align: justify;
 }
 
+.text-footer {
+    font-family: "Roboto";
+    font-style: normal;
+}
 
 /* General */
 
@@ -160,7 +196,10 @@ color: rgba(0,0,0,0.0)
 
 .world-bg {
     background-image: url("../../images/world_map.png");
+}
 
+.footer-bg {
+    background-color: #B8BEDB
 }
 
 /* Taipy classes */
@@ -352,7 +391,7 @@ color: rgba(0,0,0,0.0)
 }
 
 .taipy-selector {
-    color: #28323F;
+    color: #28303F;
     font-family: "Manrope";
     font-weight: 400;
     font-size: 17px;
@@ -437,6 +476,8 @@ hr.header-hr35 {
     padding-bottom:5%;
 
 }
+
+
 
 .footer_bg {
     background-color: #B8BEDB;
