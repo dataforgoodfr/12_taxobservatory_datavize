@@ -37,7 +37,7 @@ Find out more on the atlas of the offshore world
 .
 |>
 
-<|{ks1_image_path}|image|width=100%|>
+<|{ks1_image_path}|image|width=100%|class_name=ks-plot|>
 
 |>
 

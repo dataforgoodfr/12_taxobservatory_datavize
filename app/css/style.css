@@ -368,6 +368,15 @@ color: rgba(0,0,0,0.0)
     transform: scale(1.02);
 }
 
+.ks-plot {
+    transition: transform .4s;
+}
+
+.ks-plot:hover {
+    background-color: white;
+    transform: scale(140%) translate(-10%);
+}
+
 #blue-card {
     background-color: #02198D;
 }
