@@ -64,6 +64,11 @@ def display_number_of_tracked_reports_over_time(df):
         text_auto=True
     )
 
+    # Force position and color of bar values
+    fig.update_traces(
+        textposition='outside', textfont=dict(color='black')
+    )
+
     # Update layout settings
     fig.update_layout(
         autosize=True,
@@ -74,14 +79,16 @@ def display_number_of_tracked_reports_over_time(df):
             tickvals=data['year'].unique()
         ),
         yaxis=dict(
-            title=None
+            title=None,
+            visible=False,
         ),
-        plot_bgcolor='white'
+        plot_bgcolor='white',
+        margin=dict(l=0, r=0, b=0, t=20)
     )
 
-    # Force position and color of bar values
+    # Define style of hover on bars
     fig.update_traces(
-        textposition='outside', textfont=dict(color='black')
+        hovertemplate="%{x} : %{y} reports",
     )
 
     return go.Figure(fig)

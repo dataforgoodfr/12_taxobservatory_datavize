@@ -90,14 +90,14 @@ Our database is growing
 <|{viz_2.title}|text|class_name=viz_title|>
 <br/>
 <|{viz_2.sub_title}|text|class_name=viz_sub_title|>
-<|chart|figure={viz_2.fig}|height=340px|class_name=plot-overflow|>
+<|chart|figure={viz_2.fig}|height=360px|class_name=plot-overflow|>
 |>
 
 <|card|
 <|{viz_24.title}|text|class_name=viz_title|>
 <br/>
 <|{viz_24.sub_title}|text|class_name=viz_sub_title|>
-<|chart|figure={viz_24.fig}|height=340px|class_name=plot-overflow|>
+<|chart|figure={viz_24.fig}|class_name=plot-overflow|>
 |>
 
 |>
