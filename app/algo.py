@@ -832,9 +832,7 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
     df = pd.DataFrame(data)
 
     # Replace bool values of Tax haven by string values
-    df['jur_tax_haven'] = df['jur_tax_haven'].astype(str)  # prevent Pandas future warning
-    df.loc[df['jur_tax_haven'] == 'True', 'jur_tax_haven'] = 'Tax haven'
-    df.loc[df['jur_tax_haven'] == 'False', 'jur_tax_haven'] = 'Non tax haven'
+    df['jur_tax_haven'] = df['jur_tax_haven'].map({True: 'Tax haven', False: 'Non tax haven'})
 
     # Rename columns
     df = df.rename(columns={
