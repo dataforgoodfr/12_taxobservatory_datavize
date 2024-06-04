@@ -3,6 +3,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* Custom cards */
+.c-card-white {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    padding-left: 8%;
+    padding-right: 8%;
+    transition: transform .2s;
+}
+
+.c-card-white:hover {
+    background-color: #02198D;
+    -webkit-text-fill-color: white;
+    transform: scale(1.02);
+}
+
 /* Custom paddings in percentage */
 .cpl1 {
     padding-left: 1%;
@@ -215,6 +235,10 @@ color: rgba(0,0,0,0.0)
     --container-max-width:90rem;
 }
 
+.card {
+    box-shadow:none;
+}
+
 /* Common **********/
 
 .main-page-style {
@@ -326,46 +350,11 @@ color: rgba(0,0,0,0.0)
     text-align: justify;
 }
 
-/*.js-plotly-plot {
-    max-width: 100%;
-    box-sizing: inherit !important
-}*/
-
-.card .taipy-chart {
-   /* max-width: 100%;*/
-}
-
 .plot-overflow {
     overflow-x: auto;
     overflow-y: auto;
     width: 100%;
     max-width=100%,
-}
-
-
-
-/* Company page *********/
-
-
-/* Cards **********/
-
-.card {
-    border-radius: 15px;
-    padding-top: 6%;
-    padding-bottom: 6%;
-    padding-left: 8%;
-    padding-right: 8%;
-    box-shadow: none;
-}
-
-#white-card {
-    transition: transform .2s;
-}
-
-#white-card:hover {
-    background-color: #02198D;
-    -webkit-text-fill-color: white;
-    transform: scale(1.02);
 }
 
 .ks-plot {
@@ -381,10 +370,6 @@ color: rgba(0,0,0,0.0)
     background-color: #02198D;
 }
 
-/*#blue_card:hover {
-    background-color: white;
-    -webkit-text-fill-color: #02198D;
-}*/
 
 /* Buttons **********/
 

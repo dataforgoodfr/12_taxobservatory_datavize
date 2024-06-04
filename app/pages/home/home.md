@@ -17,38 +17,50 @@ footprints of major multinationals today and unlock key insights into an often o
 
 <|layout|columns=3*1fr|gap=1rem|
 
-<|card|id=white-card|
-Explore companies
-{: .h2 .text-blue .text-weight500 .cpb2 }
+<|part|class_name=c-card-white|
 
-Search and filter to find reports for specific multinationals. Review their declared profits, taxes paid, employee 
-counts and more for each country over multiple years.<br/><br/>
-{ .text-line-height-165 .cpb2}
+<|part|
+Explore companies
+{ .h2 .text-blue .text-weight500 .cpb4 }
+
+Search and filter to find reports for specific multinationals. Review their declared profits, taxes 
+paid, employee counts and more for each country over multiple years.
+{ .text-line-height-165 .cpb4 }
+|>
 
 [Read more &#8594;](/Company)
+
 |>
 
-<|card|id=white-card|
+<|part|class_name=c-card-white|
+
+<|part|
 Download the data
-{: .h2 .text-blue .text-weight500 .cpb2 }
+{ .h2 .text-blue .text-weight500 .cpb4 }
 
 Do you want to analyse the data ?<br/>You can download the full dataset and methodology here.
-{ .text-line-height-165 .cpb6}
-
-[Read more &#8594;](/Download)
+{ .text-line-height-165 .cpb4 }
 |>
 
-<|card|id=white-card|
+[Read more &#8594;](/Download)
+
+|>
+
+<|part|class_name=c-card-white|
+
+<|part|
 Gain Expert Insights
-{: .h2 .text-blue .text-weight500 .cpb2 }
+{ .h2 .text-blue .text-weight500 .cpb4 }
 
 Access our ongoing research examining multinational tax behavior based on this country-by-country data, including case 
 studies, risk scoring and more.
 { .text-line-height-165 .cpb4 }
+|>
 
 [Read more &#8594;](/KeyStories)
 
 |>
+
 |>
 
 |>
