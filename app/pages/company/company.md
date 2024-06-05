@@ -30,47 +30,42 @@ We might have missed out in its report.<br/>
 
 <|layout|columns=4*1fr|gap=1rem|
 
-<|card|
-<|part|class_name=cpb12|
-<|{viz_1.title}|text|class_name=viz_title|>
+<|part|class_name=viz-container|
+<|{viz_1.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_2.sub_title}|text|class_name=viz_sub_title text-transparent|>
-|>
-<|part|class_name=text-blue text-weight700 text-center round3|
-<|{viz_1.data}|>
+<|{viz_1.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|part|class_name=metric-container cpt6 cpt6|
+<|{viz_1.data}|text|class_name=text-metric|>
 |>
 |>
 
-<|card|
-<|part|class_name=cpb12|
-<|{viz_2.title}|text|class_name=viz_title|>
+<|part|class_name=viz-container|
+<|{viz_2.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_2.sub_title}|text|class_name=viz_sub_title text-transparent|>
-|>
-<|part|class_name=text-blue text-weight700 text-center round3|
-<|{viz_2.data}|>
+<|{viz_2.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|part|class_name=metric-container cpt6 cpt6|
+<|{viz_2.data}|text|class_name=text-metric|>
 |>
 |>
 
-<|card|
-<|part|class_name=cpb8|
-<|{viz_3.title}|text|class_name=viz_title|>
+
+<|part|class_name=viz-container|
+<|{viz_3.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_3.sub_title}|text|class_name=viz_sub_title text-transparent|>
-|>
-<|part|class_name=text-blue text-weight700 text-center round2|
-<|{viz_3.data}|>
+<|{viz_3.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|part|class_name=metric-container cpt6 cpt6|
+<|{viz_3.data}|text|class_name=round-metric|>
 |>
 |>
 
-<|card|
-<|part|class_name=cpb8|
-<|{viz_4.title}|text|class_name=viz_title|>
+<|part|class_name=viz-container|
+<|{viz_4.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_4.sub_title}|text|class_name=viz_sub_title|>
-|>
-<|part|class_name=text-blue text-weight700 text-center round2|
+<|{viz_4.sub_title}|text|class_name=text-small text-weight300|>
+<|part|class_name=metric-container cpt6 cpt6|
+<|part|class_name=round-metric|
 <|{viz_4.data}|><|/100|text|>
+|>
 |>
 |>
 
@@ -93,23 +88,21 @@ Tax Transparency
 
 <|layout|columns=1fr 3fr|gap=1rem|
 
-<|card|
-<|part|class_name=cpb8|
-<|{viz_5.title}|text|class_name=viz_title|>
+<|part|class_name=viz-container|
+<|{viz_5.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_5.sub_title}|text|class_name=viz_sub_title|>
-|>
-<|part|class_name=text-blue text-weight700 text-center round2|
+<|{viz_5.sub_title}|text|class_name=text-small text-weight300|>
+<|part|class_name=metric-container cpt8 cpt8|
+<|part|class_name=round-metric|
 <|{viz_5.data}|><|/100|text|>
 |>
 |>
-
-<|card|
-<|part|class_name=cpb8|
-<|{viz_26.title}|text|class_name=viz_title|>
-<br/>
-<|{viz_26.sub_title}|text|class_name=viz_sub_title|>
 |>
+
+<|part|class_name=viz-container|
+<|{viz_26.title}|text|class_name=text-weight400|>
+<br/>
+<|{viz_26.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
 <|part|
 <|{viz_26.data}|table|show_all|sortable=False|style=table-cell|class_name=rows-similar|>
 |>
@@ -134,24 +127,20 @@ Financial profile
 
 <|layout|columns=1fr 1fr|gap=1rem|
 
-<|card|
+<|part|class_name=viz-container|
+<|{viz_13.title}|text|class_name=text-weight400|>
+<br/>
+<|{viz_13.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
 <|part|
-<|{viz_13.title}|text|class_name=viz_title|>
-<br/>
-<|{viz_13.sub_title}|text|class_name=viz_sub_title|>
-<br/>
-|>
 <|{viz_13.data}|table|show_all|sortable=False|dynamic=True|style=table-cell|class_name=rows-similar|>
 |>
-
-<|card|
-<|part|
-<|{viz_14.title}|text|class_name=viz_title|>
-<br/>
-<|{viz_14.sub_title}|text|class_name=viz_sub_title|>
-<br/>
 |>
-<|chart|figure={viz_14.fig}|height=400px|class_name=plot-overflow|>
+
+<|part|class_name=viz-container|
+<|{viz_14.title}|text|class_name=text-weight400|>
+<br/>
+<|{viz_14.sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz_14.fig}|>
 |>
 
 |>
@@ -164,24 +153,18 @@ Distribution of profits vs employees
 
 <|layout|columns=1fr 1fr|gap=1rem|
 
-<|card|
-<|part|
-<|{viz_15.title}|text|class_name=viz_title|>
+<|part|class_name=viz-container|
+<|{viz_15.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_15.sub_title}|text|class_name=viz_sub_title|>
-<br/>
-|>
-<|chart|figure={viz_15.fig}|height=400px|class_name=plot-overflow|>
+<|{viz_15.sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz_15.fig}|>
 |>
 
-<|card|
-<|part|
-<|{viz_16.title}|text|class_name=viz_title|>
+<|part|class_name=viz-container|
+<|{viz_16.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_16.sub_title}|text|class_name=viz_sub_title|>
-<br/>
-|>
-<|chart|figure={viz_16.fig}|height=400px|class_name=plot-overflow|>
+<|{viz_16.sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz_16.fig}|>
 |>
 
 |>

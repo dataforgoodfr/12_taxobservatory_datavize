@@ -79,37 +79,39 @@ Our database is growing
 <|layout|columns=1fr 2fr 2fr|gap=1rem|
 
 <|layout|columns=1|gap=1rem|
-<|card|
-<|{viz_1.title}|text|class_name=viz_title|>
-<br/><br/>
-<|part|class_name=round|
-<|{viz_1.data}|>
-|>
-|>
 
-<|card|
-<|{viz_3.title}|text|class_name=viz_title|>
+<|part|class_name=viz-container|
+<|{viz_1.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_3.sub_title}|text|class_name=viz_sub_title|>
-<|part|class_name=round|
-<|{viz_3.data}|>
+<|{viz_1.sub_title}|text|class_name=text-small text-weight300|>
+<|part|class_name=metric-container cpt6 cpt6|
+<|{viz_1.data}|text|class_name=round-metric|>
 |>
 |>
 
-|>
-
-<|card|
-<|{viz_2.title}|text|class_name=viz_title|>
+<|part|class_name=viz-container|
+<|{viz_3.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_2.sub_title}|text|class_name=viz_sub_title|>
-<|chart|figure={viz_2.fig}|height=360px|class_name=plot-overflow|>
+<|{viz_3.sub_title}|text|class_name=text-small text-weight300|>
+<|part|class_name=metric-container cpt6 cpt6|
+<|{viz_3.data}|text|class_name=round-metric|>
+|>
 |>
 
-<|card|
-<|{viz_24.title}|text|class_name=viz_title|>
+|>
+
+<|part|class_name=viz-container|
+<|{viz_2.title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_24.sub_title}|text|class_name=viz_sub_title|>
-<|chart|figure={viz_24.fig}|class_name=plot-overflow|>
+<|{viz_2.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|chart|figure={viz_2.fig}|>
+|>
+
+<|part|class_name=viz-container|
+<|{viz_24.title}|text|class_name=text-weight400|>
+<br/>
+<|{viz_24.sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz_24.fig}|>
 |>
 
 |>

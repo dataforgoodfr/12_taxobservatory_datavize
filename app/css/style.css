@@ -3,6 +3,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+.viz-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.metric-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.round-metric {
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 700;
+    color: #021978;
+    background: #B8BEDB;
+    display: flex;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-metric {
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 700;
+    color: #021978;
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-plotly-plot {
+    height: 100%;
+    width: 100%;
+}
+
+.taipy-chart {
+    box-shadow: none;
+    max-height: 60vh;
+    overflow: scroll;
+}
+
 /* Custom cards */
 .c-card-white {
     background-color: white;
@@ -405,6 +457,10 @@ color: rgba(0,0,0,0.0)
     color: #1A1E3D;
     font-family: "Manrope";
     font-weight: 300;
+}
+
+.taipy-table .MuiPaper-elevation {
+  box-shadow: none;
 }
 
 

@@ -301,7 +301,7 @@ def update_viz_26(state):
 viz_26 = {
     "data": algo.display_transparency_score_over_time_details(data, selected_company),
     "title": "Transparency score over time ",
-    "sub_title": "",
+    "sub_title": "------------ --------- ---------",
     "on_action": download_viz_26
 }
 
