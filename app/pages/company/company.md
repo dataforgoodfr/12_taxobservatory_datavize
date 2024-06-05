@@ -104,7 +104,7 @@ Tax Transparency
 <br/>
 <|{viz_26.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
 <|part|
-<|{viz_26.data}|table|show_all|sortable=False|style=table-cell|class_name=rows-similar|>
+<|{viz_26.data}|table|show_all|sortable=False|style=table-cell|class_name=rows-similar table-top|>
 |>
 |>
 
@@ -131,9 +131,7 @@ Financial profile
 <|{viz_13.title}|text|class_name=text-weight400|>
 <br/>
 <|{viz_13.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
-<|part|
-<|{viz_13.data}|table|show_all|sortable=False|dynamic=True|style=table-cell|class_name=rows-similar|>
-|>
+<|{viz_13.data}|table|show_all|sortable=False|dynamic=True|style=table-cell|class_name=rows-similar table-top|>
 |>
 
 <|part|class_name=viz-container|

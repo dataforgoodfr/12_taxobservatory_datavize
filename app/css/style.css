@@ -19,6 +19,11 @@
   flex-grow: 1;
 }
 
+/* Ensure table is on top of its container */
+.table-top {
+    padding-top:0%;
+}
+
 .round-metric {
     font-style: normal;
     font-size: 18px;
