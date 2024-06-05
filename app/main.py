@@ -1,12 +1,12 @@
 from taipy.gui import Gui, navigate
 
-from pages.root import root
-from pages.home.home import home_md
-from pages.company.company import company_md
-from pages.keystories.keystories import keystories_md
-from pages.methodology.methodology import methodology_md
-from pages.contact.contact import contact_md
-from pages.download.download import download_md
+from app.pages.company.company import company_md
+from app.pages.contact.contact import contact_md
+from app.pages.download.download import download_md
+from app.pages.home.home import home_md
+from app.pages.keystories.keystories import keystories_md
+from app.pages.methodology.methodology import methodology_md
+from app.pages.root import root
 
 # Add pages
 pages = {
