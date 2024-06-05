@@ -5,10 +5,10 @@
 The Great Tax Escape
 {: .h1 .text-blue .cpb2 }
 
-<ks1|part|
+<ks1|part|class_name=cpb6|
 
-TRENDS IN GLOBAL CORPORATE PROFIT SHIFTING
-{: .h2 .cpb2 .text-center }
+Trends in Global Corporate Profit Shifting
+{: .h2 .cpb4 .text-center }
 
 <|layout|columns=2*1fr|class_name=align-columns-center|gap=2rem|
 
@@ -37,11 +37,42 @@ Find out more on the atlas of the offshore world
 .
 |>
 
-<|{ks1_image_path}|image|width=100%|class_name=ks-plot|>
+<|{ks1_image_path}|image|width=100%|class_name=ks-plot-right|>
 
 |>
 
 |ks1>
+
+<ks2|part|class_name=cpb6|
+
+The Sluggish Uptake of Public Country-by-Country Tax Reporting
+{: .h2 .cpb4 .text-center }
+
+<|layout|columns=2*1fr|class_name=align-columns-center|gap=2rem|
+
+<|{ks2_image_path}|image|width=100%|class_name=ks-plot-left|>
+
+<|part|class_name=text-justify|
+**The voluntary publication of public country-by-country reports (CbCRs) by multinational enterprises (MNEs) has been on 
+an upward trajectory in recent years.** However, the number of MNEs embracing this level of tax transparency remains 
+remarkably low. Out of the thousands of large MNEs globally, **only 153 have published public CbCR data at least once as 
+of 2021, representing less than 2% of all large MNEs worldwide.**
+<br/><br/>
+The MNEs that do publish public CbCRs tend to be some of the largest corporations. About 83% of the publishing MNEs 
+have global revenues exceeding &#8364;750 million, the threshold commonly used to define a "large" MNE. A handful of energy 
+giants like Shell, BP, and Total Energies lead the pack as some of the highest revenue publishers. However, the 
+publishing MNEs collectively account for less than 5% of total global MNE revenues, underscoring how limited public 
+CbCR disclosures are currently.
+<br/><br/>
+There are stark regional disparities in public CbCR publishing trends. European MNEs, particularly from Italy, Spain, 
+Norway, and the UK, are leading the charge, with some countries seeing around 15-20% of their large MNEs publishing. 
+In contrast, the United States, China, and several major tax havens have virtually no MNEs publishing public CbCRs, 
+representing significant transparency gaps given their roles in the global economy.
+|>
+
+|>
+
+|ks2>
 
 |>
 

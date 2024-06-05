@@ -409,13 +409,22 @@ color: rgba(0,0,0,0.0)
     max-width=100%,
 }
 
-.ks-plot {
+.ks-plot-right {
     transition: transform .4s;
 }
 
-.ks-plot:hover {
+.ks-plot-right:hover {
     background-color: white;
     transform: scale(140%) translate(-10%);
+}
+
+.ks-plot-left {
+    transition: transform .4s;
+}
+
+.ks-plot-left:hover {
+    background-color: white;
+    transform: scale(140%) translate(10%);
 }
 
 #blue-card {
