@@ -2,7 +2,7 @@
 
 <|part|class_name=cpt4 cpb4 cpl8 cpr8|
 
-Keystories
+The Great Tax Escape
 {: .h1 .text-blue .cpb2 }
 
 <ks1|part|
