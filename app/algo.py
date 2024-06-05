@@ -72,6 +72,7 @@ def display_number_of_tracked_reports_over_time(df):
     # Update layout settings
     fig.update_layout(
         autosize=True,
+        height=360,
         font_family='Roboto',
         title=None,
         xaxis=dict(
@@ -83,7 +84,7 @@ def display_number_of_tracked_reports_over_time(df):
             visible=False,
         ),
         plot_bgcolor='white',
-        margin=dict(l=0, r=0, b=0, t=20)
+        margin=dict(l=0, r=0, b=0, t=0)
     )
 
     # Define style of hover on bars
@@ -859,11 +860,14 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         title=None,
         font_family='Roboto',
         autosize=True,
+        height=360,
         xaxis=dict(
             title='% profit',
             tickformat='.0%',
         ),
-        yaxis_title='Profit/employee',
+        yaxis=dict(
+            title='Profit/employee',
+        ),
         legend=dict(
             x=0.1,
             y=1.05,
