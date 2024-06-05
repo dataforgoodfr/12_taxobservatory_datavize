@@ -10,19 +10,23 @@ from app.data.data import data
 # Path to image
 company_image_path = "images/pexels-ingo-joseph-1880351.png"
 
+var = {
+    "selected_company": "SHELL"
+}
+
 # Initialize selected company
-selected_company = "SHELL"
+# selected_company = "SHELL"
 
 # Create a filtered DataFrame with selected company
-df_selected_company = data[data["mnc"] == selected_company]
+df_selected_company = data[data["mnc"] == var["selected_company"]]
 
 # List companies to populate selector
 colname_company = "mnc"
 selector_company = list(np.sort(data[colname_company].astype(str).unique()))
 
 # List years to populate selector and initialise selected year
-selector_year = data.loc[data["mnc"] == selected_company, "year"].unique().astype(str).tolist()
-selected_year = max(data.loc[data["mnc"] == selected_company, "year"].unique().tolist())
+selector_year = data.loc[data["mnc"] == var["selected_company"], "year"].unique().astype(str).tolist()
+selected_year = max(data.loc[data["mnc"] == var["selected_company"], "year"].unique().tolist())
 
 # Calculate number of reports for all companies
 df_count_company = algo.number_of_tracked_reports_over_time_company(df_selected_company)
@@ -104,11 +108,11 @@ def download_viz_4(state):
 
 def update_viz_4(state):
     state.viz_4["data"] = algo.display_transparency_score(
-        state.data, state.selected_company)
+        state.data, state.var["selected_company"])
 
 
 viz_4 = {
-    'data': algo.display_transparency_score(data, selected_company),
+    'data': algo.display_transparency_score(data, var["selected_company"]),
     'title': "Transparency Score",
     'sub_title': "average over all reports",
     'on_action': download_viz_4
@@ -122,12 +126,12 @@ def download_viz_5(state):
 
 def update_viz_5(state):
     state.viz_5["data"] = algo.display_transparency_score(
-        state.data, state.selected_company, int(state.selected_year))
+        state.data, state.var["selected_company"], int(state.selected_year))
     state.viz_5["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
 viz_5 = {
-    'data': algo.display_transparency_score(data, selected_company, selected_year),
+    'data': algo.display_transparency_score(data, var["selected_company"], selected_year),
     'title': "Transparency  Score",
     'sub_title': f"selected fiscal year : {selected_year}",
     'on_action': download_viz_5
@@ -154,12 +158,12 @@ def download_viz_13(state):
 
 def update_viz_13(state):
     state.viz_13["data"] = algo.display_company_key_financials_kpis(
-        state.data, state.selected_company, int(state.selected_year))
+        state.data, state.var["selected_company"], int(state.selected_year))
     state.viz_13["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
 viz_13 = {
-    "data": algo.display_company_key_financials_kpis(data, selected_company, selected_year),
+    "data": algo.display_company_key_financials_kpis(data, var["selected_company"], selected_year),
     "title": "Key metrics",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_13
@@ -173,12 +177,12 @@ def download_viz_14(state):
 
 def update_viz_14(state):
     state.viz_14["fig"] = algo.display_jurisdictions_top_revenue(
-        state.data, state.selected_company, int(state.selected_year))
+        state.data, state.var["selected_company"], int(state.selected_year))
     state.viz_14["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
 viz_14 = {
-    "fig": algo.display_jurisdictions_top_revenue(data, selected_company, selected_year),
+    "fig": algo.display_jurisdictions_top_revenue(data, var["selected_company"], selected_year),
     "title": "Distribution of revenues across countries",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_14
@@ -192,12 +196,12 @@ def download_viz_15(state):
 
 def update_viz_15(state):
     state.viz_15["fig"] = algo.display_pretax_profit_and_employees_rank(
-        state.data, state.selected_company, int(state.selected_year))
+        state.data, state.var["selected_company"], int(state.selected_year))
     state.viz_15["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
 viz_15 = {
-    "fig": algo.display_pretax_profit_and_employees_rank(data, selected_company, selected_year),
+    "fig": algo.display_pretax_profit_and_employees_rank(data, var["selected_company"], selected_year),
     "title": "% profit and employees by country",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_15
@@ -210,7 +214,7 @@ def download_viz_16(state):
 
 
 viz_16 = {
-    "fig": algo.display_pretax_profit_and_profit_per_employee(data, selected_company, selected_year),
+    "fig": algo.display_pretax_profit_and_profit_per_employee(data, var["selected_company"], selected_year),
     "title": "% profit and profit / employee by country",
     "sub_title": f"selected fiscal year : {selected_year}",
     "on_action": download_viz_16
@@ -236,10 +240,10 @@ def download_viz_18(state):
 
 
 data_viz_18_dict = algo.compute_related_and_unrelated_revenues_breakdown(
-    data, selected_company, int(selected_year))
+    data, var["selected_company"], int(selected_year))
 data_viz_18 = pd.DataFrame.from_dict(data_viz_18_dict, orient="index").reset_index()
 fig_viz_18 = algo.display_related_and_unrelated_revenues_breakdown(
-    data, selected_company, int(selected_year)
+    data, var["selected_company"], int(selected_year)
 )
 viz_18 = {
     "fig": fig_viz_18,
@@ -257,7 +261,7 @@ def download_viz_19(state):
 
 def update_viz_16(state):
     state.viz_16["fig"] = algo.display_pretax_profit_and_profit_per_employee(
-        state.data, state.selected_company, int(state.selected_year))
+        state.data, state.var["selected_company"], int(state.selected_year))
     state.viz_16["sub_title"] = f"selected fiscal year : {state.selected_year}"
 
 
@@ -278,7 +282,7 @@ def download_viz_21(state):
 
 
 data_viz_21_dict = algo.compute_tax_havens_use_evolution(
-    df=data, company=selected_company)
+    df=data, company=var["selected_company"])
 data_viz_21 = pd.DataFrame.from_dict(data_viz_21_dict)
 viz_21 = {
     "data": data_viz_21,
@@ -295,11 +299,11 @@ def download_viz_26(state):
 
 def update_viz_26(state):
     state.viz_26["data"] = algo.display_transparency_score_over_time_details(
-        data, state.selected_company)
+        data, state.var["selected_company"])
 
 
 viz_26 = {
-    "data": algo.display_transparency_score_over_time_details(data, selected_company),
+    "data": algo.display_transparency_score_over_time_details(data, var["selected_company"]),
     "title": "Transparency score over time ",
     "sub_title": "------------ --------- ---------",
     "on_action": download_viz_26
@@ -308,14 +312,15 @@ viz_26 = {
 
 # Update data and figures when the selected company changes
 def on_change_company(state):
-    print("Chosen company: ", state.selected_company)
+    print("Chosen company: ", state.var["selected_company"])
+    state.var["selected_company"] = state.var["selected_company"]
 
     # Update selected year and available years
-    state.selector_year = data.loc[data["mnc"] == state.selected_company, "year"].unique().astype(str).tolist()
-    state.selected_year = max(data.loc[data["mnc"] == state.selected_company, "year"].unique().tolist())
+    state.selector_year = data.loc[data["mnc"] == state.var["selected_company"], "year"].unique().astype(str).tolist()
+    state.selected_year = max(data.loc[data["mnc"] == state.var["selected_company"], "year"].unique().tolist())
     print("Available years :", state.selector_year)
 
-    state.df_selected_company = data[data["mnc"] == state.selected_company]
+    state.df_selected_company = data[data["mnc"] == state.var["selected_company"]]
     state.df_count_company = algo.number_of_tracked_reports_over_time_company(state.df_selected_company)
 
     # Update content of page
@@ -332,10 +337,10 @@ def on_change_company(state):
     update_viz_26(state)
 
     data_viz_18_dict = algo.compute_related_and_unrelated_revenues_breakdown(
-        state.data, state.selected_company, int(state.selected_year))
+        state.data, state.var["selected_company"], int(state.selected_year))
     data_viz_18 = pd.DataFrame.from_dict(data_viz_18_dict, orient="index").reset_index()
     fig_viz_18 = algo.display_related_and_unrelated_revenues_breakdown(
-        state.data, state.selected_company, int(state.selected_year)
+        state.data, state.var["selected_company"], int(state.selected_year)
     )
 
     df_selected_company, df_selected_company_th_agg = (
@@ -343,7 +348,7 @@ def on_change_company(state):
     data_viz_19 = df_selected_company_th_agg
 
     data_viz_21_dict = algo.compute_tax_havens_use_evolution(
-        df=state.data, company=state.selected_company)
+        df=state.data, company=state.var["selected_company"])
     data_viz_21 = pd.DataFrame.from_dict(data_viz_21_dict)
 
     update_viz_1(state)
@@ -367,10 +372,10 @@ def on_change_year(state):
     update_viz_16(state)
 
     data_viz_18_dict = algo.compute_related_and_unrelated_revenues_breakdown(
-        state.data, state.selected_company, int(state.selected_year))
+        state.data, state.var["selected_company"], int(state.selected_year))
     data_viz_18 = pd.DataFrame.from_dict(data_viz_18_dict, orient='index').reset_index()
     fig_viz_18 = algo.display_related_and_unrelated_revenues_breakdown(
-        state.data, state.selected_company, int(state.selected_year)
+        state.data, state.var["selected_company"], int(state.selected_year)
     )
     state.viz_18["fig"] = fig_viz_18
     state.viz_18["data"] = data_viz_18

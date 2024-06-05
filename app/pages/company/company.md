@@ -8,7 +8,7 @@
 Pick a company to dive into the report
 {: .h1 .text-blue .cpb4 .cpr14 }
 
-<|{selected_company}|selector|lov={selector_company}|on_change=on_change_company|dropdown|class_name=fullwidth mb2|width=65%|>
+<|{var.selected_company}|selector|lov={selector_company}|on_change=on_change_company|dropdown|class_name=fullwidth mb2|width=65%|>
 
 Can't find a company ?<br/>
 We might have missed out in its report.<br/>
@@ -26,7 +26,7 @@ We might have missed out in its report.<br/>
 
 <company|part|class_name=cpt4 cpl8 cpr8|
 
-<|{selected_company}|text|class_name=h1 text-blue cpb4|>
+<|{var.selected_company}|text|class_name=h1 text-blue cpb4|>
 
 <|layout|columns=4*1fr|gap=1rem|
 
