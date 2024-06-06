@@ -79,7 +79,7 @@ We might have missed out in its report.<br/>
 Financial Reporting Overview
 {: .h1 .text-blue .cpb4 }
 
-<|{selected_year}|selector|lov={selector_year}|on_change=on_change_year|dropdown|class_name=fullwidth|>
+<|{var.selected_year}|selector|lov={var.available_years}|on_change=on_change_year|dropdown|class_name=fullwidth|>
 |>
 
 <transparency|part|class_name=cpb1|
