@@ -55,7 +55,7 @@
 }
 
 .world_map {
-    background-image: url("../../images/world_map.png");
+    background-image: url("../../images/world_map.jpg");
     -webkit-text-fill-color:#FFFFFF;
     padding-left:10%;
     padding-top:5%;
@@ -226,7 +226,7 @@
     padding-top:0%;
     padding-right:10%;
     padding-bottom:5%;
-    
+
 }
 
 .buttonsection {
