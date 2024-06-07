@@ -77,4 +77,4 @@ viz_24 = {
 }
 
 # Generate page from Markdown file
-home_md = Markdown("pages/home/home.md")
+home_md = Markdown("app/pages/home/home.md")

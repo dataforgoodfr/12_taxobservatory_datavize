@@ -4,4 +4,4 @@ from taipy.gui import Markdown
 equation = "./images/transparency-score-equation.svg"
 
 # Generate page from Markdown file
-methodology_md = Markdown("pages/methodology/methodology.md")
+methodology_md = Markdown("app/pages/methodology/methodology.md")

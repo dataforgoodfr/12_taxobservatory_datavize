@@ -7,4 +7,4 @@ dataset_filepath = "./data/EUTO_Public_CbCR_Database_2021.xlsx"
 download_filename = "EUTO_Public_CbCR_Database_2021.xlsx"
 
 # Generate page from Markdown file
-download_md = Markdown("pages/download/download.md")
+download_md = Markdown("app/pages/download/download.md")

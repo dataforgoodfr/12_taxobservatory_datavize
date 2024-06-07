@@ -382,4 +382,4 @@ def on_change_year(state):
 
 
 # Generate page from Markdown file
-company_md = Markdown("pages/company/company.md")
+company_md = Markdown("app/pages/company/company.md")

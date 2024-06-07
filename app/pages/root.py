@@ -24,4 +24,4 @@ def goto_d4g_website(state):
 
 
 # Generate page from Markdown file
-root = Markdown("pages/root.md")
+root = Markdown("app/pages/root.md")
