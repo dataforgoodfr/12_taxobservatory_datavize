@@ -55,7 +55,7 @@ stylekit = {
 
 if __name__ == '__main__':
     tp.Core().run()
-    gui_multi_pages.run(
+    web_app = gui_multi_pages.run(
         dark_mode=False,
         stylekit=stylekit,
         title="taxobservatory"
