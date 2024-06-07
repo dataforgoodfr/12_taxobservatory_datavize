@@ -60,11 +60,14 @@ stylekit = {
     "font_family": "Manrope"
 }
 
-if __name__ == "__main__":
-    # Start the server
-    gui_multi_pages.run(
-        dark_mode=False,
-        stylekit=stylekit,
-        title="Taxplorer",
-        favicon="./images/taxplorer-logo.svg"
-    )
+# Start the server
+web_app = gui_multi_pages.run(
+    dark_mode=False,
+    stylekit=stylekit,
+    title="Taxplorer",
+    favicon="./images/taxplorer-logo.svg",
+    run_server=False,
+    debug=False,
+    async_mode='gevent_uwsgi'
+)
+
