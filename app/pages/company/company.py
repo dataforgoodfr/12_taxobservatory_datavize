@@ -46,7 +46,7 @@ def download_el(state, viz):
 
 # Viz 1
 def update_viz_1(state):
-    state.viz_1 = state.viz_1.copy()
+    state.viz_1 = viz_1.copy()
     state.viz_1["data"] = state.company_sector
 
 
@@ -69,7 +69,7 @@ def download_viz_2(state):
 
 
 def update_viz_2(state):
-    state.viz_2 = state.viz_2.copy()
+    state.viz_2 = viz_2.copy()
     state.viz_2["data"] = state.company_upe_name
 
 
@@ -88,7 +88,7 @@ def download_viz_3(state):
 
 
 def update_viz_3(state):
-    state.viz_3 = state.viz_3.copy()
+    state.viz_3 = viz_3.copy()
     state.viz_3["data"] = algo.number_of_tracked_reports_company(state.df_selected_company)
 
 
@@ -107,7 +107,7 @@ def download_viz_4(state):
 
 
 def update_viz_4(state):
-    state.viz_4 = state.viz_4.copy()
+    state.viz_4 = viz_4.copy()
     state.viz_4["data"] = algo.display_transparency_score(
         state.data, state.selected_company)
 
@@ -126,7 +126,7 @@ def download_viz_5(state):
 
 
 def update_viz_5(state):
-    state.viz_5 = state.viz_5.copy()
+    state.viz_5 = viz_5.copy()
     state.viz_5["data"] = algo.display_transparency_score(
         state.data, state.selected_company, int(state.selected_year))
     state.viz_5["sub_title"] = f"selected fiscal year : {state.selected_year}"
@@ -159,7 +159,7 @@ def download_viz_13(state):
 
 
 def update_viz_13(state):
-    state.viz_13 = state.viz_13.copy()
+    state.viz_13 = viz_13.copy()
     state.viz_13["data"] = algo.display_company_key_financials_kpis(
         state.data, state.selected_company, int(state.selected_year))
     state.viz_13["sub_title"] = f"selected fiscal year : {state.selected_year}"
@@ -179,7 +179,7 @@ def download_viz_14(state):
 
 
 def update_viz_14(state):
-    state.viz_14 = state.viz_14.copy()
+    state.viz_14 = viz_14.copy()
     state.viz_14["fig"] = algo.display_jurisdictions_top_revenue(
         state.data, state.selected_company, int(state.selected_year))
     state.viz_14["sub_title"] = f"selected fiscal year : {state.selected_year}"
@@ -199,7 +199,7 @@ def download_viz_15(state):
 
 
 def update_viz_15(state):
-    state.viz_15 = state.viz_15.copy()
+    state.viz_15 = viz_15.copy()
     state.viz_15["fig"] = algo.display_pretax_profit_and_employees_rank(
         state.data, state.selected_company, int(state.selected_year))
     state.viz_15["sub_title"] = f"selected fiscal year : {state.selected_year}"
@@ -265,7 +265,7 @@ def download_viz_19(state):
 
 
 def update_viz_16(state):
-    state.viz_16 = state.viz_16.copy()
+    state.viz_16 = viz_16.copy()
     state.viz_16["fig"] = algo.display_pretax_profit_and_profit_per_employee(
         state.data, state.selected_company, int(state.selected_year))
     state.viz_16["sub_title"] = f"selected fiscal year : {state.selected_year}"
@@ -304,7 +304,7 @@ def download_viz_26(state):
 
 
 def update_viz_26(state):
-    state.viz_26 = state.viz_26.copy()
+    state.viz_26 = viz_26.copy()
     state.viz_26["data"] = algo.display_transparency_score_over_time_details(
         data, state.selected_company)
 
@@ -360,11 +360,10 @@ def on_change_company(state):
 
     update_viz_1(state)
     # state.viz1["data"'"] = state.company_sector
-
-    state.viz_2 = state.viz_2.copy()
-    state.viz_18 = state.viz_18.copy()
-    state.viz_19 = state.viz_19.copy()
-    state.viz_21 = state.viz_21.copy()
+    state.viz_2 = viz_2.copy()
+    state.viz_18 = viz_18.copy()
+    state.viz_19 = viz_19.copy()
+    state.viz_21 = viz_21.copy()
     
     state.viz_2["data"] = state.company_upe_name
     state.viz_18["fig"] = fig_viz_18
@@ -393,7 +392,7 @@ def on_change_year(state):
     fig_viz_18 = algo.display_related_and_unrelated_revenues_breakdown(
         state.data, state.selected_company, int(state.selected_year)
     )
-    state.viz_18 = state.viz_18.copy()
+    state.viz_18 = viz_18.copy()
     state.viz_18["fig"] = fig_viz_18
     state.viz_18["data"] = data_viz_18
 
