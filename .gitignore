@@ -3,7 +3,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 # C extensions
 *.so
 
@@ -28,6 +27,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+*DS_STORE
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -138,6 +138,9 @@ venv.bak/
 
 # VS Code
 .vscode
+
+# JetBrains
+.idea/*
 
 # Rope project settings
 .ropeproject

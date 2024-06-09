@@ -8,7 +8,7 @@ from taipy.gui import Markdown,download
 import algo # from dataviz import algo
 from data.data import data #from dataviz.data.data import data
 
-header_right_image_path = 'images/pexels-ingo-joseph-1880351.png'
+header_right_image_path = 'images/pexels-ingo-joseph-1880351.jpg'
 download_icon_path = 'images/Vector.svg'
 
 # selected_company = 'ACCIONA'
