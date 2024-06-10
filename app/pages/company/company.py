@@ -8,7 +8,7 @@ from app import algo
 from app.data.data import data
 
 # Path to image
-company_image_path = "images/pexels-ingo-joseph-1880351.png"
+company_image_path = "app/images/pexels-ingo-joseph-1880351.png"
 
 
 # Initialize selected company

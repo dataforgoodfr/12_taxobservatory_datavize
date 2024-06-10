@@ -6,7 +6,7 @@ def to_text(val):
 
 
 # Path to image
-taxplorer_logo_path = "./images/taxplorer-logo.svg"
+taxplorer_logo_path = "app/images/taxplorer-logo.svg"
 
 
 # Initialise navbar items
