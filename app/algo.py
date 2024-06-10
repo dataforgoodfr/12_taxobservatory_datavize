@@ -1346,7 +1346,7 @@ def compute_all_scores(df: pd.DataFrame, company: str) -> dict:
 
 
 def transparency_scores_to_csv(
-        df: pd.DataFrame, csv_path: str = './') -> pd.DataFrame():
+        df: pd.DataFrame, csv_path: str = './') -> pd.DataFrame:
     """Compute transparency score for all companies and all years into a
     DataFrame and export it to a csv file (optional).
 
