@@ -7,8 +7,8 @@ from app import algo
 from app.data.data import data
 
 # Path to images
-world_map_path = "app/images/world_map.png"
-download_icon_path = "app/images/Vector.svg"
+world_map_path = "images/world_map.png"
+download_icon_path = "images/Vector.svg"
 
 
 # Generate the digits, save them in a CSV file content, and trigger a download action
@@ -77,4 +77,4 @@ viz_24 = {
 }
 
 # Generate page from Markdown file
-home_md = Markdown("app/pages/home/home.md")
+home_md = Markdown("pages/home/home.md")

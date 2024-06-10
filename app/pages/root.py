@@ -6,7 +6,7 @@ def to_text(val):
 
 
 # Path to image
-taxplorer_logo_path = "app/images/taxplorer-logo.svg"
+taxplorer_logo_path = "images/taxplorer-logo.svg"
 
 
 # Initialise navbar items
@@ -16,7 +16,7 @@ navbar_items = [
     ("/Company", "Company"),
     ("/Methodology", "Methodology"),
     ("/Contact", "Contact"),
-    ("/Download", "&#11123;")
+    ("/Download", "Data")
 ]
 
 def goto_d4g_website(state):
@@ -24,4 +24,4 @@ def goto_d4g_website(state):
 
 
 # Generate page from Markdown file
-root = Markdown("app/pages/root.md")
+root = Markdown("pages/root.md")

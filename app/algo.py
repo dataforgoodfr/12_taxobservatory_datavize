@@ -168,39 +168,42 @@ def tax_haven_used_by_company(df_selected_company):
     company_upe_code = df_selected_company['upe_code'].unique()[0]
     pc_list = ['employees', 'profit_before_tax', 'related_revenues']
     # grouper = df_selected_company.groupby('jur_name')
-
-    df_domestic_company = df_selected_company[df_selected_company['jur_code'] == company_upe_code]
-    df_selected_company_th = df_selected_company[df_selected_company['jur_tax_haven'] != 'not.TH']
-    df_selected_company_nth = df_selected_company[df_selected_company['jur_tax_haven'] == 'not.TH']
-
+    
+    df = pd.DataFrame(df_selected_company)
+    
+    df_domestic_company = df[df['jur_code'] == company_upe_code]
+    df_selected_company_th = df[df['jur_tax_haven'] != 'not.TH']
+    df_selected_company_nth = df[df['jur_tax_haven'] == 'not.TH']
+    
     for col in pc_list:
-        df_selected_company.insert(
+        
+        df.insert(
             len(df_selected_company.columns),
             col + '_domestic_sum',
             df_domestic_company[col].sum())
 
-        df_selected_company.insert(
+        df.insert(
             len(df_selected_company.columns),
             col + '_th_sum',
             df_selected_company_th[col].sum())
 
-        df_selected_company.insert(
-            len(df_selected_company.columns),
+        df.insert(
+            len(df.columns),
             col + '_nth_sum',
             df_selected_company_nth[col].sum())
 
-        df_selected_company.insert(
-            len(df_selected_company.columns),
+        df.insert(
+            len(df.columns),
             col + '_sum',
             df_selected_company[col].sum())
 
-        df_selected_company.insert(
-            len(df_selected_company.columns),
+        df.insert(
+            len(df.columns),
             col + '_pc',
-            100 * df_selected_company[col] / df_selected_company[col + '_sum'])
+            100 * df[col] / df[col + '_sum'])
         # df_selected_company[col + '_pc'] = 100 * df_selected_company[col] / df_selected_company[col+'_sum']
 
-    df_selected_company_th = df_selected_company[df_selected_company['jur_tax_haven'] != 'not.TH']
+    df_selected_company_th = df[df['jur_tax_haven'] != 'not.TH']
     df_selected_company_th_agg = df_selected_company_th.groupby(['mnc', 'jur_name']).agg(
         profit_before_tax=('profit_before_tax', 'sum'),
         profit_before_tax_pc=('profit_before_tax_pc', 'sum'),
@@ -222,23 +225,24 @@ def tax_haven_used_by_company(df_selected_company):
 def company_table(df_selected_company):
     # company_upe_code = df_selected_company['upe_code'].unique()[0]
     pc_list = ['employees', 'profit_before_tax', 'unrelated_revenues', 'related_revenues', 'total_revenues', 'tax_paid']
-
+    
+    df = pd.DataFrame(df_selected_company)
     for col in pc_list:
-        if col + '_sum' not in df_selected_company.columns:
-            df_selected_company.insert(
-                len(df_selected_company.columns),
+        if col + '_sum' not in df.columns:
+            df.insert(
+                len(df.columns),
                 col + '_sum',
-                df_selected_company[col].sum())
+                df[col].sum())
 
-            df_selected_company.insert(
-                len(df_selected_company.columns),
+            df.insert(
+                len(df.columns),
                 col + '_pc',
-                100 * df_selected_company[col] / df_selected_company[col + '_sum'])
+                100 * df[col] / df[col + '_sum'])
             # f_selected_company[col + '_sum'] = df_selected_company[col].sum()
             # df_selected_company[col + '_pc'] = 100 * df_selected_company[col] / df_selected_company[col + '_sum']
 
     # complete table table showing for all jurisdictions revenues, profits, employees, taxes with % of total for each (color code for tax havens)
-    df_selected_company_by_jur = df_selected_company.groupby(['mnc', 'jur_name']).agg(
+    df_selected_company_by_jur = df.groupby(['mnc', 'jur_name']).agg(
         related_revenues_pc=('related_revenues_pc', 'sum'),
         unrelated_revenues=('unrelated_revenues', 'sum'),
         total_revenues=('total_revenues', 'sum'),
@@ -657,7 +661,7 @@ def display_jurisdictions_top_revenue(df: pd.DataFrame, company: str, year: int)
 
 # Viz 15
 def compute_pretax_profit_and_employees_rank(
-        df: pd.DataFrame, company: str, year: int) -> dict:
+        df: pd.DataFrame, company: str, year: int) -> pd.DataFrame:
     """Compute jurisdictions percentage of profit before tax and percentage
     of employees and rank by percentage of profit.
 
@@ -692,7 +696,7 @@ def compute_pretax_profit_and_employees_rank(
 
 
 def display_pretax_profit_and_employees_rank(
-        df: pd.DataFrame, company: str, year: int):
+        df: pd.DataFrame, company: str, year: int) -> go.Figure:
     """Display rank of jurisdictions by percentage of profit before and percentage
         of employees.
 
@@ -703,10 +707,10 @@ def display_pretax_profit_and_employees_rank(
     """
 
     # Compute data
-    data = compute_pretax_profit_and_employees_rank(df=df, company=company, year=year)
+    df = compute_pretax_profit_and_employees_rank(df=df, company=company, year=year)
 
     # Create DataFrame
-    df = pd.DataFrame(data)
+    # df = pd.DataFrame(data)
 
     # Rename columns
     df = df.rename(columns={
@@ -789,8 +793,6 @@ def display_pretax_profit_and_employees_rank(
         text_position = ['outside' if not np.isnan(value) else 'none' for value in values]
         trace.textposition = text_position
 
-    # Customize hover information for each trace
-    for trace in fig.data:
         if trace.name == '% employees':
             trace.hovertemplate = '<b>%{y}</b><br><br>Employees : %{x:.3%}<extra></extra>'
         elif trace.name == '% profit':
@@ -801,7 +803,7 @@ def display_pretax_profit_and_employees_rank(
 
 # Viz 16
 def compute_pretax_profit_and_profit_per_employee(
-        df: pd.DataFrame, company: str, year: int) -> dict:
+        df: pd.DataFrame, company: str, year: int) -> pd.DataFrame:
     # Filter rows with selected company/year and subset with necessary features
     features = ['jur_name', 'profit_before_tax', 'employees', 'jur_tax_haven']
     df = df.loc[(df['mnc'] == company) & (df['year'] == year), features]
@@ -820,27 +822,29 @@ def compute_pretax_profit_and_profit_per_employee(
     df['profit_per_employee'] = df['profit_before_tax'] / df['employees']
     df = df.drop(columns=['profit_before_tax', 'employees'])
 
+    # print('compute_pretax_profit_and_profit_per_employee df.head():\n', df.head())
     # data = df.to_dict()
 
     return df
 
 
-def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str, year: int):
+def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str, year: int) -> go.Figure:
     # Compute data
-    data = compute_pretax_profit_and_profit_per_employee(df=df, company=company, year=year)
-
+    df = compute_pretax_profit_and_profit_per_employee(df=df, company=company, year=year)
+    
     # Create DataFrame
-    df = pd.DataFrame(data)
+    # df = pd.DataFrame(data)
 
     # Replace bool values of Tax haven by string values
     df['jur_tax_haven'] = df['jur_tax_haven'].map({True: 'Tax haven', False: 'Non tax haven'})
-
+   
     # Rename columns
     df = df.rename(columns={
         'profit_before_tax_%': '% profit',
         'profit_per_employee': 'Profit/employee',
         'jur_tax_haven': 'Tax haven'
     })
+    # print('display_pretax_profit_and_profit_per_employee df.head():\n', df.head())
 
     # Bar color sequence
     colors = ['#D9D9D9', '#1E2E5C']
@@ -853,7 +857,7 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         size='% profit',
         color='Tax haven',
         color_discrete_sequence=colors,
-        hover_data=['jur_name', 'Tax haven']
+        custom_data=['jur_name', 'Tax haven']
     )
 
     # Update layout settings
@@ -879,7 +883,8 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         plot_bgcolor='white',
         margin=dict(l=0, r=0, t=0, b=0)
     )
-
+    
+    
     # Define style of hover
     fig.update_traces(
         hovertemplate="<br>".join([
@@ -888,7 +893,7 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
             "Profit/employee: %{y:.3s}€",
             ])
     )
-
+   
     return go.Figure(fig)
 
 
@@ -945,7 +950,7 @@ def compute_related_and_unrelated_revenues_breakdown(
     return data
 
 
-def display_related_and_unrelated_revenues_breakdown(df: pd.DataFrame, company: str, year: int):
+def display_related_and_unrelated_revenues_breakdown(df: pd.DataFrame, company: str, year: int) -> tuple[pd.DataFrame, go.Figure]:
     """Display related and unrelated revenues in tax heaven, non tax heaven and
     domestic jurisdictions.
 
@@ -1013,7 +1018,7 @@ def display_related_and_unrelated_revenues_breakdown(df: pd.DataFrame, company: 
             )
 
     # fig.show()
-    return go.Figure(fig)
+    return pd.DataFrame.from_dict(data, orient='index'), go.Figure(fig)
 
 
 # Viz 21 - evolution of tax havens use over time : % profit vs % employees in TH over time

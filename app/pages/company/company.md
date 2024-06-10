@@ -31,40 +31,40 @@ We might have missed out in its report.<br/>
 <|layout|columns=4*1fr|gap=1rem|
 
 <|part|class_name=viz-container|
-<|{viz_1.title}|text|class_name=text-weight400|>
+<|{viz["company_sector"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_1.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|{viz["company_sector"].sub_title}|text|class_name=text-small text-weight300 text-transparent|>
 <|part|class_name=metric-container cpt6 cpt6|
-<|{viz_1.data}|text|class_name=text-metric|>
+<|{viz["company_sector"].data}|text|class_name=text-metric|>
 |>
 |>
 
 <|part|class_name=viz-container|
-<|{viz_2.title}|text|class_name=text-weight400|>
+<|{viz["company_upe_name"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_2.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|{viz["company_upe_name"].sub_title}|text|class_name=text-small text-weight300 text-transparent|>
 <|part|class_name=metric-container cpt6 cpt6|
-<|{viz_2.data}|text|class_name=text-metric|>
+<|{viz["company_upe_name"].data}|text|class_name=text-metric|>
 |>
 |>
 
 
 <|part|class_name=viz-container|
-<|{viz_3.title}|text|class_name=text-weight400|>
+<|{viz["company_nb_reports"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_3.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|{viz["company_nb_reports"].sub_title}|text|class_name=text-small text-weight300 text-transparent|>
 <|part|class_name=metric-container cpt6 cpt6|
-<|{viz_3.data}|text|class_name=round-metric|>
+<|{viz["company_nb_reports"].data}|text|class_name=round-metric|>
 |>
 |>
 
 <|part|class_name=viz-container|
-<|{viz_4.title}|text|class_name=text-weight400|>
+<|{viz["company_transparency_score"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_4.sub_title}|text|class_name=text-small text-weight300|>
+<|{viz["company_transparency_score"].sub_title}|text|class_name=text-small text-weight300|>
 <|part|class_name=metric-container cpt6 cpt6|
 <|part|class_name=round-metric|
-<|{viz_4.data}|><|/100|text|>
+<|{viz["company_transparency_score"].data}|><|/100|text|>
 |>
 |>
 |>
@@ -89,23 +89,23 @@ Tax Transparency
 <|layout|columns=1fr 3fr|gap=1rem|
 
 <|part|class_name=viz-container|
-<|{viz_5.title}|text|class_name=text-weight400|>
+<|{viz["fin_transparency_score"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_5.sub_title}|text|class_name=text-small text-weight300|>
+<|{viz["fin_transparency_score"].sub_title}|text|class_name=text-small text-weight300|>
 <|part|class_name=metric-container cpt8 cpt8|
 <|part|class_name=round-metric|
-<|{viz_5.data}|><|/100|text|>
+<|{viz["fin_transparency_score"].data}|><|/100|text|>
 |>
 |>
 |>
 
 <|part|class_name=viz-container|
-<|{viz_26.title}|text|class_name=text-weight400|>
+<|{viz["fin_transparency_score_over_time_details"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_26.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|{viz["fin_transparency_score_over_time_details"].sub_title}|text|class_name=text-small text-weight300 text-transparent|>
 <|part|
-<|{viz_26.data}|table|show_all|sortable=False|style=table-cell|class_name=rows-similar table-top|>
-|>
+<|{viz["fin_transparency_score_over_time_details"].data}|table|show_all|sortable=False|style=table-cell|class_name=rows-similar table-top|>
+|> 
 |>
 
 |>
@@ -128,17 +128,17 @@ Financial profile
 <|layout|columns=1fr 1fr|gap=1rem|
 
 <|part|class_name=viz-container|
-<|{viz_13.title}|text|class_name=text-weight400|>
+<|{viz["fin_key_financials_kpis"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_13.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
-<|{viz_13.data}|table|show_all|sortable=False|dynamic=True|style=table-cell|class_name=rows-similar table-top|>
+<|{viz["fin_key_financials_kpis"].sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|{viz["fin_key_financials_kpis"].data}|table|show_all|sortable=False|dynamic=True|style=table-cell|class_name=rows-similar table-top|>
 |>
 
 <|part|class_name=viz-container|
-<|{viz_14.title}|text|class_name=text-weight400|>
+<|{viz["fin_jurisdictions_top_revenue"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_14.sub_title}|text|class_name=text-small text-weight300|>
-<|chart|figure={viz_14.fig}|>
+<|{viz["fin_jurisdictions_top_revenue"].sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz["fin_jurisdictions_top_revenue"].fig}|>
 |>
 
 |>
@@ -152,17 +152,17 @@ Distribution of profits vs employees
 <|layout|columns=1fr 1fr|gap=1rem|
 
 <|part|class_name=viz-container|
-<|{viz_15.title}|text|class_name=text-weight400|>
+<|{viz["fin_pretax_profit_and_employees_rank"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_15.sub_title}|text|class_name=text-small text-weight300|>
-<|chart|figure={viz_15.fig}|>
+<|{viz["fin_pretax_profit_and_employees_rank"].sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz["fin_pretax_profit_and_employees_rank"].fig}|>
 |>
 
 <|part|class_name=viz-container|
-<|{viz_16.title}|text|class_name=text-weight400|>
+<|{viz["fin_pretax_profit_and_profit_per_employee"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_16.sub_title}|text|class_name=text-small text-weight300|>
-<|chart|figure={viz_16.fig}|>
+<|{viz["fin_pretax_profit_and_profit_per_employee"].sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz["fin_pretax_profit_and_profit_per_employee"].fig}|>
 |>
 
 |>

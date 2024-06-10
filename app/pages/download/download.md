@@ -21,7 +21,7 @@ EU Tax Observatory.**
 |>
 
 <|part|class_name=text-center cpt6|
-<|{dataset_filepath}|file_download|label=Download data|name={download_filename}|>
+<|{dataset_filepath}|file_download|label=Download|name={download_filename}|>
 |>
 
 |>

@@ -15,7 +15,7 @@ Taxplorer
 <|navbar|lov={navbar_items}|>
 
 <|part|class_name=text-right|
-<|button|label=Download data|on_action=goto_download|>
+<|button|label=Download|on_action=goto_download|>
 |>
 
 |>

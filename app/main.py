@@ -1,6 +1,6 @@
-from taipy.gui import Gui, navigate
+from taipy.gui import State, Gui, navigate, get_state_id
 
-from app.pages.company.company import company_md
+from app.pages.company.company import company_md, on_init as on_company_init
 from app.pages.contact.contact import contact_md
 from app.pages.download.download import download_md
 from app.pages.home.home import home_md
@@ -8,6 +8,12 @@ from app.pages.keystories.keystories import keystories_md
 from app.pages.methodology.methodology import methodology_md
 from app.pages.root import root
 
+def on_init(state: State):
+    # print('MAIN ON_INIT...')
+    # print(f'MAIN STATE {get_state_id(state)}')
+    on_company_init(state)
+    # print('MAIN ON_INIT...END') 
+    
 # Add pages
 pages = {
     "/": root,
@@ -18,7 +24,6 @@ pages = {
     "Contact": contact_md,
     "Download": download_md
 }
-
 
 # Functions used to navigate between pages
 def goto_home(state):
@@ -60,24 +65,34 @@ stylekit = {
     "font_family": "Manrope"
 }
 
-# Start the server
+
+
 if __name__ == "__main__":
-    web_app = gui_multi_pages.run(
+    ## DEV
+    # Start the local flask server
+    gui_multi_pages.run(
         dark_mode=False,
         stylekit=stylekit,
         title="Taxplorer",
-        favicon="./images/taxplorer-logo.svg",
-        run_server=True,
-        debug=False,
+        favicon="images/taxplorer-logo.svg",
+        # Remove watermark "Taipy inside"
+        watermark="LOCAL DEVELOPMENT",
     )
 else:
+    ## PRODUCTION     
+    # Start the app used by uwsgi server
     web_app = gui_multi_pages.run(
         dark_mode=False,
         stylekit=stylekit,
         title="Taxplorer",
-        favicon="./images/taxplorer-logo.svg",
+        favicon="images/taxplorer-logo.svg",
         run_server=False,
         debug=False,
+        # Remove watermark "Taipy inside"
+        watermark="",
+        # IMPORTANT: Set the async_mode to gevent_uwsgi to use uwsgi 
+        # See https://python-socketio.readthedocs.io/en/latest/server.html#uwsgi
         async_mode='gevent_uwsgi'
     )
+    
 

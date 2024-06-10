@@ -411,7 +411,7 @@ color: rgba(0,0,0,0.0)
     overflow-x: auto;
     overflow-y: auto;
     width: 100%;
-    max-width=100%,
+    max-width:100%,
 }
 
 .ks-plot-right {
@@ -443,11 +443,17 @@ color: rgba(0,0,0,0.0)
     background-color: #021978;
     color: white;
     border-radius: 5px;
-    border: none;
+    border:  1px solid #021978;
     text-transform: none;
     font-family: "Roboto";
     font-weight: 800;
     font-size: 16px;
+}
+
+.taipy-button:hover {
+    background-color: white;
+    color: #021978;
+    border: 1px solid #021978;
 }
 
 .taipy-selector {
