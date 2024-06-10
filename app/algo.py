@@ -852,7 +852,8 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         y='Profit/employee',
         size='% profit',
         color='Tax haven',
-        color_discrete_sequence=colors
+        color_discrete_sequence=colors,
+        hover_data=['jur_name', 'Tax haven']
     )
 
     # Update layout settings
@@ -881,10 +882,11 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
 
     # Define style of hover
     fig.update_traces(
-        hovertemplate=(
-            "<b>%{hovertext}</b><br><br>% profit: %{x:.3%}<br>Profit/employee: %{y:.3s}€"
-        ),
-        hovertext=(df['jur_name'] + " - " + df['Tax haven'])
+        hovertemplate="<br>".join([
+            "<b>%{customdata[0]} - %{customdata[1]}</b>",
+            "Profit: %{x:.1%}",
+            "Profit/employee: %{y:.3s}€",
+            ])
     )
 
     return go.Figure(fig)
