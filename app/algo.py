@@ -10,6 +10,8 @@ COLOR_SEQUENCE = ["#D9D9D9", "#1E2E5C"]
 
 # TODO add viz comment
 # Viz 1 -
+
+
 def number_of_tracked_reports(df):
     number_of_tracked_reports = len(df.groupby(["year", "mnc"])["mnc"])
     return number_of_tracked_reports
@@ -155,7 +157,8 @@ def company_pourcentage_pretax_profit_and_profit_per_employee(df_selected_compan
     # pretax_profit_col_name = 'profit_before_tax'
     profit_col_name = ''
     employee_col_name = 'employees'
-    df_selected_company[profit_col_name] / df_selected_company[employee_col_name]
+    df_selected_company[profit_col_name] / \
+        df_selected_company[employee_col_name]
 
 
 # Viz 19
@@ -170,15 +173,15 @@ def tax_haven_used_by_company(df_selected_company):
     company_upe_code = df_selected_company['upe_code'].unique()[0]
     pc_list = ['employees', 'profit_before_tax', 'related_revenues']
     # grouper = df_selected_company.groupby('jur_name')
-    
+
     df = pd.DataFrame(df_selected_company)
-    
+
     df_domestic_company = df[df['jur_code'] == company_upe_code]
     df_selected_company_th = df[df['jur_tax_haven'] != 'not.TH']
     df_selected_company_nth = df[df['jur_tax_haven'] == 'not.TH']
-    
+
     for col in pc_list:
-        
+
         df.insert(
             len(df_selected_company.columns),
             col + '_domestic_sum',
@@ -215,7 +218,8 @@ def tax_haven_used_by_company(df_selected_company):
     )
     df_selected_company_th_agg = df_selected_company_th_agg.reset_index()
     df_selected_company_th_agg['profit per employee'] = \
-        df_selected_company_th_agg['profit_before_tax'] / df_selected_company_th_agg['employees']
+        df_selected_company_th_agg['profit_before_tax'] / \
+        df_selected_company_th_agg['employees']
     df_selected_company_th_agg['profit per employee'] = df_selected_company_th_agg['profit per employee'].replace(
         [np.inf, -np.inf], None)
 
@@ -226,8 +230,9 @@ def tax_haven_used_by_company(df_selected_company):
 # complete table table showing for all jurisdictions revenues, profits, employees, taxes with % of total for each (color code for tax havens)
 def company_table(df_selected_company):
     # company_upe_code = df_selected_company['upe_code'].unique()[0]
-    pc_list = ['employees', 'profit_before_tax', 'unrelated_revenues', 'related_revenues', 'total_revenues', 'tax_paid']
-    
+    pc_list = ['employees', 'profit_before_tax', 'unrelated_revenues',
+               'related_revenues', 'total_revenues', 'tax_paid']
+
     df = pd.DataFrame(df_selected_company)
     for col in pc_list:
         if col + '_sum' not in df.columns:
@@ -258,12 +263,13 @@ def company_table(df_selected_company):
 
 # Viz 4 - Breakdown of reports by sector (pie chart)
 def breakdown_of_reports_by_sector(df):
-    #Dataframe called df
+    # Dataframe called df
     df_reports_per_sector_year = df.groupby(['sector', 'year'])['mnc'].nunique().reset_index(
         name='unique_company_count')
 
     # Aggregate the counts of unique companies across all years for each sector
-    df_reports_per_sector = df_reports_per_sector_year.groupby('sector')['unique_company_count'].sum().reset_index()
+    df_reports_per_sector = df_reports_per_sector_year.groupby(
+        'sector')['unique_company_count'].sum().reset_index()
 
     # Calculate the total count of unique companies across all sectors
     total_companies = df_reports_per_sector['unique_company_count'].sum()
@@ -273,7 +279,8 @@ def breakdown_of_reports_by_sector(df):
         2)
 
     # Sort the DataFrame by the count of unique companies in ascending order
-    df_reports_per_sector = df_reports_per_sector.sort_values(by='unique_company_count', ascending=True)
+    df_reports_per_sector = df_reports_per_sector.sort_values(
+        by='unique_company_count', ascending=True)
 
     return df_reports_per_sector
 
@@ -283,7 +290,8 @@ def breakdown_of_reports_by_sector_viz(df_reports_per_sector):
     fig = px.bar(df_reports_per_sector, y='sector', x='percent',
                  orientation='h',  # Horizontal orientation
                  title='Breakdown of Reports by Sector (All Years)',
-                 labels={'percent': 'Percentage of Companies (%)', 'sector': 'Sector'},
+                 labels={
+                     'percent': 'Percentage of Companies (%)', 'sector': 'Sector'},
                  text='percent',  # Show the percentage as text label
                  hover_data={'unique_company_count': True, 'percent': ':.2f%'},
                  # Add tooltip for count and rounded percentage
@@ -305,17 +313,19 @@ def breakdown_of_reports_by_hq_country(df):
         name='unique_company_count')
 
     # Aggregate the counts of unique companies across all years for each HQ country
-    df_reports_per_country = df_reports_per_country_year.groupby('upe_name')['unique_company_count'].sum().reset_index()
+    df_reports_per_country = df_reports_per_country_year.groupby(
+        'upe_name')['unique_company_count'].sum().reset_index()
 
     # Calculate the total count of unique companies across all HQ countries
     total_companies = df_reports_per_country['unique_company_count'].sum()
 
     # Calculate the percentage of each HQ country's count relative to the total count and round to 2 decimals
     df_reports_per_country['percent'] = (
-            (df_reports_per_country['unique_company_count'] / total_companies) * 100).round(2)
+        (df_reports_per_country['unique_company_count'] / total_companies) * 100).round(2)
 
     # Sort the DataFrame by the count of unique companies in ascending order
-    df_reports_per_country = df_reports_per_country.sort_values(by='unique_company_count', ascending=True)
+    df_reports_per_country = df_reports_per_country.sort_values(
+        by='unique_company_count', ascending=True)
 
     return df_reports_per_country
 
@@ -325,7 +335,8 @@ def breakdown_of_reports_by_hq_country_viz(df_reports_per_country):
     fig = px.bar(df_reports_per_country, y='upe_name', x='percent',
                  orientation='h',  # Horizontal orientation
                  title='Breakdown of Reports by HQ Country over Time',
-                 labels={'percent': 'Percentage of Companies (%)', 'upe_name': 'HQ Country'},
+                 labels={
+                     'percent': 'Percentage of Companies (%)', 'upe_name': 'HQ Country'},
                  text='percent',  # Show the percentage as text label
                  hover_data={'unique_company_count': True, 'percent': ':.2f%'},
                  # Add tooltip for count and rounded percentage
@@ -341,7 +352,7 @@ def breakdown_of_reports_by_hq_country_viz(df_reports_per_country):
     return go.Figure(fig)
 
 
-## Viz 6 - Breakdown of reports by sector over time (bar chart)
+# Viz 6 - Breakdown of reports by sector over time (bar chart)
 
 
 def breakdown_of_reports_by_sector_over_time(df):
@@ -352,14 +363,16 @@ def breakdown_of_reports_by_sector_over_time(df):
     top_10_sectors = df['sector'].value_counts().nlargest(10).index.tolist()
 
     # Step 2: Group all other sectors as "Others"
-    df['Sectors'] = df['sector'].apply(lambda x: x if x in top_10_sectors else 'Others')
+    df['Sectors'] = df['sector'].apply(
+        lambda x: x if x in top_10_sectors else 'Others')
 
     # Step 3: Group the DataFrame by 'year', 'Sectors', and count the number of unique companies for each year and sector
     df_reports_per_year_sector = df.groupby(['year', 'Sectors'])['mnc'].nunique().reset_index(
         name='unique_company_count')
 
     # Sort sectors alphabetically
-    df_reports_per_year_sector = df_reports_per_year_sector.sort_values(by='Sectors', ascending=False)
+    df_reports_per_year_sector = df_reports_per_year_sector.sort_values(
+        by='Sectors', ascending=False)
 
     return df_reports_per_year_sector, top_10_sectors
 
@@ -372,7 +385,8 @@ def breakdown_of_reports_by_sector_over_time_viz(df_reports_per_year_sector, top
     # Plotting the bar chart using Plotly Express
     fig = px.bar(df_reports_per_year_sector, x='year', y='unique_company_count', color='Sectors',
                  title='Breakdown of Reports by Sector over Time',
-                 labels={'unique_company_count': 'Number of Companies Reporting', 'year': 'Year'},
+                 labels={
+                     'unique_company_count': 'Number of Companies Reporting', 'year': 'Year'},
                  barmode='stack',
                  category_orders={'Sectors': chart_order})
 
@@ -391,19 +405,19 @@ def breakdown_of_reports_by_sector_over_time_viz(df_reports_per_year_sector, top
     return go.Figure(fig)
 
 
-## Viz 7 - Breakdown of reports by HQ country over time (bar chart)
+# Viz 7 - Breakdown of reports by HQ country over time (bar chart)
 # TODO add code
 
-## Viz 8 - Breakdown of MNC by sector (pie chart - changed to bar chart for more visibility)
+# Viz 8 - Breakdown of MNC by sector (pie chart - changed to bar chart for more visibility)
 # TODO add code
 
-## Viz 9 - Breakdown of MNC by HQ country (pie chart - changed to bar chart for more visibility)
+# Viz 9 - Breakdown of MNC by HQ country (pie chart - changed to bar chart for more visibility)
 # TODO add code
 
-## Viz 10/11 - Breakdown of MNC by sector
+# Viz 10/11 - Breakdown of MNC by sector
 # TODO add code
 
-## Viz 11 - Breakdown of MNC by HQ country
+# Viz 11 - Breakdown of MNC by HQ country
 # TODO add code
 
 # Viz 12 - available reports by company
@@ -536,7 +550,8 @@ def display_company_key_financials_kpis(
     """
 
     # Compute data
-    data = compute_company_key_financials_kpis(df=df, company=company, year=year)
+    data = compute_company_key_financials_kpis(
+        df=df, company=company, year=year)
 
     # Create the table
     df = pd.DataFrame.from_dict(data)
@@ -688,7 +703,8 @@ def compute_pretax_profit_and_employees_rank(
     df = df.sort_values(by='profit_before_tax').reset_index(drop=True)
 
     # Calculate percentages
-    df['profit_before_tax_%'] = df['profit_before_tax'] / df['profit_before_tax'].sum()
+    df['profit_before_tax_%'] = df['profit_before_tax'] / \
+        df['profit_before_tax'].sum()
     df['employees_%'] = df['employees'] / df['employees'].sum()
     df = df.drop(columns=['profit_before_tax', 'employees'])
 
@@ -709,7 +725,8 @@ def display_pretax_profit_and_employees_rank(
     """
 
     # Compute data
-    df = compute_pretax_profit_and_employees_rank(df=df, company=company, year=year)
+    df = compute_pretax_profit_and_employees_rank(
+        df=df, company=company, year=year)
 
     # Create DataFrame
     # df = pd.DataFrame(data)
@@ -739,7 +756,8 @@ def display_pretax_profit_and_employees_rank(
 
     # Set maximum value for x axis
     if not df[['% profit', '% employees']].isna().all().all():
-        max_x_value = max(df[['% profit', '% employees']].max(axis='columns')) + 0.1
+        max_x_value = max(df[['% profit', '% employees']
+                             ].max(axis='columns')) + 0.1
     else:
         max_x_value = 1
 
@@ -792,7 +810,8 @@ def display_pretax_profit_and_employees_rank(
     # Loop through each bar trace and hide the text if the value is NaN
     for trace in fig.data:
         values = df[trace.name]
-        text_position = ['outside' if not np.isnan(value) else 'none' for value in values]
+        text_position = ['outside' if not np.isnan(
+            value) else 'none' for value in values]
         trace.textposition = text_position
 
         if trace.name == '% employees':
@@ -820,7 +839,8 @@ def compute_pretax_profit_and_profit_per_employee(
     df.loc[df['employees'] == 0, 'employees'] = 1
 
     # Calculate percentages
-    df['profit_before_tax_%'] = df['profit_before_tax'] / df['profit_before_tax'].sum()
+    df['profit_before_tax_%'] = df['profit_before_tax'] / \
+        df['profit_before_tax'].sum()
     df['profit_per_employee'] = df['profit_before_tax'] / df['employees']
     df = df.drop(columns=['profit_before_tax', 'employees'])
 
@@ -832,14 +852,16 @@ def compute_pretax_profit_and_profit_per_employee(
 
 def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str, year: int) -> go.Figure:
     # Compute data
-    df = compute_pretax_profit_and_profit_per_employee(df=df, company=company, year=year)
-    
+    df = compute_pretax_profit_and_profit_per_employee(
+        df=df, company=company, year=year)
+
     # Create DataFrame
     # df = pd.DataFrame(data)
 
     # Replace bool values of Tax haven by string values
-    df['jur_tax_haven'] = df['jur_tax_haven'].map({True: 'Tax haven', False: 'Non tax haven'})
-   
+    df['jur_tax_haven'] = df['jur_tax_haven'].map(
+        {True: 'Tax haven', False: 'Non tax haven'})
+
     # Create figure
     fig = px.scatter(
         df,
@@ -874,13 +896,13 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
         plot_bgcolor='white',
         margin=dict(l=0, r=0, t=0, b=0)
     )
-    
-    
+
     # Define hover
     fig.update_traces(
-        hovertemplate=f"{company} reports %{{x:.1%}} of profit and %{{y:.3s}}€ profits per employee in %{{customdata[0]}}"
+        hovertemplate=f"{
+            company} reports %{{x:.1%}} of profit and %{{y:.3s}}€ profits per employee in %{{customdata[0]}}"
     )
-   
+
     return go.Figure(fig)
 
 
@@ -914,13 +936,17 @@ def compute_related_and_unrelated_revenues_breakdown(
     df['total_revenues'] = df['unrelated_revenues'] + df['related_revenues']
 
     # Create a column to check if 'jur_code' is the domestic country
-    df['domestic'] = df.apply(lambda row: row['jur_code'] == row['upe_code'], axis='columns')
+    df['domestic'] = df.apply(
+        lambda row: row['jur_code'] == row['upe_code'], axis='columns')
 
     # Compute kpis in a new DataFrame
     data = pd.DataFrame()
-    data['tax_haven'] = df.loc[df['jur_tax_haven'] == True, ['unrelated_revenues', 'related_revenues']].sum()
-    data['non_tax_haven'] = df.loc[df['jur_tax_haven'] == False, ['unrelated_revenues', 'related_revenues']].sum()
-    data['domestic'] = df.loc[df['domestic'] == True, ['unrelated_revenues', 'related_revenues']].sum()
+    data['tax_haven'] = df.loc[df['jur_tax_haven'] == True,
+                               ['unrelated_revenues', 'related_revenues']].sum()
+    data['non_tax_haven'] = df.loc[df['jur_tax_haven'] ==
+                                   False, ['unrelated_revenues', 'related_revenues']].sum()
+    data['domestic'] = df.loc[df['domestic'] == True, [
+        'unrelated_revenues', 'related_revenues']].sum()
 
     # Replace values with share (%) of 'unrelated/related revenues'
     data = data.div(data.sum(axis='rows'), axis='columns')
@@ -948,7 +974,8 @@ def display_related_and_unrelated_revenues_breakdown(df: pd.DataFrame, company: 
     """
 
     # Compute data
-    data = compute_related_and_unrelated_revenues_breakdown(df=df, company=company, year=year)
+    data = compute_related_and_unrelated_revenues_breakdown(
+        df=df, company=company, year=year)
 
     # Create DataFrame
     df = pd.DataFrame.from_dict(data, orient='index')
@@ -985,7 +1012,8 @@ def display_related_and_unrelated_revenues_breakdown(df: pd.DataFrame, company: 
 
     # Define position of text values
     for col in ['Unrelated revenues percentage', 'Related revenues percentage']:
-        values_positions = ['outside' if value <= 0.05 else 'inside' for value in df[col]]
+        values_positions = ['outside' if value <=
+                            0.05 else 'inside' for value in df[col]]
 
         fig.update_traces(
             textangle=0,
@@ -1021,23 +1049,28 @@ def compute_tax_havens_use_evolution(df: pd.DataFrame, company: str) -> dict:
     """
 
     # Filter rows with selected company and subset with necessary features
-    features = ['jur_code', 'year', 'jur_tax_haven', 'profit_before_tax', 'employees']
+    features = ['jur_code', 'year', 'jur_tax_haven',
+                'profit_before_tax', 'employees']
     df = df.loc[(df['mnc'] == company), features]
 
     # Keep jurisdictions with profitable or missing revenues
-    df = df.loc[(df['profit_before_tax'] >= 0) | (df['profit_before_tax'].isna())]
+    df = df.loc[(df['profit_before_tax'] >= 0) |
+                (df['profit_before_tax'].isna())]
 
     # For all sum calculations below :
     # - Result NA : all jurisdictions values were NA ;
     # - Result 0 : at least one jurisdiction was reported as 0.
 
     # Calculate total profit and employees by year and tax haven status
-    df = df.groupby(['year', 'jur_tax_haven'], as_index=False)[['profit_before_tax', 'employees']].sum(min_count=1)
+    df = df.groupby(['year', 'jur_tax_haven'], as_index=False)[
+        ['profit_before_tax', 'employees']].sum(min_count=1)
 
     # Calculate total profits and employees for each year
     for year in df['year'].unique():
-        df.loc[df['year'] == year, 'total_profit'] = df.loc[df['year'] == year, 'profit_before_tax'].sum(min_count=1)
-        df.loc[df['year'] == year, 'total_employees'] = df.loc[df['year'] == year, 'employees'].sum(min_count=1)
+        df.loc[df['year'] == year, 'total_profit'] = df.loc[df['year']
+                                                            == year, 'profit_before_tax'].sum(min_count=1)
+        df.loc[df['year'] == year, 'total_employees'] = df.loc[df['year']
+                                                               == year, 'employees'].sum(min_count=1)
 
     # Remove non tax haven jurisdictions
     df = df.loc[df['jur_tax_haven'] == True].reset_index()
@@ -1047,7 +1080,8 @@ def compute_tax_havens_use_evolution(df: pd.DataFrame, company: str) -> dict:
     df['tax_havens_employees_%'] = df['employees'] / df['total_employees']
 
     # Convert necessary data to dictionnary
-    data = df[['year', 'tax_havens_profit_%', 'tax_havens_employees_%']].to_dict()
+    data = df[['year', 'tax_havens_profit_%',
+               'tax_havens_employees_%']].to_dict()
 
     return data
 
@@ -1076,7 +1110,8 @@ def display_tax_havens_use_evolution(df: pd.DataFrame, company: str):
     fig = px.bar(
         df,
         x='year',
-        y=['Percentage of profits in tax havens', 'Percentage of employees in tax havens'],
+        y=['Percentage of profits in tax havens',
+            'Percentage of employees in tax havens'],
         barmode='group',
         text_auto='.1%'
     )
@@ -1106,10 +1141,12 @@ def compute_number_of_tracked_mnc_available(df) -> dict:
     df_unique_mnc = df.drop_duplicates(subset=['year', 'mnc'])
 
     # Group the DataFrame by 'mnc' and count the number of reports for each MNC
-    df_reports_per_mnc = df_unique_mnc.groupby('mnc').size().reset_index(name='report_count')
+    df_reports_per_mnc = df_unique_mnc.groupby(
+        'mnc').size().reset_index(name='report_count')
 
     # Convert the DataFrame to a dictionary where MNCs are keys and report counts are values
-    mnc_report_count = dict(zip(df_reports_per_mnc['mnc'], df_reports_per_mnc['report_count'], strict=False))
+    mnc_report_count = dict(
+        zip(df_reports_per_mnc['mnc'], df_reports_per_mnc['report_count'], strict=False))
 
     return mnc_report_count
 
@@ -1185,7 +1222,8 @@ def compute_geographic_score(df: pd.DataFrame, company: str, year: int) -> float
     df = df.dropna(axis='columns', how='all')
 
     # List financial columns left after deleting columns with only missing values
-    financial_columns_left = [col for col in df.columns if col in financial_columns]
+    financial_columns_left = [
+        col for col in df.columns if col in financial_columns]
 
     # Geographic score = 0 if no financial columns left
     if not financial_columns_left:
@@ -1197,8 +1235,8 @@ def compute_geographic_score(df: pd.DataFrame, company: str, year: int) -> float
     # Calculate percentage of each financial value where jurisdiction is 'OTHER'
     # Percentage = 1. Total of 'OTHER' row(s) / 2. Total of all rows
     other_percentage = (
-            df.loc[df['jur_code'] == 'OTHER', financial_columns_left].sum()  # 1
-            / df[financial_columns_left].sum()  # 2
+        df.loc[df['jur_code'] == 'OTHER', financial_columns_left].sum()  # 1
+        / df[financial_columns_left].sum()  # 2
     )
 
     # Calculate geographic score
@@ -1230,7 +1268,8 @@ def compute_completeness_score(df: pd.DataFrame, company: str, year: int) -> flo
     df = df.dropna(axis='columns', how='all')
 
     # List financial columns left after deleting columns with only missing values
-    financial_columns_left = [col for col in df.columns if col in financial_columns]
+    financial_columns_left = [
+        col for col in df.columns if col in financial_columns]
 
     # Completeness score = 0 if no financial columns left
     if not financial_columns_left:
@@ -1275,7 +1314,8 @@ def compute_transparency_score(df: pd.DataFrame, company: str, year: int) -> flo
     df = df.dropna(axis='columns', how='all')
 
     # List financial columns left after deleting columns with only missing values
-    financial_columns_left = [col for col in df.columns if col in financial_columns]
+    financial_columns_left = [
+        col for col in df.columns if col in financial_columns]
 
     # Transparency score = 0 if no financial columns left
     if not financial_columns_left:
@@ -1287,8 +1327,8 @@ def compute_transparency_score(df: pd.DataFrame, company: str, year: int) -> flo
     # Calculate percentage of each financial value where jurisdiction is not 'OTHER'
     # Percentage = 1. Total of not 'OTHER' row(s) / 2. Total of all rows
     not_other_percentage = (
-            df.loc[df['jur_code'] != 'OTHER', financial_columns_left].sum()  # 1
-            / df[financial_columns_left].sum()  # 2
+        df.loc[df['jur_code'] != 'OTHER', financial_columns_left].sum()  # 1
+        / df[financial_columns_left].sum()  # 2
     )
 
     # Calculate transparency score
@@ -1318,9 +1358,12 @@ def compute_all_scores(df: pd.DataFrame, company: str) -> dict:
     # Calculate scores for each year and add them to the dictionary
     for year in years_list:
         # Calculate scores
-        geographic_score = compute_geographic_score(df=df, company=company, year=year)
-        completeness_score = compute_completeness_score(df=df, company=company, year=year)
-        transparency_score = compute_transparency_score(df=df, company=company, year=year)
+        geographic_score = compute_geographic_score(
+            df=df, company=company, year=year)
+        completeness_score = compute_completeness_score(
+            df=df, company=company, year=year)
+        transparency_score = compute_transparency_score(
+            df=df, company=company, year=year)
 
         data[year] = {
             'mnc': company,
