@@ -14,7 +14,7 @@ import pandas as pd
 # Global variables
 # APP
 APP_TITLE = "Taxplorer"
-FAVICON = f"{cfg.IMAGES}/taxplorer-logo.svg"
+FAVICON = "images/taxplorer-logo.svg"
 # DATA
 MAX_YEAR_OF_REPORTS = 2021
 PATH_TO_DATA = f"{cfg.DATA}/data_final_dataviz.csv"
