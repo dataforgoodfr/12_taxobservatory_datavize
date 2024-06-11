@@ -1,4 +1,4 @@
-from mimetypes import init
+from taipy.gui import State, Markdown, get_state_id
 
 import numpy as np
 import pandas as pd
@@ -291,4 +291,3 @@ def on_change_year(state: State):
 
 # Generate page from Markdown file
 company_md = Markdown(f"{cfg.PAGES}/company/company.md")
-    
