@@ -1,3 +1,5 @@
 from taipy.gui import Markdown
+from app import config as cfg
 
-contact_md = Markdown("pages/contact/contact.md")
+# Generate page from Markdown file
+contact_md = Markdown(f"{cfg.PAGES}/contact/contact.md")

@@ -1,4 +1,501 @@
+@charset "UTF-8";
 @import url("viz.css");
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.viz-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.metric-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+/* Ensure table is on top of its container */
+.table-top {
+    padding-top:0%;
+}
+
+.round-metric {
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 700;
+    color: #021978;
+    background: #B8BEDB;
+    display: flex;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-metric {
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 700;
+    color: #021978;
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-plotly-plot {
+    height: 100%;
+    width: 100%;
+}
+
+.taipy-chart {
+    box-shadow: none;
+    max-height: 60vh;
+    overflow: scroll;
+}
+
+/* Custom cards */
+.c-card-white {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    padding-left: 8%;
+    padding-right: 8%;
+    transition: transform .2s;
+}
+
+.c-card-white:hover {
+    background-color: #02198D;
+    -webkit-text-fill-color: white;
+    transform: scale(1.02);
+}
+
+/* Custom paddings in percentage */
+.cpl1 {
+    padding-left: 1%;
+}
+
+.cpr1 {
+    padding-right: 1%;
+}
+
+.cpt1 {
+    padding-top: 1%;
+}
+
+.cpb1 {
+    padding-bottom: 1%;
+}
+
+.cpl2 {
+    padding-left: 2%;
+}
+
+.cpr2 {
+    padding-right: 2%;
+}
+
+.cpt2 {
+    padding-top: 2%;
+}
+
+.cpb2 {
+    padding-bottom: 2%;
+}
+
+.cpl3 {
+    padding-left: 3%;
+}
+
+.cpr3 {
+    padding-right: 3%;
+}
+
+.cpt3 {
+    padding-top: 3%;
+}
+
+.cpb3 {
+    padding-bottom: 3%;
+}
+
+.cpl4 {
+    padding-left: 4%;
+}
+
+.cpr4 {
+    padding-right: 4%;
+}
+
+.cpt4 {
+    padding-top: 4%;
+}
+
+.cpb4 {
+    padding-bottom: 4%;
+}
+
+.cpl6 {
+    padding-left: 6%;
+}
+
+.cpr6 {
+    padding-right: 6%;
+}
+
+.cpt6 {
+    padding-top: 6%;
+}
+
+.cpb6 {
+    padding-bottom: 6%;
+}
+
+
+.cpl8 {
+    padding-left: 8%;
+}
+
+.cpr8 {
+    padding-right: 8%;
+}
+
+.cpt8 {
+    padding-top: 8%;
+}
+
+.cpb8 {
+    padding-bottom: 8%;
+}
+
+.cpl10 {
+    padding-left: 10%;
+}
+
+.cpr10 {
+    padding-right: 10%;
+}
+
+.cpt10 {
+    padding-top: 10%;
+}
+
+.cpb10 {
+    padding-bottom: 10%;
+}
+
+.cpl12 {
+    padding-left: 12%;
+}
+
+.cpr12 {
+    padding-right: 12%;
+}
+
+.cpt12 {
+    padding-top: 12%;
+}
+
+.cpb12 {
+    padding-bottom: 12%;
+}
+
+.cpl14 {
+    padding-left: 14%;
+}
+
+.cpr14 {
+    padding-right: 14%;
+}
+
+.cpt14 {
+    padding-top: 14%;
+}
+
+.cpb14 {
+    padding-bottom: 14%;
+}
+
+.cpl24 {
+    padding-left: 24%;
+}
+
+.cpr24 {
+    padding-right: 24%;
+}
+
+.cpt24 {
+    padding-top: 24%;
+}
+
+.cpb24 {
+    padding-bottom: 24%;
+}
+
+/* Font relative styles */
+
+.text-blue {
+    color: #021978;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.text-transparent {
+color: rgba(0,0,0,0.0)
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-footer {
+    font-family: "Roboto";
+    font-style: normal;
+}
+
+/* General */
+
+.main-bg {
+    background-color: #F2F2F2;
+}
+
+.world-bg {
+    background-image: url("../../images/world_map.png");
+}
+
+.footer-bg {
+    background-color: #B8BEDB
+}
+
+/* Taipy classes */
+
+.header {
+    margin: 0 auto;
+    background-color: white !important;
+    box-shadow: none;
+    -webkit-text-fill-color: initial !important
+}
+
+.container {
+    --container-max-width:90rem;
+}
+
+.card {
+    box-shadow:none;
+}
+
+/* Common **********/
+
+.main-page-style {
+    background-color: #F2F2F2;
+    width: 90rem;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.main-content {
+    padding-left: 8rem;
+    padding-right: 8rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    margin: 0;
+    text-align: justify;
+}
+
+.text_justified {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    text-align: justify;
+}
+
+.big_title_blue {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    color: #021978;
+    text-align: left;
+}
+
+.big_title_keystories {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    text-align: center;
+}
+
+.title_blue {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 48px;
+    color: #021978;
+    text-align: left;
+}
+
+.text_blue {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 23px;
+    color: #021978;
+}
+
+.title_button_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title_selector_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Home page **********/
+
+.world_map_container {
+    position: relative;
+    display: inline-block;
+}
+
+.world_map_content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.world_map_title {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    color: white;
+}
+
+.world_map_text {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 23px;
+    color: white;
+    text-align: justify;
+}
+
+.plot-overflow {
+    overflow-x: auto;
+    overflow-y: auto;
+    width: 100%;
+    max-width:100%,
+}
+
+.ks-plot-right {
+    transition: transform .4s;
+}
+
+.ks-plot-right:hover {
+    background-color: white;
+    transform: scale(140%) translate(-10%);
+}
+
+.ks-plot-left {
+    transition: transform .4s;
+}
+
+.ks-plot-left:hover {
+    background-color: white;
+    transform: scale(140%) translate(10%);
+}
+
+#blue-card {
+    background-color: #02198D;
+}
+
+
+/* Buttons **********/
+
+.taipy-button {
+    background-color: #021978;
+    color: white;
+    border-radius: 5px;
+    border:  1px solid #021978;
+    text-transform: none;
+    font-family: "Roboto";
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.taipy-button:hover {
+    background-color: white;
+    color: #021978;
+    border: 1px solid #021978;
+}
+
+.taipy-selector {
+    color: #28303F;
+    font-family: "Manrope";
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.taipy-table:where(:not(.table-header-font)) thead th {
+    color: #021978;
+    font-family: "Manrope";
+    font-weight: 500;
+}
+
+.taipy-table:where(:not(.table-row-top-border)) tbody td {
+  border-top: 1px solid #B8BEDB;
+}
+
+.table-cell>td {
+    color: #1A1E3D;
+    font-family: "Manrope";
+    font-weight: 300;
+}
+
+.taipy-table .MuiPaper-elevation {
+  box-shadow: none;
+}
+
+
+/* Header *********/
+
+.header {
+    background-color:#E8E9EC;
+    -webkit-text-fill-color:#02198D;
+}
+
+.header_bg {
+    background-color: white;
+    width: 1440px;
+    margin: 0 auto;
+}
 
 .logo {
     width: 45.26px;
@@ -7,6 +504,7 @@
     left: 1.74px;
     gap: 0px;
     opacity: 0px;
+    margin-left: 10px
 }
 
 .logotitle {
@@ -15,16 +513,89 @@
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
-    line-height: 55px;
-
+    /*line-height: 55px;*/
     color: #000000;
 }
 
-.pagecontent {
+/* Horizontal lines */
+
+hr.header-hr20 {
+    border: none;
+    border-top: 2px solid #021978;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+hr.header-hr35 {
+    border: none;
+    border-top: 3.5px solid #021978;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Footer *********/
+
+.footer {
+    background-color: #B8BEDB;
+    -webkit-text-fill-color:#02198D;
     padding-left:10%;
-    padding-top:5%;
+    padding-top:0%;
     padding-right:10%;
     padding-bottom:5%;
+
+}
+
+
+
+.footer_bg {
+    background-color: #B8BEDB;
+    width: 1440px;
+    margin: 0 auto;
+}
+
+.footer_vl {
+    border: 1.5px solid #021978;
+    height: 320px;
+    margin-top: 30px;
+    box-shadow: none;
+}
+
+.footer_text {
+    font-family: "Roboto";
+    font-size: 14px;
+    line-height: 1.5rem
+}
+
+.footer_text_justified {
+    font-family: "Roboto";
+    font-size: 14px;
+    text-align: justify;
+    line-height: 1.2rem
+}
+
+.footer_privacy_text {
+    font-family: "Roboto";
+    font-size: 14px;
+    line-height: 1.5rem;
+    color: #021978;
+    position: absolute;
+}
+
+.footer_title {
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: 700;
+    color: #021978;
+}
+
+/* Other **********/
+
+.contact-enveloppe {
+    font-size: 800%;
+    color: #021978;
+    text-decoration: none !important;
 }
 
 .blue_section {
@@ -34,41 +605,16 @@
     padding:30px;
 }
 
-.card {
-    background-color:#ffffff;
-    border-radius: 20px;
-    -webkit-text-fill-color:#02198D;
-    font-size: 24px;
+.text-line-height-165 {
+    line-height: 165%;
 }
 
-.card:hover {
-    background-color:#02198D;
-    border-radius: 20px;
-    -webkit-text-fill-color:#ffffff;
-    font-size: 24px;
-}
-
-
-.header {
-    background-color:#E8E9EC;
-    -webkit-text-fill-color:#02198D;
-}
-
-.world_map {
+.world {
     background-image: url("../../images/world_map.png");
-    -webkit-text-fill-color:#FFFFFF;
-    padding-left:10%;
-    padding-top:5%;
-    padding-right:10%;
-    padding-bottom:5%;
+    background-size: cover;
 }
 
 .title {
-    /* Title */
-
-    /*width: 1037px;
-    height: 55px;*/
-
     /* Grand titre */
     font-family: 'Manrope';
     font-style: normal;
@@ -78,26 +624,15 @@
     /* identical to box height */
     display: flex;
     align-items: center;
-
     /* f9fbfe */
     color: #F9FBFE;
-
-
     /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
 }
 
-
-
-
-.title_blue {
-    /* Title */
-
-    /*width: 1037px;
-    height: 55px;*/
-
+.title_white {
     /* Grand titre */
     font-family: 'Manrope';
     font-style: normal;
@@ -107,73 +642,25 @@
     /* identical to box height */
     display: flex;
     align-items: center;
-
+    margin-bottom: 10px;
     /* f9fbfe */
-    color: #021978;
-
-
+    color: #F9FBFE;
     /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
 }
 
-
-
-.cardtitle {
-    /* Title */
-
-    /*width: 354px;
-    height: 38px;*/
-
+.text_white {
     font-family: 'Manrope';
     font-style: normal;
-    font-weight: 500;
-    font-size: 35px;
-    line-height: 48px;
-    display: flex;
-    align-items: center;
-
-    /* 021978 */
-    color: #021978;
-
-
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.cardtext{
-    /* Title */
-
-    /*width: 301.64px;
-    height: 106px;*/
-
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 17px;
-    line-height: 23px;
-    display: flex;
-    align-items: center;
-
-    /* 000000 */
-    color: #000000;
-
-
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    color: #F9FBFE;
+    text-align: justify;
 }
 
 .sectiontitle {
-    /* Title */
-
-    /*width: 473.51px;
-    height: 57.28px;*/
-
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
@@ -181,36 +668,31 @@
     line-height: 48px;
     display: flex;
     align-items: center;
-
+    margin-bottom: 10px;
     /* 021978 */
     color: #021978;
-
-
     /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
-
 }
 
-
+.blue {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 17px;
+    color: #021978;
+}
 
 .subheader {
-    /* Subtitle */
-
-    /*width: 1170px;
-    height: 163px;*/
-
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;
     font-size: 17px;
     line-height: 23px;
-
     /* f9fbfe */
     color: #F9FBFE;
-
-
     /* Inside auto layout */
     flex: none;
     order: 1;
@@ -219,30 +701,14 @@
     padding-bottom:2%;
 }
 
-.footer {
-    background-color: #B8BEDB;
-    -webkit-text-fill-color:#02198D;
-    padding-left:10%;
-    padding-top:0%;
-    padding-right:10%;
-    padding-bottom:5%;
-    
-}
-
 .buttonsection {
-    /* Button */
-    /*width: 264px;
-    height: 50px;*/
     /* Inside auto layout */
     flex: none;
     order: 1;
     flex-grow: 0;
-
     -webkit-text-fill-color:#FFFFFF;
-
     background: #021978;
     border-radius: 5px;
-
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 800;

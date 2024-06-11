@@ -1,13 +1,14 @@
-from taipy.gui import Markdown, navigate
-from app import config as cfg
+from taipy.gui import navigate
+from app import config as cfg 
+from app.page import Page
+
+page_id="_header"
 
 def to_text(val):
     return "{:,}".format(int(val)).replace(",", " ")
 
-
 # Path to image
 taxplorer_logo_path = f"{cfg.IMAGES}/taxplorer-logo.svg"
-
 
 # Initialise navbar items
 navbar_items = [
@@ -24,4 +25,4 @@ def goto_d4g_website(state):
 
 
 # Generate page from Markdown file
-root = Markdown(f"{cfg.PAGES}/root.md")
+header_md = Page(f"{__name__}").markdown()

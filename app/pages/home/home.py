@@ -1,71 +1,73 @@
-import pandas as pd
-import io
-from taipy.gui import Markdown,download
+from taipy.gui import State, Markdown
 
-import algo # from dataviz import algo
-from data.data import data #from dataviz.data.data import data
+from app import config as cfg
+from app import algo
+from app.page import Page
+from app.viz import Viz
+# from app.data.data import data
 
-original_image = "images/viz.png"
-layout = {'barmode':'stack', "hovermode":"x"}
-options = {"unselected":{"marker":{"opacity":0.5}}}
+# Path to images
+world_map_path = f"{cfg.IMAGES}/world_map.png"
+download_icon_path = f"{cfg.IMAGES}/Vector.svg"
 
-download_icon_path = 'images/Vector.svg'
-df = data.head()
+# Initialize state (Taipy callback function)
+# Called by main.py/on_init
+def on_init(state: State):
+    # print('HOME ON INIT...')
+    # print(f'HOME STATE ID {get_state_id(state)}')
+    with state as s:
+        update_viz(s)
+    # print('HOME ON INIT...END') 
+
+# Viz store map[viz_id,viz_dict]
+# Important for taipy bindings
+# Use Viz.init on each page with set of viz_id
+viz:dict[str,dict] = Viz.init(
+    (
+        "general_number_of_tracked_reports",
+        "general_number_of_tracked_reports_over_time",
+        "general_number_of_tracked_mnc",
+        "general_number_of_tracked_mnc_available",                          
+    )
+) 
+
+def update_viz(state: State):
+    id ="general_number_of_tracked_reports"
+    state.viz[id] = Viz(id=id, 
+                    state=state, 
+                    data=algo.number_of_tracked_reports(state.data), 
+                    title="Reports tracked",
+                    sub_title=""
+                ).to_state()
+    
+    id ="general_number_of_tracked_reports_over_time"
+    # TODO PERF : all in once
+    # algo_data, algo_fig = algo.display_number_of_tracked_reports_over_time(state.data)
+    state.viz[id] = Viz(id=id, 
+                    state=state, 
+                    data=algo.number_of_tracked_reports_over_time(state.data), 
+                    fig=algo.display_number_of_tracked_reports_over_time(state.data),
+                    title="Number of reports over time"
+                ).to_state()  
+ 
+    id ="general_number_of_tracked_mnc"
+    state.viz[id] = Viz(id=id, 
+                    state=state, 
+                    data=algo.number_of_tracked_mnc(state.data), 
+                    title="Multinationals",
+                    sub_title="with 1+ report tracked"
+                ).to_state() 
+           
+    id ="general_number_of_tracked_mnc_available"
+    state.viz[id] = Viz(id=id, 
+                    state=state, 
+                    data=algo.compute_number_of_tracked_mnc_available(state.data), 
+                    fig=algo.display_number_of_tracked_mnc_available(state.data), 
+                    title="Multinationals available",
+                    sub_title="with 1+ report tracked"
+                ).to_state() 
 
 
-def download_viz1(state): download_el(state,viz1)
-def download_viz_2(state): download_el(state,viz_2)
-def download_viz3(state): download_el(state,viz3)
-
-df_viz1 = algo.number_of_tracked_reports(data)
-viz1 = {
-    'data': df_viz1,
-    'title': "Reports",
-    'sub_title': "CbC reports tracked",
-    'on_action': download_viz1
-}
-
-df_viz3 = algo.number_of_tracked_reports_company(data)
-viz3 = {
-    'data': df_viz3,
-    'title': "Multinationals ",
-    'sub_title': "with 1+ report tracked",
-    'on_action': download_viz3
-}
-
-df_viz_2 = algo.number_of_tracked_reports_over_time(data)
-viz_2 = {
-    'data': df_viz_2,
-    'title': "Evolution of reports over time",
-    'sub_title': "CbC reports tracked",
-    'on_action': download_viz_2
-}
-
-data_viz_24 = algo.viz_24_compute_data(data)
-data_viz_24_fig = algo.viz_24_viz(data_viz_24)
-def download_viz_24(state):download_el(state,viz_24)
-viz_24 = {
-    'fig': data_viz_24_fig,
-    'data': data_viz_24,
-    'title': "Multinationals available",
-    'sub_title': "with 1+ report tracked",
-    'on_action': download_viz_24
-}
-
-
-
-# Generate the digits, save them in a CSV file content, and trigger a download action
-# so the user can retrieve them
-def download_el(state, viz):
-    buffer = io.StringIO()
-    data = viz['data']
-    if type(data) == pd.DataFrame:
-        data.to_csv(buffer)
-    else:
-        buffer.write(state["sub_title"] + "\n" + str(data))
-    download(state, content=bytes(buffer.getvalue(), "UTF-8"), name="data.csv")
-# <|{download_icon_path}|image|class_name=download|on_action=on_click|properties={viz}>
-
-
-
-home_md = Markdown("pages/home/home.md")
+# Generate page from Markdown file
+home_md = Markdown(f"{cfg.PAGES}/home/home.md")
+# NOT WORKING: home_md: Markdown = Page("home").markdown()

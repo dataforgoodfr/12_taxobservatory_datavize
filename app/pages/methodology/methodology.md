@@ -1,114 +1,221 @@
-<|part|class_name=pagecontent|
+<main|container main-bg|
+
+<|part|class_name=cpt4 cpb4 cpl8 cpr8|
 
 Methodology
-{: .title_blue }
+{: .h1 .text-blue .cpb2}
 
-Taxplorer was created to collect, aggregate and analyze data from country-by-country reports published by multinationals.
-Our approach is based on three pillars:
-- Open source: the code is available here (https://github.com/dataforgoodfr/12_taxobservatory/) and our database can be downloaded here (add link to /download-data)
-- Collaborative: Reach out (add link to contact page) to contribute or suggest improvements.
-- Dynamic: Our database is regularly updated to incorporate new insights and to enhance its accuracy.
+<introduction|part|class_name=text-justify cpb1|
+Taxplorer was created to collect, aggregate and analyze data from country-by-country reports published by multinationals.  
+Our approach is based on three pillars :
 
+* Open source : The code is available
+<a href="https://github.com/dataforgoodfr/12_taxobservatory/" target="_blank">
+ here 
+</a>
+and our database can be downloaded [here](/Download).
+* Collaborative : [Reach out](/Contact) to contribute or suggest improvements.
+* Dynamic : Our database is regularly updated to incorporate new insights and to enhance its accuracy.
+|introduction>
+
+<collection|part|class_name=cpb2|
 How is the data collected ?
-{: .sectiontitle }
+{: .h2 .text-blue .cpb2 .text-weight500 }
 
-**Search Strategy**  
-Our methodology revolves around searching for specific PDF documents related to corporate reporting, particularly focusing on tax country-by-country reporting. The following steps outline our search strategy:  
-1. Google Custom Search API Integration: We utilize the Google Custom Search API to conduct targeted searches for PDF documents. This API allows us to narrow down our search to PDF files related to corporate reporting, enhancing the efficiency of our search process.
-2. Query Formulation: Each search query is formulated based on the company name and relevant keywords. The keywords used in the search queries are meticulously chosen to target documents about tax country-by-country reporting, ensuring the retrieval of relevant PDF files.    
-3. Query Execution: The formulated search queries are sent to the Google Custom Search API, specifying parameters such as the API key, custom search engine (CSE) ID, and file type (PDF). By incorporating these parameters, we focus our search exclusively on PDF documents related to the specified keywords and company names.  
-4. Iterative Search Process: We conduct an iterative search process, querying the API for each unique company name derived from the provided CSV file. This iterative approach enables comprehensive coverage of relevant documents across multiple companies.  
-5. URL Caching: To optimize performance and avoid redundant queries, we implement URL caching. Cached URLs are stored locally, allowing us to bypass repeated API queries for previously searched company names and keywords. This caching mechanism significantly reduces query latency during subsequent runs.
+The key steps of the database construction are the following. We start by collecting sustainability and other reports, 
+usually published as PDFs. We extract from these the CbCR tables and convert them into text. Tables are rearranged and 
+standardised to obtain a uniform dataset. Finally, we enrich the dataset with additional information on the sector and 
+headquarter country from financial accounts.<br/><br/>
+{: .text-justify }
 
+<|part|class_name=text-justify|
+Report Collection
+{: .h6 }
 
-**PDF Retrieval and Validation**  
-Upon identifying relevant PDF documents through the search process, we employ the following methodology for retrieval and validation:
-1. PDF Download: Using the URLs obtained from the search results, we proceed to download the corresponding PDF files. Each PDF file is downloaded to a designated directory for further processing.  
-2. Download Handling: We implement error handling mechanisms to manage download failures and interruptions gracefully. In case of download errors or timeouts, appropriate error messages are logged, and the corresponding PDF file is discarded to maintain data integrity.  
-3. PDF Integrity Check: Upon successful download, each PDF file undergoes an integrity check to ensure its validity. We utilize the PyPDF2 library to validate the structure and metadata of the downloaded PDF files. Any PDF files found to be corrupted or incomplete are flagged, logged, and subsequently discarded to prevent erroneous data inclusion.  
-4. Duplicate Detection: Throughout the download process, we employ mechanisms to detect and filter out duplicate PDF files. This prevents redundant downloads of identical documents, optimizing resource utilization and streamlining the data collection process.  
+The public CbCR data were all hand-collected using publicly available online corporate reports, such as annual reports 
+or sustainability reports. We proceeded by using several different key words on google that effectively identify public 
+CbCR data. Key words used are: "207-4", "Public country-by-country-report", "Tax contribution report", all GRI variable 
+names and all OECD variable names.  We used these key words directly on all companies within the Eurostoxx and the MSCI 
+SRI list. We focused on Eurostoxx as reporting is higher in Europe. We used the MSCI Socially Responsible Investing 
+(SRI) list because multinationals with good ESG ratings should have a higher probability of reporting. We then used 
+these key words more generally on google without using any particular company list. We sometimes indicate to display 
+only pdf-files and vary time horizons and locations to attempt to capture a maximum of companies.
+|>
 
+|collection>
 
-**Logging and Monitoring**  
-Our methodology incorporates robust logging and monitoring mechanisms to facilitate transparency, traceability, and error detection throughout the search and retrieval process. Detailed logs are generated, capturing essential information such as query results, download status, error messages, and system notifications. These logs serve as invaluable assets for troubleshooting, performance analysis, and quality assurance.
+<process|part|class_name=cpb2|
+How is data processed ?
+{: .h2 .text-blue .cpb2 .text-weight500 }
 
+<|part|class_name=text-justify|
+Table formatting
+{: .h6 }
 
-**Execution and Configuration**  
-Our methodology is implemented as a Python script, offering flexibility and configurability to accommodate diverse search requirements and operational environments. Users can specify input parameters such as the CSV file containing company names, Google API credentials, search keywords, destination directory for PDF downloads, timeout thresholds, and debug options. This configurability ensures adaptability to varying use cases and facilitates seamless integration into existing workflows.
+CbCRs are published by multinationals in different formats. The most common for a given multinational and fiscal year 
+has each row corresponding to a given jurisdiction and each column to different variables. A smaller number of companies 
+used different formats, for example spreading data across multiple tables in the document (e.g. data for profit before 
+tax and tax paid might be on two different pages), reporting multiple fiscal years in the same table or transposing the 
+table. The tables were converted into the standard format in order to merge them.
+<br/><br/>
 
+Cell-level issues
+{: .h6 }
 
-How is the data processed ?
-{: .sectiontitle }
+Several within-cell issues have been addressed : ranging from the notation used to denote a negative value, to the use 
+of characters to ease readability (3000 is often presented as "3,000", "3.000" or "3 000"), to the removal of sub- and 
+superscripts and of other characters present in the cells.
+<br/><br/>
 
-The country-by-country tax report (CbCR) can be provided in a pretty long financial report of a hundred of pages or so. Once the tables of interest are located, the extraction of the figures from the tables in a PDF is not straightforward. These numbers are not necessarily encoded in the PDF code and we need to involve visual processing tools and character recognition (OCR). Finally, the companies indicate their indicators in various ways such that some standardization is required to transform these arbitrary layouts into the target layout of interest. 
-Therefore, our processing pipeline involves the following key steps:  
-- identification of the pages containing the CbCR tables  
-- localization of the tables in the page and automatic character recognition  
-- table standardization  
+Standardization of variable names and country names
+{: .h6 }
 
+We have collected country-by-country reports published in multiple languages (e.g. Spanish, Italian), to translate 
+variables and country names into English we resorted to dictionaries in the corresponding languages.
 
-**Identification of the relevant pages to process**  
+In addition, across the reports collected, the names used to refer to the standard variables vary widely. For example, 
+"Unrelated party revenues" can be referred to as  "Third-party revenue", "Revenues from unrelated parties", "Revenues 
+from third-party sales" or "Income from sales to third parties". To have uniform column names, whenever a new variable 
+name is encountered, correspondence with the standard name is made, and the rule is then either applied globally or 
+just once.
+<br/><br/>
 
-Locating the pages of interest is formulated as a binary classification task where we need to decide whether or not a page is relevant. This classification problem is solved with a random forest classifier, trained on a pre-labeled corpus. Input features are extracted from every page and fed into the random forest. The features we extract are the number of countries listed in the page and the number of occurrences of several pre-identified keywords such as "tax", "countr", "report", "revenu", "incom", "employ", etc.. 
-At this stage, the pages suggested by the classifier are validated by a human expert.
+Similarly, jurisdiction names might differ across reports, for example, the United States of America can be either 
+referred to as "The US", "USA" or "United States", "United Stated of America". Jurisdiction names were made uniform 
+and standardised to a 3-letter code.
+<br/><br/>
 
+Finally, some companies, instead of publishing data on a strict country-by-country basis, aggregate multiple 
+jurisdictions together (e.g."Ireland and the Netherlands" or "other europe"). In these cases, we set the jurisdiction 
+name to "other" or "other" followed by additional information e.g  "other apac" or "other europe".
+<br/><br/>
 
-**Table localization and parsing**  
+Units, currency and variables' signs
+{: .h6 }
 
-Once the relevant pages are identified, we need to extract the layout of the tables (e.g. column headers) and the content of the cells. Unfortunately, the PDF format has a whole lot of different ways to encode tables and the parsing of these tables is not straightforward. In our pipeline, we tackled the most challenging situation where the tables are inserted as images into the pages. Hence, we need to involve image processing tools to locate the table and parse it. Fortunately, nowadays we have several highly performant algorithms for locating and parsing tables. Within our code, we propose several algorithms implemented in different libraries:
-- ExtractTable : https://extracttable.com/  
-- Camelot : https://camelot-py.readthedocs.io/en/master/    
-- LlamaParse : https://github.com/run-llama/llama_parse  
-- Unstructured (local or through the API) : https://unstructured-io.github.io/unstructured/core/partition.html    
-ExtractTable is a proprietary closed-source solution. It is provided as an API and we do not have any details about its functioning.  
-Camelot is open-source and comes in two flavors : stream and lattice. Both involves the text extracted from the PDF with pdfminer (https://pdfminersix.readthedocs.io/en/latest/) which are either aggregated to form tables or combined with the layout extracted with image processing (line, intersection .. detection using OpenCV).  
-The last two, LlamaParse and Unstructured, have been developed in the context of the increasing interest in Retrieval Augmented Generation (RAG) applications were a large language model (LLMs) can be plugged onto your own database and generate content that is grounded on your document base. LlamaParse is closed source and can only be accessed through their API. Unstructured provides several algorithms such as cutting edge deep learning algorithms for detecting tables (yolox, detectron2) combined with character recognition (tesseract OCR / PaddlePaddle OCR) as well a private text to image transformer based model called chipper which can be accessed only through the API.  
-Our library is modular, allowing us to use any of these algorithms and we performed tests on some reports in order to identify which of these algorithms have the best performance. It turned out that LlamaParse and Unstructured are really competitive.  
-This stage may contain errors. For example, OCR is not perfect and there can be typos, for example, in country names. The decimal separator in numbers can also be difficult to catch by these algorithms. Therefore, we implemented some automated checks (e.g. for the juridictions, we can use the Levenshtein distance to fix some errors, the sum of numbers in columns can be compared to the Total if provided in the table) but we also need a human expert to validate this stage.  
+Multinationals published their CbCRs using different currencies and units (e.g. thousands, billions, millions). In 
+order to have a consistent database, the units and the currencies are manually collected for each report. This 
+information is then used to transform all financial figures into euros units. The conversion rates used have been 
+computed by averaging the daily rates found on XE.com for each year.
+<br/><br/>
+  
+Another source of inconsistency is due to the sign attributed to some variables, in particular tax paid and accrued. 
+As they are recorded as expenses, multinationals sometimes record the tax paid on profits as a negative value. To 
+ensure that the tax variables have a homogeneous sign across all reports included in the database, we manually collect 
+information on the appropriate sign and invert them when necessary to have tax paid as positive values and 
+reimbursements by the government as negative ones.
+<br/><br/>
 
+Additional information
+{: .h6 }
 
-**Table standardization**  
+We have enriched the database by adding the following information for each multinational : the country in which it is 
+headquartered and the industry classification. This information was sourced from ORBIS, Bloomberg.com and financial 
+accounts. It should be noted that an effort was made to attribute the sector to the whole multinational, this is 
+sometimes challenging as certain structures (such as conglomerates) might operate in different sectors.
+<br/><br/>
 
-The layout of the CbCR tables are nothing but standard. The columns can be arbitrarily swapped, the table can be completely transposed, the column headers can be expressed in various different ways, the units and currencies are not always the same. The last step standardizes these tables into a common output format with the key figures always in the same order. To perform this step, instead of handcrafting custom rules for every report, we build on top of the latest developments of Large Language Models (LLMs) and instruct them to extract and reformat the relevant piece of information from the tables we extracted at the previous step. This last step is performed using the LangChain library (https://www.langchain.com/) and the OpenAI GPT-4 LLM.
+Data limitations
+{: .h6 }
 
-
-Calculations
-{: .title_blue }
-
-
-Transparency score
-{: .sectiontitle }
-
-We created the transparency score metric to assess how transparent multinationals are in their CbC report, given the CBC report’s format is not standardized yet.   
-
-**This score is calculated for each report and corresponds to the average of two components : one based on the geographical level of reporting (Component I) and the other on the completeness of the financial data provided (Component II).**  
-
-
-**Geographical level of reporting (Component I)**  
-
-
-**Context** : Usually the CBCR has to publish figures country by country (or jurisdiction by jurisdiction). Some multinationals comply with this requirement, but others publish figures by large region, such as Asia or Africa. Some multinationals may also group a certain number of countries together in an "Other" category, in which the multinationals aggregate several countries and may or may not give details of these countries. We wanted here to calculate a score that evaluates the quantity of data reported at a jurisdiction level and would penalize data reported at a more aggregated level than the jurisdiction.  
-
-
-**Calculation behind Component I** : for each financial variable available in the report (transformed into absolute values), we calculate the % attributed to a jurisdiction and then calculate the average of those scores (e.g., if 70% of a company’s profits and 50% of this company’s employees are attributed to a jurisdiction, its geographical score for this report will be 60%)  
-
-
-**Completeness of the financial data provided (Component II)**  
-
-
-**Context** : A full CbCR report should include the following 10 financial data :  
-1. Revenue by Region = Total_Revenue dans le dataset actuel  
-2. Related Party transactions ou relacted Party Revenue by region = Related party revenue  
-3. Pre-tax income by region = Profit before Tax  
-4. Income Tax expense by region = Income Tax accrued  
-5. Cash Taxes paid by region = Tax paid  
-6. Assets or property, plant, and equipment by region = Tangible assets  
-7. Accumulated earnings  
-8. Tangible assets  
-9. Stated capital  
-10. Number of employees by region = Employees   
-Yet, some companies do not disclose all variables. We wanted to reflect this in the transparency score.  
-
-**Calculation behind Component II** : We calculate the score based on the weighted share of variables available in the report (i.e., for which the company provides at least 1 datapoint). The weight is 2 for Pre-tax profits and Taxes paid, and 1 for other variables (reflecting the importance of the first two for tax behavior analysis)  
+The current version of the database covers public CbCRs relative to the fiscal years 2016 to 2021. Companies publish 
+CbCRs on a voluntary basis, resulting in an unbalanced panel with heterogeneity across the different disclosures. 
+Companies apply some discretion when choosing which set of variables to disclose, apply different geographical 
+disaggregations and sometimes deviate from the standard definition of the reported variables.
 
 |>
+|process>
+
+<calculations|part|class_name=cpb2|
+Calculations ?
+{: .h2 .text-blue .cpb2 .text-weight500 }
+
+Transparency score
+{: .h5 .text-blue .cpb2 }
+
+Multinationals, except banks, report on a voluntary basis. The disclosed information varies a lot in terms of detail. 
+Multinational enterprises can limit the financial variables they disclose. They can also add geographic categories, 
+instead of giving detailed figures for each country.
+<br/><br/>
+
+To evaluate the comprehensiveness and transparency of country-by-country reports, we have developed a transparency 
+score specifically tailored for this purpose. Building upon previous literature, this score measures the extent to 
+which multinational enterprises disclose financial information across different countries and variables.
+<br/><br/>
+
+The transparency score is calculated based on the disclosure of the set of 10 variables included in the standard CbCR 
+designed by the OECD (
+<a href="https://www.oecd.org/tax/transfer-pricing-documentation-and-country-by-country-reporting-action-13-2015-final-report-9789264241480-en.htm" target="_blank">
+link
+</a>
+) across different jurisdictions with higher scores indicating greater transparency (0 is the lowest score and 100 is 
+the highest). The transparency score calculation follows the general formula :
+<br/><br/>
+
+[//]: # (Taipy is not able to render the below LaTex expression so an image is used instead to display the equation)
+
+[//]: # ($$\text{Transparency Score} = \sum_{i=1}^{n} w_i \times \frac{\sum_{j\in J_i} | x_{ij} |}{\sum_{j} | x_{ij} |} \times 100\$$)
+
+<|part|class_name=text-center|
+<img class="test" src="./images/transparency-score-equation.svg" height="40px"/>
+|>
+<br/><br/>
+
+Where :
+
+* *n* is the number of financial variables ;
+* *w<sub>i</sub>* is the weight assigned to the *i*-th financial variable (in this case, all variables are equally 
+weighted, with *w<sub>i</sub> = 1/n*) ;
+* *J<sub>i</sub>* is the set of jurisdictions for which the *i*-th financial variable is disclosed (excluding the 
+aggregated categories) ;
+* *x<sub>ij</sub>* is the value of the *i*-th financial variable for jurisdiction *j*.
+
+We also created two additional metrics :
+<br/><br/>
+
+Geographical level of reporting
+{: .h6 }
+
+<br/>
+
+**Context** : Usually the CBCR has to publish figures country by country (or jurisdiction by jurisdiction). Some 
+multinationals comply with this requirement, but others publish figures by large region, such as Asia or Africa. 
+Some multinationals may also group a certain number of countries together in an "Other" category, in which the 
+multinationals aggregate several countries and may or may not give details of these countries. We wanted here to 
+calculate a score that evaluates the quantity of data reported at a jurisdiction level and would penalize data reported 
+at a more aggregated level than the jurisdiction.
+<br/><br/>
+
+**Calculation** : For each financial variable available in the report (transformed into absolute values), we calculate the % attributed 
+to a jurisdiction and then calculate the average of those scores (e.g., if 70 % of a company's profits and 50% of this 
+company's employees are attributed to a jurisdiction, its geographical score for this report will be 60 %).
+<br/><br/>
+
+Completeness of the financial data provided
+{: .h6 }
+
+<br/>
+
+**Context** : A full CbCR report should include the following 10 financial data :
+
+1. Revenue by Region = Total_Revenue dans le dataset actuel
+2. Related Party transactions ou related Party Revenue by region = Related party revenue
+3. Pre-tax income by region = Profit before Tax
+4. Income Tax expense by region = Income Tax accrued
+5. Cash Taxes paid by region = Tax paid
+6. Assets or property, plant, and equipment by region = Tangible assets
+7. Accumulated earnings
+8. Tangible assets
+9. Stated capital
+10. Number of employees by region = Employees
+
+Yet, some companies do not disclose all variables. We wanted to reflect this in the transparency score.
+<br/><br/>
+
+**Calculation** : We calculate the score based on the weighted share of variables available in 
+the report (i.e., for which the company provides at least 1 datapoint).
+|calculations>
+
+|>
+
+|main>
