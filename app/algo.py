@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 import humanize
 from wordcloud import WordCloud, get_single_color_func
 
+# Define color sequence for plots
+COLOR_SEQUENCE = ["#D9D9D9", "#1E2E5C"]
 
 # TODO add viz comment
 # Viz 1 -
@@ -838,26 +840,15 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
     # Replace bool values of Tax haven by string values
     df['jur_tax_haven'] = df['jur_tax_haven'].map({True: 'Tax haven', False: 'Non tax haven'})
    
-    # Rename columns
-    df = df.rename(columns={
-        'profit_before_tax_%': '% profit',
-        'profit_per_employee': 'Profit/employee',
-        'jur_tax_haven': 'Tax haven'
-    })
-    # print('display_pretax_profit_and_profit_per_employee df.head():\n', df.head())
-
-    # Bar color sequence
-    colors = ['#D9D9D9', '#1E2E5C']
-
     # Create figure
     fig = px.scatter(
         df,
-        x='% profit',
-        y='Profit/employee',
-        size='% profit',
-        color='Tax haven',
-        color_discrete_sequence=colors,
-        custom_data=['jur_name', 'Tax haven']
+        x='profit_before_tax_%',
+        y='profit_per_employee',
+        size='profit_before_tax_%',
+        color='jur_tax_haven',
+        color_discrete_sequence=COLOR_SEQUENCE,
+        custom_data=['jur_name']
     )
 
     # Update layout settings
@@ -885,13 +876,9 @@ def display_pretax_profit_and_profit_per_employee(df: pd.DataFrame, company: str
     )
     
     
-    # Define style of hover
+    # Define hover
     fig.update_traces(
-        hovertemplate="<br>".join([
-            "<b>%{customdata[0]} - %{customdata[1]}</b>",
-            "Profit: %{x:.1%}",
-            "Profit/employee: %{y:.3s}€",
-            ])
+        hovertemplate=f"{company} reports %{{x:.1%}} of profit and %{{y:.3s}}€ profits per employee in %{{customdata[0]}}"
     )
    
     return go.Figure(fig)
