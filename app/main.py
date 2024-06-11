@@ -19,33 +19,28 @@ FAVICON = "images/taxplorer-logo.svg"
 MAX_YEAR_OF_REPORTS = 2021
 PATH_TO_DATA = f"{cfg.DATA}/data_final_dataviz.csv"
 
-data: pd.DataFrame = None
-
+data:pd.DataFrame = None
 
 def on_init(state: State):
     # print('MAIN ON_INIT...')
     # print(f'MAIN STATE {get_state_id(state)}')
-
+    
     # Init data
     init_data(state)
     # Call company on_init
     on_init_company(state)
     # Call company on_init
-    on_init_home(state)
-
-    # print('MAIN ON_INIT...END')
-
-# Performance optimization
-
-
+    on_init_home(state) 
+       
+    # print('MAIN ON_INIT...END') 
+    
+# Performance optimization    
 def init_data(state: State):
-    df = pd.read_csv(f"{PATH_TO_DATA}", sep=",",
-                     low_memory=False, encoding='utf-8')
+    df = pd.read_csv(f"{PATH_TO_DATA}", sep=",", low_memory=False, encoding='utf-8')
     # Filter dataset with the maximum year to take in account
     df = df.loc[df["year"] <= MAX_YEAR_OF_REPORTS].reset_index()
-    state.data = df
-
-
+    state.data = df   
+     
 # Add pages
 pages = {
     "/": root,
@@ -58,8 +53,6 @@ pages = {
 }
 
 # Functions used to navigate between pages
-
-
 def goto_home(state):
     navigate(state, "Home")
 
@@ -99,9 +92,11 @@ stylekit = {
     "font_family": "Manrope"
 }
 
-if __name__ == '__main__':
-    tp.Core().run()
-    web_app = gui_multi_pages.run(
+
+if __name__ == "__main__":
+    ## DEV
+    # Start the local flask server
+    gui_multi_pages.run(
         dark_mode=False,
         stylekit=stylekit,
         title=f"{APP_TITLE}",
@@ -110,7 +105,7 @@ if __name__ == '__main__':
         watermark="LOCAL DEVELOPMENT",
     )
 else:
-    # PRODUCTION
+    ## PRODUCTION     
     # Start the app used by uwsgi server
     web_app = gui_multi_pages.run(
         dark_mode=False,
@@ -121,7 +116,9 @@ else:
         debug=False,
         # Remove watermark "Taipy inside"
         watermark="",
-        # IMPORTANT: Set the async_mode to gevent_uwsgi to use uwsgi
+        # IMPORTANT: Set the async_mode to gevent_uwsgi to use uwsgi 
         # See https://python-socketio.readthedocs.io/en/latest/server.html#uwsgi
         async_mode='gevent_uwsgi'
     )
+    
+
