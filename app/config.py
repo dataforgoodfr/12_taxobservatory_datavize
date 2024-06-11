@@ -1,6 +1,6 @@
 
 # CUSTOMIZE IF NEEDED
-APP= "" 
+APP= "app/" 
 # APP= "app/" OR "" 
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
