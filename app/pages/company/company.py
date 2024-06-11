@@ -2,10 +2,10 @@ from taipy.gui import State, Markdown, get_state_id
 import numpy as np
 import pandas as pd
 from app import algo
+from app import config as cfg
 from app.viz import Viz
-from app.data.data import data
 
-company_image_path = "images/pexels-ingo-joseph-1880351.png"
+company_image_path = f"{cfg.IMAGES}/pexels-ingo-joseph-1880351.png"
 
 DEFAULT_COMPANY = "SHELL"
 
@@ -20,36 +20,28 @@ company_upe_name:str = ""
 df_selected_company:pd.DataFrame = None
 df_count_company:pd.DataFrame = None
 
-# All vizz store map[viz_id,viz_dict]
-viz:dict[str,dict] = {}  
+# Viz store map[viz_id,viz_dict]
+# Important for taipy bindings
+# Use Viz.init on each page with set of viz_id
+viz:dict[str,dict] = Viz.init(
+    (
+        "company_sector",
+        "company_upe_name",
+        "company_nb_reports",
+        "company_transparency_score",
+        
+        "fin_transparency_score",
+        "fin_transparency_score_over_time_details",
+        
+        "fin_key_financials_kpis",
+        "fin_jurisdictions_top_revenue",
+        
+        "fin_pretax_profit_and_employees_rank",
+        "fin_pretax_profit_and_profit_per_employee",                    
+    )
+) 
 
-# //Important 
-# WORKAROUND
-# this extra code to init dict keys with dict empty template
-# should not be needed but taipy throws warning message without it
-# TODO try another solution... DRY, less annoying
-# Note: did not see any functional bug if we do not do this (only many warnings)
-viz_set:set[str] = (
-    "company_sector",
-    "company_upe_name",
-    "company_nb_reports",
-    "company_transparency_score",
-    
-    "fin_transparency_score",
-    "fin_transparency_score_over_time_details",
-    
-    "fin_key_financials_kpis",
-    "fin_jurisdictions_top_revenue",
-    
-    "fin_pretax_profit_and_employees_rank",
-    "fin_pretax_profit_and_profit_per_employee",                    
-)
-   
-for viz_id in viz_set:
-    viz[viz_id] = Viz.TO_EMPTY()
-# Important//
-
-    
+ 
 # Initialize state (Taipy callback function)
 # Called by main.py/on_init
 def on_init(state: State):
@@ -69,7 +61,8 @@ def init_state(state: State):
         s.selected_company = selected_company
         # print(f'company state selected_company:{s.selected_company}')
         
-        s.data = data
+        # Performance: Done once in main.py
+        # s.data = data
         # print(f'company state data:{s.data.head()}')
         
         # List companies to populate selector        
@@ -277,4 +270,4 @@ def on_change_year(state: State):
 
 
 # Generate page from Markdown file
-company_md = Markdown("pages/company/company.md")
+company_md = Markdown(f"{cfg.PAGES}/company/company.md")

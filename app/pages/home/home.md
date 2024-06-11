@@ -81,37 +81,37 @@ Our database is growing
 <|layout|columns=1|gap=1rem|
 
 <|part|class_name=viz-container|
-<|{viz_1.title}|text|class_name=text-weight400|>
+<|{viz["general_number_of_tracked_reports"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_1.sub_title}|text|class_name=text-small text-weight300|>
+<|{viz["general_number_of_tracked_reports"].sub_title}|text|class_name=text-small text-weight300|>
 <|part|class_name=metric-container cpt6 cpt6|
-<|{viz_1.data}|text|class_name=round-metric|>
+<|{viz["general_number_of_tracked_reports"].data}|text|class_name=round-metric|>
 |>
 |>
 
 <|part|class_name=viz-container|
-<|{viz_3.title}|text|class_name=text-weight400|>
+<|{viz["general_number_of_tracked_mnc"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_3.sub_title}|text|class_name=text-small text-weight300|>
+<|{viz["general_number_of_tracked_mnc"].sub_title}|text|class_name=text-small text-weight300|>
 <|part|class_name=metric-container cpt6 cpt6|
-<|{viz_3.data}|text|class_name=round-metric|>
+<|{viz["general_number_of_tracked_mnc"].data}|text|class_name=round-metric|>
 |>
 |>
 
 |>
 
 <|part|class_name=viz-container|
-<|{viz_2.title}|text|class_name=text-weight400|>
+<|{viz["general_number_of_tracked_reports_over_time"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_2.sub_title}|text|class_name=text-small text-weight300 text-transparent|>
-<|chart|figure={viz_2.fig}|>
+<|{viz["general_number_of_tracked_reports_over_time"].sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|chart|figure={viz["general_number_of_tracked_reports_over_time"].fig}|>
 |>
 
 <|part|class_name=viz-container|
-<|{viz_24.title}|text|class_name=text-weight400|>
+<|{viz["general_number_of_tracked_mnc_available"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz_24.sub_title}|text|class_name=text-small text-weight300|>
-<|chart|figure={viz_24.fig}|>
+<|{viz["general_number_of_tracked_mnc_available"].sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz["general_number_of_tracked_mnc_available"].fig}|>
 |>
 
 |>

@@ -48,7 +48,6 @@ We might have missed out in its report.<br/>
 |>
 |>
 
-
 <|part|class_name=viz-container|
 <|{viz["company_nb_reports"].title}|text|class_name=text-weight400|>
 <br/>

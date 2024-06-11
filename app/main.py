@@ -1,19 +1,46 @@
 from taipy.gui import State, Gui, navigate, get_state_id
+from app import config as cfg
 
-from app.pages.company.company import company_md, on_init as on_company_init
+from app.pages.company.company import company_md, on_init as on_init_company
 from app.pages.contact.contact import contact_md
 from app.pages.download.download import download_md
-from app.pages.home.home import home_md
+from app.pages.home.home import home_md, on_init as on_init_home
 from app.pages.keystories.keystories import keystories_md
 from app.pages.methodology.methodology import methodology_md
 from app.pages.root import root
 
+import pandas as pd
+
+# Global variables
+# APP
+APP_TITLE = "Taxplorer"
+FAVICON = f"{cfg.IMAGES}/taxplorer-logo.svg"
+# DATA
+MAX_YEAR_OF_REPORTS = 2021
+PATH_TO_DATA = f"{cfg.DATA}/data_final_dataviz.csv"
+
+data:pd.DataFrame = None
+
 def on_init(state: State):
     # print('MAIN ON_INIT...')
     # print(f'MAIN STATE {get_state_id(state)}')
-    on_company_init(state)
+    
+    # Init data
+    init_data(state)
+    # Call company on_init
+    on_init_company(state)
+    # Call company on_init
+    on_init_home(state) 
+       
     # print('MAIN ON_INIT...END') 
     
+# Performance optimization    
+def init_data(state: State):
+    df = pd.read_csv(f"{PATH_TO_DATA}", sep=",", low_memory=False, encoding='utf-8')
+    # Filter dataset with the maximum year to take in account
+    df = df.loc[df["year"] <= MAX_YEAR_OF_REPORTS].reset_index()
+    state.data = df   
+     
 # Add pages
 pages = {
     "/": root,
@@ -66,15 +93,14 @@ stylekit = {
 }
 
 
-
 if __name__ == "__main__":
     ## DEV
     # Start the local flask server
     gui_multi_pages.run(
         dark_mode=False,
         stylekit=stylekit,
-        title="Taxplorer",
-        favicon="images/taxplorer-logo.svg",
+        title=f"{APP_TITLE}",
+        favicon=f"{FAVICON}",
         # Remove watermark "Taipy inside"
         watermark="LOCAL DEVELOPMENT",
     )
@@ -84,8 +110,8 @@ else:
     web_app = gui_multi_pages.run(
         dark_mode=False,
         stylekit=stylekit,
-        title="Taxplorer",
-        favicon="images/taxplorer-logo.svg",
+        title=f"{APP_TITLE}",
+        favicon=f"{FAVICON}",
         run_server=False,
         debug=False,
         # Remove watermark "Taipy inside"

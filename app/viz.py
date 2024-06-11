@@ -1,15 +1,16 @@
 from taipy.gui import State, download
 import pandas as pd
-import io 
+import io
+import plotly.graph_objects as go
 
 class Viz:
-    def __init__(self, id:str, state: State, data: pd.DataFrame=None, fig = None, title:str=None, sub_title:str=None):
+    def __init__(self, id:str, state: State, data: pd.DataFrame=None, fig:go.Figure = None, title:str=None, sub_title:str=None):
         self.id= id
         self.state = state
         self.data = data
         self.fig = fig
         self.title = id if title is None else title
-        # Used for responsive to preserve layout
+        # Workaround used for responsive to preserve layout
         # "sub_title": "------------ --------- ---------"
         self.sub_title = "------------ --------- ---------" if sub_title is None else sub_title   
 
@@ -38,5 +39,11 @@ class Viz:
     def to_state(self) -> dict[str]:
         return self._to_state()
     
-    def TO_EMPTY() -> dict[str,]:
+    def _to_empty() -> dict[str,]:
         return Viz._to_state(None) 
+    
+    def init(viz_set:set[str]) -> dict[str,dict]:
+        viz:dict[str,dict] = {}
+        for viz_id in viz_set:
+            viz[viz_id] = Viz._to_empty()
+        return viz

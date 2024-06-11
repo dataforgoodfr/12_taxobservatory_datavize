@@ -1101,7 +1101,7 @@ def display_tax_havens_use_evolution(df: pd.DataFrame, company: str):
 
 
 # Viz 24
-def viz_24_compute_data(df):
+def compute_number_of_tracked_mnc_available(df) -> dict:
     # Drop duplicates to ensure each MNC appears only once per year
     df_unique_mnc = df.drop_duplicates(subset=['year', 'mnc'])
 
@@ -1114,8 +1114,8 @@ def viz_24_compute_data(df):
     return mnc_report_count
 
 
-def viz_24_viz(df):
-    mnc_report_count = viz_24_compute_data(df=df)
+def display_number_of_tracked_mnc_available(df) -> go.Figure:
+    mnc_report_count = compute_number_of_tracked_mnc_available(df=df)
 
     color_func = get_single_color_func("#B8BEDB")
 

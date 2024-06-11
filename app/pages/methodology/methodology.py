@@ -1,7 +1,8 @@
 from taipy.gui import Markdown
+from app import config as cfg
 
 # Path to equation image
-equation = "images/transparency-score-equation.svg"
+equation = f"{cfg.IMAGES}/transparency-score-equation.svg"
 
 # Generate page from Markdown file
-methodology_md = Markdown("pages/methodology/methodology.md")
+methodology_md = Markdown(f"{cfg.PAGES}/methodology/methodology.md")

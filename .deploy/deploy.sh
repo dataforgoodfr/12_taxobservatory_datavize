@@ -6,7 +6,7 @@ project_dir=$(pwd)
 venv_dir=$project_dir/.venv
 
 # Warning to ensure you are at the root of the project
-read -p "Please ensure $project_dir IS THE ROOT OF YOUR PROJECT before proceeding. Continue? (yes/no): " answer
+read -p "Please ensure $project_dir IS THE ROOT OF THE REPO before proceeding. Continue? (y/n): " answer
 case ${answer:0:1} in
     y|Y )
         echo "Proceeding with the script..."
@@ -20,16 +20,18 @@ esac
 
 # Check if the virtual environment exists in the project directory
 if [ ! -d "$venv_dir" ]; then
-    echo "Virtual environment in project directory exists."
+    echo "Virtual environment not found in project directory!"
     exit
 fi
 
-deploy_dir=$project_dir/.deploy
+deploy_dir=$project_dir/.deploy/.gi-generated
 mkdir -p $deploy_dir &2> /dev/null
 
 
 # Update the package lists for upgrades and new package installations
 sudo apt update -y
+# Ensure libssl-dev is installed
+sudo apt install libssl-dev
 
 # Check if nginx is installed, if not then install it
 if ! command -v nginx &> /dev/null
@@ -40,7 +42,8 @@ fi
 . $venv_dir/bin/activate
 # Install uwsgi and gevent using pip
 pip install uwsgi gevent 
-#asyncio greenlet
+# not recommended: asyncio greenlet
+deactivate
 
 # Remove existing uwsgi link if it exists and create a new one
 sudo rm -f /usr/bin/uwsgi 
@@ -53,7 +56,7 @@ Description=Taxplorer UWSGI Server
 After=syslog.target
 
 [Service]
-ExecStart=uwsgi --master --http :5000 --gevent 1000 --http-websockets --module main:web_app
+ExecStart=uwsgi --master --http :5000 --gevent 1000 --http-websockets --module main:web_app --logto /tmp/taxplorer.log
 WorkingDirectory=$(pwd)/app
 Restart=always
 KillSignal=SIGQUIT
@@ -114,6 +117,5 @@ if [ -f "/etc/nginx/sites-enabled/taxplorer" ]; then
 fi
 sudo cp $deploy_dir/nginx/sites-available/taxplorer /etc/nginx/sites-enabled/taxplorer
 
-# }""" | sudo tee /etc/nginx/sites-enabled/default
 # Restart Nginx to apply the changes
 sudo systemctl restart nginx
