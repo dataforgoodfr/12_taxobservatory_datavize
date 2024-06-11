@@ -1,4 +1,5 @@
 import io
+from typing import Any, Optional, Union
 
 import pandas as pd
 import plotly.graph_objects as go
@@ -10,10 +11,10 @@ class Viz:
         self,
         id: str,
         state: State,
-        data: pd.DataFrame = None,
-        fig: go.Figure = None,
-        title: str = None,
-        sub_title: str = None,
+        data: Union[pd.DataFrame, Any] = None,
+        fig: Optional[go.Figure] = None,
+        title: Optional[str] = None,
+        sub_title: Optional[str] = None,
     ):
         self.id = id
         self.state = state
@@ -36,21 +37,29 @@ class Viz:
             buffer.write(self.sub_title + "\n" + str(data))
         download(self.state, content=bytes(buffer.getvalue(), "UTF-8"), name="data.csv")
 
-    def _to_state(self) -> dict[str]:
+    def _to_state(self) -> dict[str, Any]:
         return {
-            "data": None if self is None else self.data,
-            "fig": None if self is None else self.fig,
-            "title": None if self is None else self.title,
-            "sub_title": None if self is None else self.sub_title,
-            "on_action": None if self is None else self.on_action,
+            "data": self.data,
+            "fig": self.fig,
+            "title": self.title,
+            "sub_title": self.sub_title,
+            "on_action": self.on_action,
         }
 
-    def to_state(self) -> dict[str]:
+    def to_state(self) -> dict[str, Any]:
         return self._to_state()
 
-    def _to_empty() -> dict[str,]:
-        return Viz._to_state(None)
+    @staticmethod
+    def _to_empty() -> dict[str, None]:
+        return {
+            "data": None,
+            "fig": None,
+            "title": None,
+            "sub_title": None,
+            "on_action": None,
+        }
 
+    @staticmethod
     def init(viz_set: set[str]) -> dict[str, dict]:
         viz: dict[str, dict] = {}
         for viz_id in viz_set:

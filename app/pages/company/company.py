@@ -1,3 +1,5 @@
+from typing import Union
+
 import numpy as np
 import pandas as pd
 from taipy.gui import Markdown, State, get_state_id
@@ -13,19 +15,19 @@ DEFAULT_COMPANY = "SHELL"
 # Init bindings (used in md file)
 selected_company = DEFAULT_COMPANY
 selector_company: list[str] = []
-selected_year: str = None
+selected_year: Union[str, None] = None
 selector_year: list[str] = []
-company_sector: str = None
+company_sector: Union[str, None] = None
 company_upe_name: str = ""
 
-df_selected_company: pd.DataFrame = None
-df_count_company: pd.DataFrame = None
+df_selected_company: Union[pd.DataFrame, None] = None
+df_count_company: Union[pd.DataFrame, None] = None
 
 # Viz store map[viz_id,viz_dict]
 # Important for taipy bindings
 # Use Viz.init on each page with set of viz_id
 viz: dict[str, dict] = Viz.init(
-    (
+    {
         "company_sector",
         "company_upe_name",
         "company_nb_reports",
@@ -36,7 +38,7 @@ viz: dict[str, dict] = Viz.init(
         "fin_jurisdictions_top_revenue",
         "fin_pretax_profit_and_employees_rank",
         "fin_pretax_profit_and_profit_per_employee",
-    )
+    }
 )
 
 
