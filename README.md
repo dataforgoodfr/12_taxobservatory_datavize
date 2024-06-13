@@ -81,7 +81,87 @@ pip install uwsgi gevent
 
 ### Systemd service file for running taipy
 
+For easily managing the start/stop of the taipy server, we define a service
+file. We actually define two service files `taxplorer.uwsgi.service` for the
+production site and `taxplorer-dev.uwsgi.service` for the development website.
 
+**File /etc/systemd/system/taxplorer.uwsgi.service**
+
+```
+[Unit]
+Description=D4G Taxplorer website for CbCR visualization
+After=syslog.target
+
+[Service]
+ExecStart=/opt/d4g/12_taxobservatory_dataviz/.venv/bin/uwsgi --http 127.0.0.1:5000 --gevent 1000 --http-websockets --module app.main:web_app --logto /opt/d4g/12_taxobservatory_dataviz/taxplorer.log
+WorkingDirectory=/opt/d4g/12_taxobservatory_dataviz/
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+User=d4gtaxobs
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**File /etc/systemd/system/taxplorer-dev.uwsgi.service**
+
+```
+[Unit]
+Description=D4G Taxplorer website for CbCR visualization
+After=syslog.target
+
+[Service]
+ExecStart=/opt/d4g/12_taxobservatory_dataviz_dev/.venv/bin/uwsgi --http 127.0.0.1:5001 --gevent 1000 --http-websockets --module app.main:web_app --logto /opt/d4g/12_taxobservatory_dataviz/taxplorer.log
+WorkingDirectory=/opt/d4g/12_taxobservatory_dataviz_dev/
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+User=d4gtaxobs
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Once these service files are defined, we enable and start them :
+
+```
+sudo systemctl enable taxplorer.uwsgi.service
+sudo service taxplorer.uwsgi start
+
+sudo systemctl enable taxplorer-dev.uwsgi.service
+sudo service taxplorer-dev.uwsgi start
+```
+
+Now, you should have your servers up and running. To ensure this is the case,
+you must be able to contact the machine with your browser at
+`http://localhost:5000` and `http://localhost:5001`. The `localhost` here refers
+to the server name. To access it from a remote machine, you can add a ssh tunnel
+before connecting with your browser :
+
+```
+ssh -L 5000:localhost:5000  YOUR_LOGIN@THE_IP_OF_THE_MACHINE
+```
+
+If accessing the taipy server from your browser fails, you have an issue. To
+debug the issue, you can:
+- check the logs of the service : `sudo service taxplorer.uwsgi status` and in
+  the log file `tail /opt/d4g/12_taxobservatory_dataviz/taxplorer.log`
+- stop the service and run the `uwsgi` command manually :
+
+```
+# For debugging issues
+sudo service taxplorer.uwsgi stop
+cd /opt/d4g/12_taxobservatory_dataviz/
+/opt/d4g/12_taxobservatory_dataviz/.venv/bin/uwsgi --http 127.0.0.1:5000 --gevent 1000 --http-websockets --module app.main:web_app --logto /opt/d4g/12_taxobservatory_dataviz/taxplorer.log
+
+```
+
+And pay particular attention to python errors.
 
 ### Nginx setup
 
