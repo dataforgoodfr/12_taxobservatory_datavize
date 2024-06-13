@@ -1,15 +1,16 @@
-from taipy.gui import State, Gui, navigate, get_state_id
-from app import config as cfg
+import pandas as pd
+from taipy.gui import Gui, State, navigate  # ,get_state_id
 
-from app.pages.company.company import company_md, on_init as on_init_company
+from app import config as cfg
+from app.pages.company.company import company_md
+from app.pages.company.company import on_init as on_init_company
 from app.pages.contact.contact import contact_md
 from app.pages.download.download import download_md
-from app.pages.home.home import home_md, on_init as on_init_home
+from app.pages.home.home import home_md
+from app.pages.home.home import on_init as on_init_home
 from app.pages.keystories.keystories import keystories_md
 from app.pages.methodology.methodology import methodology_md
 from app.pages.root import root
-
-import pandas as pd
 
 # Global variables
 # APP
@@ -19,28 +20,31 @@ FAVICON = "images/taxplorer-logo.svg"
 MAX_YEAR_OF_REPORTS = 2021
 PATH_TO_DATA = f"{cfg.DATA}/data_final_dataviz.csv"
 
-data:pd.DataFrame = None
+data: pd.DataFrame = None
+
 
 def on_init(state: State):
     # print('MAIN ON_INIT...')
     # print(f'MAIN STATE {get_state_id(state)}')
-    
+
     # Init data
     init_data(state)
     # Call company on_init
     on_init_company(state)
     # Call company on_init
-    on_init_home(state) 
-       
-    # print('MAIN ON_INIT...END') 
-    
-# Performance optimization    
+    on_init_home(state)
+
+    # print('MAIN ON_INIT...END')
+
+
+# Performance optimization
 def init_data(state: State):
-    df = pd.read_csv(f"{PATH_TO_DATA}", sep=",", low_memory=False, encoding='utf-8')
+    df = pd.read_csv(f"{PATH_TO_DATA}", sep=",", low_memory=False, encoding="utf-8")
     # Filter dataset with the maximum year to take in account
     df = df.loc[df["year"] <= MAX_YEAR_OF_REPORTS].reset_index()
-    state.data = df   
-     
+    state.data = df
+
+
 # Add pages
 pages = {
     "/": root,
@@ -49,8 +53,9 @@ pages = {
     "Company": company_md,
     "Methodology": methodology_md,
     "Contact": contact_md,
-    "Download": download_md
+    "Download": download_md,
 }
+
 
 # Functions used to navigate between pages
 def goto_home(state):
@@ -78,10 +83,7 @@ def goto_download(state):
 
 
 # Initialise Gui with pages and style sheet
-gui_multi_pages = Gui(
-    pages=pages,
-    css_file="css/style.css"
-)
+gui_multi_pages = Gui(pages=pages, css_file="css/style.css")
 
 # Customize the Stylekit
 stylekit = {
@@ -89,7 +91,7 @@ stylekit = {
     "color_secondary": "#C0FFE",
     "color_paper_light": "#FFFFFF",
     "color_background_light": "#FFFFFF",
-    "font_family": "Manrope"
+    "font_family": "Manrope",
 }
 
 
@@ -105,7 +107,7 @@ if __name__ == "__main__":
         watermark="LOCAL DEVELOPMENT",
     )
 else:
-    ## PRODUCTION     
+    ## PRODUCTION
     # Start the app used by uwsgi server
     web_app = gui_multi_pages.run(
         dark_mode=False,
@@ -116,9 +118,7 @@ else:
         debug=False,
         # Remove watermark "Taipy inside"
         watermark="",
-        # IMPORTANT: Set the async_mode to gevent_uwsgi to use uwsgi 
+        # IMPORTANT: Set the async_mode to gevent_uwsgi to use uwsgi
         # See https://python-socketio.readthedocs.io/en/latest/server.html#uwsgi
-        async_mode='gevent_uwsgi'
+        async_mode="gevent_uwsgi",
     )
-    
-

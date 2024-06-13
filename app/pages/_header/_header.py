@@ -1,11 +1,14 @@
 from taipy.gui import navigate
-from app import config as cfg 
+
+from app import config as cfg
 from app.page import Page
 
-page_id="_header"
+page_id = "_header"
+
 
 def to_text(val):
     return "{:,}".format(int(val)).replace(",", " ")
+
 
 # Path to image
 taxplorer_logo_path = f"{cfg.IMAGES}/taxplorer-logo.svg"
@@ -17,8 +20,9 @@ navbar_items = [
     ("/Company", "Company"),
     ("/Methodology", "Methodology"),
     ("/Contact", "Contact"),
-    ("/Download", "Data")
+    ("/Download", "Data"),
 ]
+
 
 def goto_d4g_website(state):
     navigate(state, "https://dataforgood.fr/", tab="_blank")

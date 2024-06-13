@@ -1,7 +1,6 @@
-
 # CUSTOMIZE IF NEEDED
-APP= "app/" 
-# APP= "app/" OR "" 
+APP = "app/"
+# APP= "app/" OR ""
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # AUTO

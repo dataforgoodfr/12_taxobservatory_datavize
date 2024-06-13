@@ -1,4 +1,5 @@
 from taipy.gui import Markdown
+
 from app import config as cfg
 
 # Path to equation image

@@ -1,4 +1,5 @@
 from taipy.gui import Markdown
+
 from app import config as cfg
 
 # Initialise default name for file to download
