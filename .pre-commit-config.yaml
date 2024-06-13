@@ -15,7 +15,14 @@ repos:
   #  hooks:
   #  - id: bandit
   #    exclude: tests/
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.1
-    hooks:
-      - id: python-safety-dependencies-check
+
+  # !COMMENTED OUT FOR NOW:
+  # TAIPY latest version 3.1.1 (2024/06/12) is affected with 3 CVEs
+  #  jinja2 3.1.4 is affected with 1 CVE
+  #  flask-cors 4.0.0 is affected with 1 CVE
+  #  pymongo 4.6.1 is affected with 1 CVE
+
+  # - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+  #   rev: v1.3.1
+  #   hooks:
+  #     - id: python-safety-dependencies-check
