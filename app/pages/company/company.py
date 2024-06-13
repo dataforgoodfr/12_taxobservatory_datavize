@@ -2,7 +2,7 @@ from typing import Union
 
 import numpy as np
 import pandas as pd
-from taipy.gui import Markdown, State, get_state_id
+from taipy.gui import Markdown, State  # , get_state_id
 
 from app import algo
 from app import config as cfg
