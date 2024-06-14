@@ -23,8 +23,29 @@ syncing the `main` branch with the `dev` branch.
 
 ## Environment installation
 
-TBD
+For development on your machine, if you have a linux on which you have `sudo`
+access, you can simply : 
 
+```
+git clone https://github.com/dataforgoodfr/12_taxobservatory_dataviz
+.deploy/deploy.sh
+```
+
+This will :
+
+- create the virtual environment in the repository
+- install poetry and the project requirements
+- install nginx and the definition of the website
+- install a systemd service file
+
+You will then be able to connect to the website
+[http://localhost:5000](http://localhost:5000). 
+
+If you need to restart the taipy server, you can : 
+
+```
+sudo service taxplorer.uwsgi restart
+```
 ## Pre-commit
 
 To run the pre-commit, follow the instructions on how to [install pre-commit](https://pre-commit.com/) and then run them with :
