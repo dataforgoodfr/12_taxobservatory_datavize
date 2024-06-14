@@ -20,7 +20,7 @@ jobs:
 
       - name: Read the ssh private key
         env:
-          SSH_SECRET_KEY: ${{ secrets.private_key }}
+          SSH_SECRET_KEY: ${{ secrets.SSH_SECRET_KEY }}
         run: |
           eval $(ssh-agent -s)
           ssh-add <(echo "$SSH_SECRET_KEY" | base64 --decode)
