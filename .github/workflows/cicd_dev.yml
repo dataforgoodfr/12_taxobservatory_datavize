@@ -27,6 +27,7 @@ jobs:
 
       - name: Synchronization of the remote deployment
         run: |
-          ssh d4gtaxobs@129.199.194.59 "sudo service taxplorer-dev.uwsgi stop"
-          ssh d4gtaxobs@129.199.194.59 "cd /opt/d4g/12_taxobservatory_dataviz_dev && git pull"
-          ssh d4gtaxobs@129.199.194.59 "sudo service taxplorer-dev.uwsgi start"
+          ssh d4gtaxobs@129.199.194.59 "echo 'ok'"
+          #ssh d4gtaxobs@129.199.194.59 "sudo service taxplorer-dev.uwsgi stop"
+          #ssh d4gtaxobs@129.199.194.59 "cd /opt/d4g/12_taxobservatory_dataviz_dev && git pull"
+          #ssh d4gtaxobs@129.199.194.59 "sudo service taxplorer-dev.uwsgi start"
