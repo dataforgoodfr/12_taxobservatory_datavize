@@ -12,6 +12,11 @@ jobs:
   copy:
     runs-on: ubuntu-latest
     steps:
+      - name: Install and start the ssh agent
+        run: |
+          'which ssh-agent || ( apt-get install -qq openssh-client )'
+          eval $(ssh-agent -s)
+
       - name: Read the ssh private key
         env:
           SSH_SECRET_KEY: ${{ secrets.private_key }}
