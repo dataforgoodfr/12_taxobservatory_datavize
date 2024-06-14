@@ -1,68 +1,57 @@
-# Template DataForGood
+# Taxplorer website for CbCR data visualization
 
-This file will become your README and also the index of your
-documentation.
+The repository contains the source code for the
+[https://www.taxplorer.eu](https://www.taxplorer.eu) Taxplorer website for
+Country-By-Country Report data visualization. 
+
+It has been developed during the 12th season of [dataforgood](https://dataforgood.fr/).
+
+The website is deployed on
+[https://www.taxplorer.eu](https://www.taxplorer.eu/). The `main` branch is the
+one deployed on the production website .
+
+The `dev` branch is deployed on the developpement website [https://dev.taxplorer.eu](https://dev.taxplorer.eu)
 
 # Contributing
 
-## Installer Poetry
+If you want to contribute a new feature, please fork the `ðev` branch and
+propose a pull request. Once accepted, it will integrate the `dev` branch and
+eventually be deployed on the production website once a release is created by
+syncing the `main` branch with the `dev` branch.
 
-Plusieurs [méthodes d'installation](https://python-poetry.org/docs/#installation) sont décrites dans la documentation de poetry dont:
+# Local development environment
 
-- avec pipx
-- avec l'installateur officiel
+## Environment installation
 
-Chaque méthode a ses avantages et inconvénients. Par exemple, la méthode pipx nécessite d'installer pipx au préable, l'installateur officiel utilise curl pour télécharger un script qui doit ensuite être exécuté et comporte des instructions spécifiques pour la completion des commandes poetry selon le shell utilisé (bash, zsh, etc...).
+For development on your machine, if you have a linux on which you have `sudo`
+access, you can simply : 
 
-L'avantage de pipx est que l'installation de pipx est documentée pour linux, windows et macos. D'autre part, les outils installées avec pipx bénéficient d'un environment d'exécution isolé, ce qui est permet de fiabiliser leur fonctionnement. Finalement, l'installation de poetry, voire d'autres outils est relativement simple avec pipx.
+```
+git clone https://github.com/dataforgoodfr/12_taxobservatory_dataviz
+.deploy/deploy.sh
+```
 
-Cependant, libre à toi d'utiliser la méthode qui te convient le mieux ! Quelque soit la méthode choisie, il est important de ne pas installer poetry dans l'environnement virtuel qui sera créé un peu plus tard dans ce README pour les dépendances de la base de code de ce repo git.
+This will :
 
-### Installation de Poetry avec pipx
+- create the virtual environment in the repository
+- install poetry and the project requirements
+- install nginx and the definition of the website
+- install a systemd service file
 
-Suivre les instructions pour [installer pipx](https://pipx.pypa.io/stable/#install-pipx) selon ta plateforme (linux, windows, etc...)
+You will then be able to connect to the website
+[http://localhost:5000](http://localhost:5000). 
 
-Par exemple pour Ubuntu 23.04+:
+If you need to restart the taipy server, you can : 
 
-    sudo apt update
-    sudo apt install pipx
-    pipx ensurepath
+```
+sudo service taxplorer.uwsgi restart
+```
+## Pre-commit
 
-[Installer Poetry avec pipx](https://python-poetry.org/docs/#installing-with-pipx):
-
-    pipx install poetry
-
-### Installation de Poetry avec l'installateur officiel
-
-L'installation avec l'installateur officiel nécessitant quelques étapes supplémentaires,
-se référer à la [documentation officielle](https://python-poetry.org/docs/#installing-with-the-official-installer).
-
-## Utiliser un venv python
-
-    python3 -m venv .venv
-
-    source .venv/bin/activate
-
-## Utiliser Poetry
-
-Installer les dépendances:
-
-    poetry install
-
-Ajouter une dépendance:
-
-    poetry add pandas
-
-Mettre à jour les dépendances:
-
-    poetry update
-
-## Lancer les precommit-hook localement
-
-[Installer les precommit](https://pre-commit.com/)
+To run the pre-commit, follow the instructions on how to [install pre-commit](https://pre-commit.com/) and then run them with :
 
     pre-commit run --all-files
 
-## Utiliser Tox pour tester votre code
+The pre-commit must be run before proposing a pull request, otherwise the CI/CD
+will complain about your proposed feature.
 
-    tox -vv
