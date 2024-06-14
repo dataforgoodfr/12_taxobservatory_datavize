@@ -35,6 +35,10 @@ jobs:
           mv .deploy/known_hosts ~/.ssh/
           chmod 644 ~/.ssh/known_hosts
 
+      - name: Check the IP of the machine
+        run: |
+          ip addr
+
       - name: Synchronization of the remote deployment
         run: |
           ssh d4gtaxobs@129.199.194.59 "sudo service taxplorer-dev.uwsgi stop"
