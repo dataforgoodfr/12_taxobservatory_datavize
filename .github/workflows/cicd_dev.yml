@@ -22,6 +22,7 @@ jobs:
         env:
           SSH_SECRET_KEY: ${{ secrets.private_key }}
         run: |
+          eval $(ssh-agent -s)
           ssh-add <(echo "$SSH_SECRET_KEY" | base64 --decode)
 
       - name: Definition of the known host
