@@ -1,3 +1,8 @@
+"""
+This module contains functions to compute and/or display the visualizations, defined by EU Tax Observatory, which
+are needed in Taxplorer tool. Below functions will be used in different pages of the website.
+"""
+
 import pandas as pd
 import numpy as np
 import plotly.express as px
