@@ -11,5 +11,5 @@ sudo apt update && sudo apt install gum
 
 
 ```bash
-* * * * * /opt/d4g/<MY_REPO>/.d4g-tools/deploy/pull/pull_cron.sh --github-token=<REDACTED> --repository-name=dataforgoodfr/<MY_REPO> --branch=dev >> /tmp/log/pull_cron.log 2>&1
+* * * * * /opt/d4g/12_taxobservatory_dataviz_dev/.d4g-tools/deploy/pull/pull_cron.sh --repository-name=dataforgoodfr/12_taxobservatory_dataviz_dev --branch=dev >> /opt/d4g/12_taxobservatory_dataviz_dev/pull_cron.log 2>&1
 ```
