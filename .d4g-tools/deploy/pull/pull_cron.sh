@@ -100,10 +100,9 @@ parse_params() {
   DEBUG="false"
   RUN_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
   SOURCE=$(dirname "$RUN_DIR")
-  GITHUB_TOKEN=""
   REPOSITORY_NAME=""
   BRANCH="main"
-  DEPLOY_SCRIPT="${SOURCE}/.d4g-tools/deploy/pull/pull.sh"
+  DEPLOY_SCRIPT="${SOURCE}/pull/pull.sh"
 
   while :; do
     case "${1-}" in
@@ -112,9 +111,6 @@ parse_params() {
       ;;
     -v | --verbose)
       DEBUG="true"
-      ;;
-    --github-token=*)
-      GITHUB_TOKEN="${1#*=}"
       ;;
     --repository-name=*)
       REPOSITORY_NAME="${1#*=}"
