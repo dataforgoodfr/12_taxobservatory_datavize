@@ -35,7 +35,7 @@ viz: dict[str, dict] = Viz.init(
         "fin_transparency_score",
         "fin_transparency_score_over_time_details",
         "fin_key_financials_kpis",
-        "fin_jurisdictions_top_revenue",
+        "fin_top_jurisdictions_revenue",
         "fin_pretax_profit_and_employees_rank",
         "fin_pretax_profit_and_profit_per_employee",
     }
@@ -92,8 +92,8 @@ def update_state(state: State):
     # print(f'company state selected_year:{state.selected_year}')
 
     # Calculate number of reports for all companies
-    state.df_count_company = algo.number_of_tracked_reports_over_time_company(
-        state.df_selected_company
+    state.df_count_company = algo.number_of_tracked_reports(
+        state.df_selected_company, "mnc", state.selected_company
     )
     # print(f'company state df_count_company:{state.df_count_company.head()}')
 
@@ -128,7 +128,9 @@ def update_viz_company(state: State):
     state.viz[id] = Viz(
         id=id,
         state=state,
-        data=algo.number_of_tracked_reports_company(state.df_selected_company),
+        data=algo.number_of_tracked_reports(
+            state.df_selected_company, "mnc", state.selected_company
+        ),
         title="Number of reports",
     ).to_state()
     # print(f'update viz id:{id} title:{state.viz[id].title}')
@@ -137,7 +139,7 @@ def update_viz_company(state: State):
     state.viz[id] = Viz(
         id=id,
         state=state,
-        data=algo.display_transparency_score(state.data, state.selected_company),
+        data=algo.transparency_score(state.data, state.selected_company),
         title="Transparency Score",
         sub_title="average over all reports",
     ).to_state()
@@ -163,7 +165,7 @@ def update_viz_year(state: State):
     state.viz[id] = Viz(
         id=id,
         state=state,
-        data=algo.display_transparency_score(
+        data=algo.transparency_score(
             state.data, state.selected_company, int(state.selected_year)
         ),
         title="Transparency Score",
@@ -175,7 +177,7 @@ def update_viz_year(state: State):
     state.viz[id] = Viz(
         id=id,
         state=state,
-        data=algo.display_transparency_score_over_time_details(
+        data=algo.transparency_scores_over_time_details(
             state.data, state.selected_company
         ),
         title="Transparency score over time ",
@@ -187,7 +189,7 @@ def update_viz_year(state: State):
     state.viz[id] = Viz(
         id=id,
         state=state,
-        data=algo.display_company_key_financials_kpis(
+        data=algo.company_key_financials_kpis(
             state.data, state.selected_company, int(state.selected_year)
         ),
         title="Key metrics",
@@ -195,11 +197,11 @@ def update_viz_year(state: State):
     ).to_state()
     # print(f'update viz id:{id} title:{state.viz[id].title}')
 
-    id = "fin_jurisdictions_top_revenue"
+    id = "fin_top_jurisdictions_revenue"
     state.viz[id] = Viz(
         id=id,
         state=state,
-        fig=algo.display_jurisdictions_top_revenue(
+        fig=algo.top_jurisdictions_revenue(
             state.data, state.selected_company, int(state.selected_year)
         ),
         title="Distribution of revenues across countries",
@@ -212,7 +214,7 @@ def update_viz_year(state: State):
     state.viz[id] = Viz(
         id=id,
         state=state,
-        fig=algo.display_pretax_profit_and_employees_rank(
+        fig=algo.pretax_profit_and_employees_rank(
             state.data, state.selected_company, int(state.selected_year)
         ),
         title="% profit and employees by country",
@@ -224,7 +226,7 @@ def update_viz_year(state: State):
     state.viz[id] = Viz(
         id=id,
         state=state,
-        fig=algo.display_pretax_profit_and_profit_per_employee(
+        fig=algo.pretax_profit_and_profit_per_employee(
             state.data, state.selected_company, int(state.selected_year)
         ),
         title="% profit and profit / employee by country",

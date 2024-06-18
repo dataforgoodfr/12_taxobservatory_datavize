@@ -29,7 +29,7 @@ viz: dict[str, dict] = Viz.init(
         "general_number_of_tracked_reports",
         "general_number_of_tracked_reports_over_time",
         "general_number_of_tracked_mnc",
-        "general_number_of_tracked_mnc_available",
+        "general_list_of_tracked_mnc_available",
     )
 )
 
@@ -50,8 +50,7 @@ def update_viz(state: State):
     state.viz[id] = Viz(
         id=id,
         state=state,
-        data=algo.number_of_tracked_reports_over_time(state.data),
-        fig=algo.display_number_of_tracked_reports_over_time(state.data),
+        fig=algo.number_of_tracked_reports_over_time(state.data),
         title="Number of reports over time",
     ).to_state()
 
@@ -64,12 +63,11 @@ def update_viz(state: State):
         sub_title="with 1+ report tracked",
     ).to_state()
 
-    id = "general_number_of_tracked_mnc_available"
+    id = "general_list_of_tracked_mnc_available"
     state.viz[id] = Viz(
         id=id,
         state=state,
-        data=algo.compute_number_of_tracked_mnc_available(state.data),
-        fig=algo.display_number_of_tracked_mnc_available(state.data),
+        fig=algo.mnc_tracked(state.data),
         title="Multinationals available",
         sub_title="with 1+ report tracked",
     ).to_state()

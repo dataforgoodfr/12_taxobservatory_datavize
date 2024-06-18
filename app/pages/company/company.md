@@ -129,15 +129,15 @@ Financial profile
 <|part|class_name=viz-container|
 <|{viz["fin_key_financials_kpis"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz["fin_key_financials_kpis"].sub_title}|text|class_name=text-small text-weight300 text-transparent|>
+<|{viz["fin_key_financials_kpis"].sub_title}|text|class_name=text-small text-weight300|>
 <|{viz["fin_key_financials_kpis"].data}|table|show_all|sortable=False|dynamic=True|style=table-cell|class_name=rows-similar table-top|>
 |>
 
 <|part|class_name=viz-container|
-<|{viz["fin_jurisdictions_top_revenue"].title}|text|class_name=text-weight400|>
+<|{viz["fin_top_jurisdictions_revenue"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz["fin_jurisdictions_top_revenue"].sub_title}|text|class_name=text-small text-weight300|>
-<|chart|figure={viz["fin_jurisdictions_top_revenue"].fig}|>
+<|{viz["fin_top_jurisdictions_revenue"].sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz["fin_top_jurisdictions_revenue"].fig}|>
 |>
 
 |>
