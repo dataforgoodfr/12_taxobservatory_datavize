@@ -76,8 +76,8 @@ parse_params() {
 
 parse_params "$@"
 
-sudo /bin/systemctl stop taxplorer-dev.uwsgi 
+sudo /bin/systemctl stop taxplorer-dev.uwsgi.service
 cd $SOURCE && git pull
-sudo /bin/systemctl start taxplorer-dev.uwsgi
+sudo /bin/systemctl start taxplorer-dev.uwsgi.service
 
 exit 0
