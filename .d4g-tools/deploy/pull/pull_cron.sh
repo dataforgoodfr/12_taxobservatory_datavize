@@ -41,7 +41,7 @@ report_github_status() {
   debug "COMMIT_SHA: $COMMIT_SHA"
   debug "STATUS: $STATUS"
   debug "DESCRIPTION: $DESCRIPTION"
-  curl -s -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
+  curl -s -X POST \
     -d "{\"state\": \"${STATUS}\", \"description\": \"$DESCRIPTION\", \"context\": \"deploy\"}" \
     "https://api.github.com/repos/${REPOSITORY_NAME}/statuses/${COMMIT_SHA}" >/dev/null
 }
@@ -139,16 +139,11 @@ parse_params() {
 
   debug "DEBUG: $DEBUG"
   debug "RUN_DIR: $RUN_DIR"
-  debug "GITHUB_TOKEN: $GITHUB_TOKEN"
   debug "REPOSITORY_NAME: $REPOSITORY_NAME"
   debug "BRANCH: $BRANCH"
   debug "DEPLOY_SCRIPT: $DEPLOY_SCRIPT"
   debug "LOCK_LOCATION: $LOCK_LOCATION"
 
-  if [ -z "${GITHUB_TOKEN}" ]; then
-    error "Github token is required."
-    usage
-  fi
   if [ -z "${REPOSITORY_NAME}" ]; then
     error "Repository name is required."
     usage
@@ -160,7 +155,7 @@ parse_params() {
 parse_params "$@"
 
 # Check if a new commit exists
-HEAD_COMMIT=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/${REPOSITORY_NAME}/commits/${BRANCH}" | jq -r '.sha')
+HEAD_COMMIT=$(curl -s "https://api.github.com/repos/${REPOSITORY_NAME}/commits/${BRANCH}" | jq -r '.sha')
 LOCAL_COMMIT=$(cd $SOURCE && git rev-parse HEAD)
 
 debug "HEAD_COMMIT: $HEAD_COMMIT"
