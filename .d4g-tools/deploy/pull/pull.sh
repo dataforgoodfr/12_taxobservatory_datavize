@@ -76,6 +76,8 @@ parse_params() {
 
 parse_params "$@"
 
+service taxplorer-dev.uwsgi stop
 cd $SOURCE && git pull
-#docker compose up -d --build
+service taxplorer-dev.uwsgi start
+
 exit 0
