@@ -94,7 +94,7 @@ def number_of_tracked_reports_over_time(
     fig.update_layout(
         autosize=True,
         height=360,
-        font_family="Roboto",
+        font_family="Roboto, sans-serif",
         title=None,
         xaxis=dict(title=None, tickvals=data["year"].unique()),
         yaxis=dict(
@@ -176,20 +176,12 @@ def breakdown_of_reports_by_sector(df: pd.DataFrame) -> go.Figure:
         y="sector",
         x="percent",
         orientation="h",  # Horizontal orientation
-        title="Breakdown of Reports by Sector (All Years)",
         labels={"percent": "Percentage of Companies (%)", "sector": "Sector"},
         text="percent",  # Show the percentage as text label
-        hover_data={"unique_company_count": True, "percent": ":.2f%"},
-        # Add tooltip for count and rounded percentage
+        hover_data={"unique_company_count": True, "percent": ":.2f%"}, # Add tooltip for count and rounded percentage
     )
 
-    # Update layout to display the title above the chart
-    fig.update_layout(
-        title="Breakdown of Reports by Sector",
-        title_x=0.5,
-        title_y=0.9,  # Adjust position
-        title_font_size=20,
-    )  # Adjust font size
+    fig.update_layout(title=None)
 
     return go.Figure(fig)
 
@@ -230,7 +222,6 @@ def breakdown_of_reports_by_hq_country(df: pd.DataFrame) -> go.Figure:
         y="upe_name",
         x="percent",
         orientation="h",  # Horizontal orientation
-        title="Breakdown of Reports by HQ Country over Time",
         labels={"percent": "Percentage of Companies (%)", "upe_name": "HQ Country"},
         text="percent",  # Show the percentage as text label
         hover_data={"unique_company_count": True, "percent": ":.2f%"},
@@ -238,12 +229,7 @@ def breakdown_of_reports_by_hq_country(df: pd.DataFrame) -> go.Figure:
     )
 
     # Update layout to display the title above the chart
-    fig.update_layout(
-        title="Breakdown of Reports by HQ Country over Time",
-        title_x=0.5,
-        title_y=0.95,  # Adjust position
-        title_font_size=20,
-    )  # Adjust font size
+    fig.update_layout(title=None)
 
     return go.Figure(fig)
 
@@ -278,14 +264,16 @@ def breakdown_of_reports_by_sector_over_time(df: pd.DataFrame) -> go.Figure:
         x="year",
         y="unique_company_count",
         color="Sectors",
-        title="Breakdown of Reports by Sector over Time",
         labels={"unique_company_count": "Number of Companies Reporting", "year": "Year"},
         barmode="stack",
         category_orders={"Sectors": chart_order},
     )
 
     # Reverse the order of legend items
-    fig.update_layout(legend=dict(traceorder="reversed"))
+    fig.update_layout(
+        title=None,
+        legend=dict(traceorder="reversed")
+    )
 
     # Adjusting the legend order and formatting the legend labels
     for i, trace in enumerate(fig.data):
@@ -930,7 +918,7 @@ def tax_havens_use_evolution(df: pd.DataFrame, company: str) -> go.Figure:
 
     # Update layout settings
     fig.update_layout(
-        title="Tax havens use in profitables jurisdictions",
+        title=None,
         xaxis_title=None,
         yaxis_title=None,
         yaxis_tickformat=".0%",
