@@ -10,6 +10,19 @@ import plotly.graph_objects as go
 import humanize
 from wordcloud import WordCloud, get_single_color_func
 
+
+# Define custom template
+custom_template = {
+    "layout": {
+        "autosize": True,
+        "plot_bgcolor": "white",
+        "font": {"family": "Roboto, sans-serif"},
+        "title": None,
+        "margin": dict(l=0, r=0, b=0, t=0),
+    }
+}
+
+
 # Define color sequence for plots
 COLOR_SEQUENCE = ["#D9D9D9", "#1E2E5C"]
 
@@ -84,26 +97,18 @@ def number_of_tracked_reports_over_time(
 
     # Create figure
     fig = px.bar(
-        data, x="year", y="mnc", color_discrete_sequence=COLOR_SEQUENCE, text_auto=True
+        data, x="year", y="mnc", text_auto=True, color_discrete_sequence=COLOR_SEQUENCE
     )
 
     # Force position and color of bar values
     fig.update_traces(textposition="outside", textfont=dict(color="black"))
 
+    # Define axes settings
+    fig.update_xaxes(title=None, tickvals=data["year"].unique())
+    fig.update_yaxes(title=None, visible=False, range=[0, data["mnc"].max() * 1.1])
+
     # Update layout settings
-    fig.update_layout(
-        autosize=True,
-        height=360,
-        font_family="Roboto, sans-serif",
-        title=None,
-        xaxis=dict(title=None, tickvals=data["year"].unique()),
-        yaxis=dict(
-            title=None,
-            visible=False,
-        ),
-        plot_bgcolor="white",
-        margin=dict(l=0, r=0, b=0, t=0),
-    )
+    fig.update_layout(template=custom_template, height=360)
 
     # Define style of hover on bars
     fig.update_traces(
@@ -178,10 +183,14 @@ def breakdown_of_reports_by_sector(df: pd.DataFrame) -> go.Figure:
         orientation="h",  # Horizontal orientation
         labels={"percent": "Percentage of Companies (%)", "sector": "Sector"},
         text="percent",  # Show the percentage as text label
-        hover_data={"unique_company_count": True, "percent": ":.2f%"}, # Add tooltip for count and rounded percentage
+        hover_data={
+            "unique_company_count": True,
+            "percent": ":.2f%",
+        },  # Add tooltip for count and rounded percentage
     )
 
-    fig.update_layout(title=None)
+    # Update layout settings
+    fig.update_layout(template=custom_template)
 
     return go.Figure(fig)
 
@@ -228,8 +237,8 @@ def breakdown_of_reports_by_hq_country(df: pd.DataFrame) -> go.Figure:
         # Add tooltip for count and rounded percentage
     )
 
-    # Update layout to display the title above the chart
-    fig.update_layout(title=None)
+    # Update layout settings
+    fig.update_layout(template=custom_template)
 
     return go.Figure(fig)
 
@@ -269,11 +278,8 @@ def breakdown_of_reports_by_sector_over_time(df: pd.DataFrame) -> go.Figure:
         category_orders={"Sectors": chart_order},
     )
 
-    # Reverse the order of legend items
-    fig.update_layout(
-        title=None,
-        legend=dict(traceorder="reversed")
-    )
+    # Update layout settings
+    fig.update_layout(template=custom_template, legend=dict(traceorder="reversed"))
 
     # Adjusting the legend order and formatting the legend labels
     for i, trace in enumerate(fig.data):
@@ -455,22 +461,19 @@ def top_jurisdictions_revenue(df: pd.DataFrame, company: str, year: int) -> go.F
         x="total_revenues_%",
         y="jur_name",
         orientation="h",
-        color_discrete_sequence=COLOR_SEQUENCE,
         text_auto=".1%",
+        color_discrete_sequence=COLOR_SEQUENCE,
     )
 
     # Set figure height (min. 480) depending on the number of jurisdictions
     fig_height = max(480, (48 * len(df["jur_name"])))
 
+    # Update axis layout
+    fig.update_xaxes(title="Percentage of total revenue", tickformat=".0%")
+    fig.update_yaxes(title=None)
+
     # Update layout settings
-    fig.update_layout(
-        font_family="Roboto",
-        xaxis=dict(title="Percentage of total revenue", tickformat=".0%"),
-        yaxis_title=None,
-        plot_bgcolor="white",
-        height=fig_height,
-        margin=dict(l=0, r=0, t=0, b=0),
-    )
+    fig.update_layout(template=custom_template, height=fig_height)
 
     # Define position of text values
     values_positions = [
@@ -541,18 +544,17 @@ def pretax_profit_and_employees_rank(df: pd.DataFrame, company: str, year: int) 
     else:
         max_x_value = 1
 
+    # Update axis layout
+    fig.update_xaxes(title=None, tickformat=".0%", range=[0, max_x_value])
+    fig.update_yaxes(title=None)
+
     # Update layout settings
     fig.update_layout(
-        font_family="Roboto",
-        title=None,
-        xaxis=dict(title=None, tickformat=".0%", range=[0, max_x_value]),
-        yaxis_title=None,
         legend=dict(
-            x=0.1, y=1.05, xanchor="center", yanchor="top", title=dict(text=""), orientation="h"
+            orientation="h", yanchor="bottom", y=1.01, xanchor="left", x=0, title=dict(text="")
         ),
-        plot_bgcolor="white",
+        template=custom_template,
         height=fig_height,
-        margin=dict(l=0, r=0, t=10, b=0),
     )
 
     # Add annotations for NaN values where there should have been a bar
@@ -639,24 +641,17 @@ def pretax_profit_and_profit_per_employee(
         custom_data=["jur_name"],
     )
 
+    # Update axis layout
+    fig.update_xaxes(title="Percentage of profit", tickformat=".0%")
+    fig.update_yaxes(title="Profit per employee")
+
     # Update layout settings
     fig.update_layout(
-        title=None,
-        font_family="Roboto",
-        autosize=True,
-        height=360,
-        xaxis=dict(
-            title="Percentage of profit",
-            tickformat=".0%",
-        ),
-        yaxis=dict(
-            title="Profit per employee",
-        ),
         legend=dict(
-            x=0.1, y=1.05, xanchor="center", yanchor="top", title=dict(text=""), orientation="h"
+            orientation="h", yanchor="bottom", y=1.01, xanchor="left", x=0, title=dict(text="")
         ),
-        plot_bgcolor="white",
-        margin=dict(l=0, r=0, t=0, b=0),
+        template=custom_template,
+        height=380,
     )
 
     # Define hover
@@ -739,15 +734,13 @@ def related_and_unrelated_revenues_breakdown(
         text_auto=".0%",
     )
 
+    # Update axis layout
+    fig.update_xaxes(title=None, tickformat=".0%")
+    fig.update_yaxes(title=None)
+
     # Update layout settings
     fig.update_layout(
-        title=None,
-        xaxis=dict(title=None, tickformat=".0%"),
-        yaxis_title=None,
-        legend=dict(title=dict(text=""), orientation="h"),
-        plot_bgcolor="white",
-        width=800,
-        height=480,
+        legend=dict(title=dict(text=""), orientation="h"), template=custom_template
     )
 
     # Define position of text values
@@ -915,17 +908,13 @@ def tax_havens_use_evolution(df: pd.DataFrame, company: str) -> go.Figure:
         barmode="group",
         text_auto=".1%",
     )
+    # Update axis layout
+    fig.update_xaxes(title=None)
+    fig.update_yaxes(title=None, tickformat=".0%")
 
     # Update layout settings
     fig.update_layout(
-        title=None,
-        xaxis_title=None,
-        yaxis_title=None,
-        yaxis_tickformat=".0%",
-        legend=dict(title=dict(text=""), orientation="h"),
-        plot_bgcolor="white",
-        width=800,
-        height=480,
+        legend=dict(title=dict(text=""), orientation="h"), template=custom_template
     )
 
     return go.Figure(fig)
@@ -1250,7 +1239,7 @@ def transparency_score_over_time(df: pd.DataFrame, company: str):
 
     # Update layout settings
     fig.update_layout(
-        title="Transparency score over time",
+        template=custom_template,
         xaxis=dict(title=None, tickvals=df["year"].unique()),
         yaxis=dict(
             title=None,
@@ -1262,9 +1251,6 @@ def transparency_score_over_time(df: pd.DataFrame, company: str):
             tickvals=[0, 25, 50, 75, 100],
             ticktext=[0, "", "", "", 100],
         ),
-        plot_bgcolor="white",
-        width=800,
-        height=480,
     )
 
     # Force position and color of bar values
