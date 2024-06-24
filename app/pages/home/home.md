@@ -108,10 +108,10 @@ Our database is growing
 |>
 
 <|part|class_name=viz-container|
-<|{viz["general_number_of_tracked_mnc_available"].title}|text|class_name=text-weight400|>
+<|{viz["general_list_of_tracked_mnc_available"].title}|text|class_name=text-weight400|>
 <br/>
-<|{viz["general_number_of_tracked_mnc_available"].sub_title}|text|class_name=text-small text-weight300|>
-<|chart|figure={viz["general_number_of_tracked_mnc_available"].fig}|>
+<|{viz["general_list_of_tracked_mnc_available"].sub_title}|text|class_name=text-small text-weight300|>
+<|chart|figure={viz["general_list_of_tracked_mnc_available"].fig}|>
 |>
 
 |>
