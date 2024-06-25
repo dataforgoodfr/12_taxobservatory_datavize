@@ -3,13 +3,14 @@ This module contains functions to compute and/or display the visualizations, def
 are needed in Taxplorer tool. Below functions will be used in different pages of the website.
 """
 
-import pandas as pd
+import random
+
+import humanize
 import numpy as np
+import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import humanize
-from wordcloud import WordCloud, get_single_color_func
-
+from PIL import Image, ImageColor, ImageDraw, ImageFont
 
 # Define custom template
 custom_template = {
@@ -925,29 +926,100 @@ def tax_havens_use_evolution(df: pd.DataFrame, company: str) -> go.Figure:
 
 
 # Viz 24 : mnc tracked
-def mnc_tracked(df: pd.DataFrame) -> go.Figure:
+def mnc_tracked(
+    df: pd.DataFrame,
+    image_width: int = 1200,
+    image_height: int = 1000,
+    margin: int = 6,
+    min_font_size: int = 10,
+) -> go.Figure:
     """Compute and plot the list of company name in a word cloud where the size of the font depends of the number
     of reports available.
 
     Args:
         df (pd.DataFrame): CbCRs database.
+        image_width (int, optional): Image width in pixel. Defaults to 900.
+        image_height (int, optional): Image height in pixel. Defaults to 600.
+        margin (int, optional): Margin around words in pixel. Defaults to 10.
+        min_font_size (int, optional): Minimum fontsize. Defaults to 10.
 
     Returns:
         go.Figure: word cloud with company name  in a Plotly figure.
     """
 
+    # List of colors in hexadecimal format
+    font_colors = ["#B8BEDB", "#8087A8", "#080F33", "#181F42", "#424A75"]
+
     # Create dictionnary with company name as key and the number of reports as value
-    data = df.groupby("mnc")["year"].nunique().to_dict()
+    data = df.groupby("mnc")["year"].nunique().sort_values(ascending=False).to_dict()
 
-    color_func = get_single_color_func("#B8BEDB")
+    # Create a blank image
+    image = Image.new("RGB", (1200, 1000), (255, 255, 255))
+    draw = ImageDraw.Draw(image)
 
-    # Generate the word cloud using the report counts as weights
-    wordcloud = WordCloud(
-        width=1200, height=800, background_color="white", color_func=color_func
-    ).generate_from_frequencies(data)
+    # Load a default scalable font
+    font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+
+    # Calculate max font size based on the most frequent word
+    most_freq_word = max(data, key=data.get)
+    max_width = image_width * 0.8
+
+    # Function to find the max font size for a word
+    max_font_size = min_font_size
+    font = ImageFont.truetype(font_path, max_font_size)
+    while draw.textlength(most_freq_word, font=font) < max_width:
+        max_font_size += 2
+        font = ImageFont.truetype(font_path, max_font_size)
+
+    # Calculate and store in a dictionnary text size and bounding boxe for each word
+    word_sizes = {}
+    max_frequency = max(data.values())
+    for word, frequency in data.items():
+        word_font_size = max(int(max_font_size * (frequency / max_frequency)), min_font_size)
+        font = ImageFont.truetype(font_path, word_font_size)
+        left, top, right, bottom = font.getbbox(word)
+        word_sizes[word] = (word_font_size, (right - left), (bottom - top))
+
+    # Place words on the image
+    # Initiliaze a list to store all words' boundary boxes
+    bboxes = []
+    for word in data.keys():
+        font_size, word_width, word_height = word_sizes[word]
+        font = ImageFont.truetype(font_path, font_size)
+
+        word_placed = False
+        tries = 0
+        while not word_placed and tries < 100:
+            # Pick a random x and y position to place the word
+            x = random.randint(margin, image_width - word_width - margin)
+            y = random.randint(margin, image_height - word_height - margin)
+
+            # Calculate word's boundary box
+            bbox = [x, y, x + word_width + margin, y + word_height + margin]
+
+            # Check if the word overlaps with already placed words
+            overlap = False
+            for existing_bbox in bboxes:
+                if (
+                    bbox[2] > existing_bbox[0]
+                    and bbox[0] < existing_bbox[2]
+                    and bbox[3] > existing_bbox[1]
+                    and bbox[1] < existing_bbox[3]
+                ):
+                    overlap = True
+                    break
+
+            # Add word to the image
+            if not overlap:
+                bboxes.append(bbox)
+                word_color = ImageColor.getrgb(random.choice(font_colors))
+                draw.text((x, y), word, font=font, fill=word_color)
+                word_placed = True
+
+            tries += 1
 
     # Display the word cloud
-    fig = px.imshow(wordcloud)
+    fig = px.imshow(image)
 
     # Remove hover on image
     fig.update_traces(hoverinfo="skip", hovertemplate="")
@@ -955,12 +1027,12 @@ def mnc_tracked(df: pd.DataFrame) -> go.Figure:
     # Remove colorbar
     fig.update_layout(coloraxis_showscale=False)
 
-    # Remove axis
+    # Update axis layouts
     fig.update_xaxes(showticklabels=False)
     fig.update_yaxes(showticklabels=False)
 
-    # Remove margins
-    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
+    # Update layout setting
+    fig.update_layout(template=custom_template, height=400)
 
     return go.Figure(fig)
 
