@@ -1,0 +1,46 @@
+name: Copy website to the development site
+
+on:
+  push:
+    branches:
+      - cicd_dev
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Install and start the ssh agent
+        run: |
+          which ssh-agent || ( apt-get install -qq openssh-client )
+          eval $(ssh-agent -s)
+
+      - name: Read the ssh private key
+        env:
+          SSH_SECRET_KEY: ${{ secrets.SSH_SECRET_KEY }}
+        run: |
+          eval $(ssh-agent -s)
+          ssh-add <(echo "$SSH_SECRET_KEY" | base64 --decode)
+
+      - name: Definition of the known host
+        run: |
+          mkdir -p ~/.ssh/
+          # ssh-keyscan 129.199.194.59 > .deploy/known_host
+          mv .deploy/known_hosts ~/.ssh/
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Check the IP of the machine
+        run: |
+          ip addr
+
+      - name: Synchronization of the remote deployment
+        run: |
+          ssh d4gtaxobs@129.199.194.59 "sudo service taxplorer-dev.uwsgi stop"
+          #ssh d4gtaxobs@129.199.194.59 "cd /opt/d4g/12_taxobservatory_dataviz_dev && git pull"
+          ssh d4gtaxobs@129.199.194.59 "sudo service taxplorer-dev.uwsgi start"
