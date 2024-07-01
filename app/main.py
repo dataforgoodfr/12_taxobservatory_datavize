@@ -15,7 +15,7 @@ from app.pages.root import root
 # Global variables
 # APP
 APP_TITLE = "Taxplorer"
-FAVICON = "images/taxplorer-logo.svg"
+FAVICON = "assets/images/taxplorer-logo.svg"
 # DATA
 MAX_YEAR_OF_REPORTS = 2021
 PATH_TO_DATA = f"{cfg.DATA}/data_final_dataviz.csv"
@@ -83,7 +83,7 @@ def goto_download(state):
 
 
 # Initialise Gui with pages and style sheet
-gui_multi_pages = Gui(pages=pages, css_file="css/style.css")
+gui_multi_pages = Gui(pages=pages, css_file="assets/css/style.css")
 
 # Customize the Stylekit
 stylekit = {

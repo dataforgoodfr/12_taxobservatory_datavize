@@ -958,7 +958,8 @@ def mnc_tracked(
     draw = ImageDraw.Draw(image)
 
     # Load a default scalable font
-    font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+    # font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+    font_path = "Roboto"
 
     # Calculate max font size based on the most frequent word
     most_freq_word = max(data, key=data.get)

@@ -45,7 +45,7 @@ Taxplorer
 
 <|part|class_name=text-center|
 
- <img class="cpb14" src="./images/data4good-logo.svg" height="130px"/> 
+ <img class="cpb14" src="./assets/images/data4good-logo.svg" height="130px"/> 
 
 DATA FOR GOOD
 {: .h4 .text-blue .text-footer .cpb6 }
@@ -55,7 +55,7 @@ Website
 {: .text-left }
 
 <a class="text-center" href="https://dataforgood.fr/" target="_blank">
-    <img src="./images/website-logo.svg"/>
+    <img src="./assets/images/website-logo.svg"/>
 </a>
 |>
 
@@ -64,7 +64,7 @@ Twitter
 {: .text-left }
 
 <a class="text-center" href="https://twitter.com/dataforgood_fr" target="_blank">
-    <img src="./images/twitter-logo.svg"/>
+    <img src="./assets/images/twitter-logo.svg"/>
 </a>
 |>
 
@@ -73,7 +73,7 @@ LinkedIn
 {: .text-left }
 
 <a class="text-center" href="https://www.linkedin.com/company/dataforgood" target="_blank">
-    <img src="./images/linkedin-logo.svg"/>
+    <img src="./assets/images/linkedin-logo.svg"/>
 </a>
 |>
 
@@ -87,7 +87,7 @@ LinkedIn
 
 <|part|class_name=text-center|
 
- <img class="cpb14" src="./images/eutax-logo.svg" height="130px"/> 
+ <img class="cpb14" src="./assets/images/eutax-logo.svg" height="130px"/> 
 
 EU TAX OBSERVATORY
 {: .h4 .text-blue .text-footer .cpb6 }
@@ -97,7 +97,7 @@ Website
 {: .text-left }
 
 <a class="text-center" href="https://www.taxobservatory.eu/" target="_blank">
-    <img src="./images/website-logo.svg"/>
+    <img src="./assets/images/website-logo.svg"/>
 </a>
 |>
 
@@ -106,7 +106,7 @@ Twitter
 {: .text-left }
 
 <a class="text-center" href="https://twitter.com/taxobservatory" target="_blank">
-    <img src="./images/twitter-logo.svg"/>
+    <img src="./assets/images/twitter-logo.svg"/>
 </a>
 |>
 
@@ -115,7 +115,7 @@ LinkedIn
 {: .text-left }
 
 <a class="text-center" href="https://www.linkedin.com/company/70917369/" target="_blank">
-    <img src="./images/linkedin-logo.svg"/>
+    <img src="./assets/images/linkedin-logo.svg"/>
 </a>
 |>
 

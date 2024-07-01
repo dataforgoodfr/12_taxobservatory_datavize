@@ -157,7 +157,7 @@ the highest). The transparency score calculation follows the general formula :
 [//]: # ($$\text{Transparency Score} = \sum_{i=1}^{n} w_i \times \frac{\sum_{j\in J_i} | x_{ij} |}{\sum_{j} | x_{ij} |} \times 100\$$)
 
 <|part|class_name=text-center|
-<img class="test" src="./images/transparency-score-equation.svg" height="40px"/>
+<img class="test" src="./assets/images/transparency-score-equation.svg" height="40px"/>
 |>
 <br/><br/>
 
