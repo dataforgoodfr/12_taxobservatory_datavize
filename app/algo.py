@@ -12,6 +12,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from PIL import Image, ImageColor, ImageDraw, ImageFont
 
+from app import config as cfg
+
 # Define custom template
 custom_template = {
     "layout": {
@@ -930,7 +932,7 @@ def mnc_tracked(
     df: pd.DataFrame,
     image_width: int = 1200,
     image_height: int = 1000,
-    margin: int = 6,
+    margin: int = 10,
     min_font_size: int = 10,
 ) -> go.Figure:
     """Compute and plot the list of company name in a word cloud where the size of the font depends of the number
@@ -958,8 +960,7 @@ def mnc_tracked(
     draw = ImageDraw.Draw(image)
 
     # Load a default scalable font
-    # font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-    font_path = "Roboto"
+    font_path = f"{cfg.FONTS}/roboto/Roboto-Regular.ttf"
 
     # Calculate max font size based on the most frequent word
     most_freq_word = max(data, key=data.get)
